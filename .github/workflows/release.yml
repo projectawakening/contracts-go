@@ -1,0 +1,35 @@
+name: release
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  generate-push-and-retag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Go version 1.22.x
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.x
+
+      - run: go install github.com/ethereum/go-ethereum/cmd/abigen@latest
+
+      - run: go generate
+        env:
+          VERSION: ${{ github.ref_name }}
+
+      - name: Update main and update tag
+        run: |
+          git config --global user.name "eve-frontier-bot"
+          git config --global user.email "159136139+eve-frontier-bot@users.noreply.github.com"
+          git add .
+          git commit -m "release ${{ github.ref_name }}"
+          git push
+          git tag -fa -m "release ${{ github.ref_name }}" ${{ github.ref_name }}
+          git push origin --tags -f
