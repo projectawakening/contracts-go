@@ -31,7 +31,7 @@ var (
 
 // ERC20MetaData contains all meta data concerning the ERC20 contract.
 var ERC20MetaData = &bind.MetaData{
-	ABI: "[{\"inputs\":[{\"internalType\":\"contractIBaseWorld\",\"name\":\"_world\",\"type\":\"address\"},{\"internalType\":\"bytes16\",\"name\":\"_namespace\",\"type\":\"bytes16\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"approved\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"emitApproval\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"emitTransfer\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}]",
+	ABI: "[{\"type\":\"function\",\"name\":\"allowance\",\"inputs\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"spender\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"approve\",\"inputs\":[{\"name\":\"spender\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"balanceOf\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"decimals\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"name\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"symbol\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"string\",\"internalType\":\"string\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"totalSupply\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"transfer\",\"inputs\":[{\"name\":\"to\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferFrom\",\"inputs\":[{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"to\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"event\",\"name\":\"Approval\",\"inputs\":[{\"name\":\"owner\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"spender\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Transfer\",\"inputs\":[{\"name\":\"from\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"to\",\"type\":\"address\",\"indexed\":true,\"internalType\":\"address\"},{\"name\":\"value\",\"type\":\"uint256\",\"indexed\":false,\"internalType\":\"uint256\"}],\"anonymous\":false},{\"type\":\"error\",\"name\":\"ERC20InsufficientAllowance\",\"inputs\":[{\"name\":\"spender\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"allowance\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"needed\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"ERC20InsufficientBalance\",\"inputs\":[{\"name\":\"sender\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"balance\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"needed\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"ERC20InvalidApprover\",\"inputs\":[{\"name\":\"approver\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"ERC20InvalidReceiver\",\"inputs\":[{\"name\":\"receiver\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"ERC20InvalidSender\",\"inputs\":[{\"name\":\"sender\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"ERC20InvalidSpender\",\"inputs\":[{\"name\":\"spender\",\"type\":\"address\",\"internalType\":\"address\"}]}]",
 }
 
 // ERC20ABI is the input ABI used to generate the binding from.
@@ -213,10 +213,10 @@ func (_ERC20 *ERC20CallerSession) Allowance(owner common.Address, spender common
 
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
-// Solidity: function balanceOf(address owner) view returns(uint256)
-func (_ERC20 *ERC20Caller) BalanceOf(opts *bind.CallOpts, owner common.Address) (*big.Int, error) {
+// Solidity: function balanceOf(address account) view returns(uint256)
+func (_ERC20 *ERC20Caller) BalanceOf(opts *bind.CallOpts, account common.Address) (*big.Int, error) {
 	var out []interface{}
-	err := _ERC20.contract.Call(opts, &out, "balanceOf", owner)
+	err := _ERC20.contract.Call(opts, &out, "balanceOf", account)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -230,16 +230,16 @@ func (_ERC20 *ERC20Caller) BalanceOf(opts *bind.CallOpts, owner common.Address) 
 
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
-// Solidity: function balanceOf(address owner) view returns(uint256)
-func (_ERC20 *ERC20Session) BalanceOf(owner common.Address) (*big.Int, error) {
-	return _ERC20.Contract.BalanceOf(&_ERC20.CallOpts, owner)
+// Solidity: function balanceOf(address account) view returns(uint256)
+func (_ERC20 *ERC20Session) BalanceOf(account common.Address) (*big.Int, error) {
+	return _ERC20.Contract.BalanceOf(&_ERC20.CallOpts, account)
 }
 
 // BalanceOf is a free data retrieval call binding the contract method 0x70a08231.
 //
-// Solidity: function balanceOf(address owner) view returns(uint256)
-func (_ERC20 *ERC20CallerSession) BalanceOf(owner common.Address) (*big.Int, error) {
-	return _ERC20.Contract.BalanceOf(&_ERC20.CallOpts, owner)
+// Solidity: function balanceOf(address account) view returns(uint256)
+func (_ERC20 *ERC20CallerSession) BalanceOf(account common.Address) (*big.Int, error) {
+	return _ERC20.Contract.BalanceOf(&_ERC20.CallOpts, account)
 }
 
 // Decimals is a free data retrieval call binding the contract method 0x313ce567.
@@ -368,107 +368,65 @@ func (_ERC20 *ERC20CallerSession) TotalSupply() (*big.Int, error) {
 
 // Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
 //
-// Solidity: function approve(address spender, uint256 amount) returns(bool)
-func (_ERC20 *ERC20Transactor) Approve(opts *bind.TransactOpts, spender common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.contract.Transact(opts, "approve", spender, amount)
+// Solidity: function approve(address spender, uint256 value) returns(bool)
+func (_ERC20 *ERC20Transactor) Approve(opts *bind.TransactOpts, spender common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.contract.Transact(opts, "approve", spender, value)
 }
 
 // Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
 //
-// Solidity: function approve(address spender, uint256 amount) returns(bool)
-func (_ERC20 *ERC20Session) Approve(spender common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.Approve(&_ERC20.TransactOpts, spender, amount)
+// Solidity: function approve(address spender, uint256 value) returns(bool)
+func (_ERC20 *ERC20Session) Approve(spender common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.Contract.Approve(&_ERC20.TransactOpts, spender, value)
 }
 
 // Approve is a paid mutator transaction binding the contract method 0x095ea7b3.
 //
-// Solidity: function approve(address spender, uint256 amount) returns(bool)
-func (_ERC20 *ERC20TransactorSession) Approve(spender common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.Approve(&_ERC20.TransactOpts, spender, amount)
-}
-
-// EmitApproval is a paid mutator transaction binding the contract method 0x5687f2b8.
-//
-// Solidity: function emitApproval(address owner, address approved, uint256 amount) returns()
-func (_ERC20 *ERC20Transactor) EmitApproval(opts *bind.TransactOpts, owner common.Address, approved common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.contract.Transact(opts, "emitApproval", owner, approved, amount)
-}
-
-// EmitApproval is a paid mutator transaction binding the contract method 0x5687f2b8.
-//
-// Solidity: function emitApproval(address owner, address approved, uint256 amount) returns()
-func (_ERC20 *ERC20Session) EmitApproval(owner common.Address, approved common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.EmitApproval(&_ERC20.TransactOpts, owner, approved, amount)
-}
-
-// EmitApproval is a paid mutator transaction binding the contract method 0x5687f2b8.
-//
-// Solidity: function emitApproval(address owner, address approved, uint256 amount) returns()
-func (_ERC20 *ERC20TransactorSession) EmitApproval(owner common.Address, approved common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.EmitApproval(&_ERC20.TransactOpts, owner, approved, amount)
-}
-
-// EmitTransfer is a paid mutator transaction binding the contract method 0x23de6651.
-//
-// Solidity: function emitTransfer(address from, address to, uint256 amount) returns()
-func (_ERC20 *ERC20Transactor) EmitTransfer(opts *bind.TransactOpts, from common.Address, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.contract.Transact(opts, "emitTransfer", from, to, amount)
-}
-
-// EmitTransfer is a paid mutator transaction binding the contract method 0x23de6651.
-//
-// Solidity: function emitTransfer(address from, address to, uint256 amount) returns()
-func (_ERC20 *ERC20Session) EmitTransfer(from common.Address, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.EmitTransfer(&_ERC20.TransactOpts, from, to, amount)
-}
-
-// EmitTransfer is a paid mutator transaction binding the contract method 0x23de6651.
-//
-// Solidity: function emitTransfer(address from, address to, uint256 amount) returns()
-func (_ERC20 *ERC20TransactorSession) EmitTransfer(from common.Address, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.EmitTransfer(&_ERC20.TransactOpts, from, to, amount)
+// Solidity: function approve(address spender, uint256 value) returns(bool)
+func (_ERC20 *ERC20TransactorSession) Approve(spender common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.Contract.Approve(&_ERC20.TransactOpts, spender, value)
 }
 
 // Transfer is a paid mutator transaction binding the contract method 0xa9059cbb.
 //
-// Solidity: function transfer(address to, uint256 amount) returns(bool)
-func (_ERC20 *ERC20Transactor) Transfer(opts *bind.TransactOpts, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.contract.Transact(opts, "transfer", to, amount)
+// Solidity: function transfer(address to, uint256 value) returns(bool)
+func (_ERC20 *ERC20Transactor) Transfer(opts *bind.TransactOpts, to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.contract.Transact(opts, "transfer", to, value)
 }
 
 // Transfer is a paid mutator transaction binding the contract method 0xa9059cbb.
 //
-// Solidity: function transfer(address to, uint256 amount) returns(bool)
-func (_ERC20 *ERC20Session) Transfer(to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.Transfer(&_ERC20.TransactOpts, to, amount)
+// Solidity: function transfer(address to, uint256 value) returns(bool)
+func (_ERC20 *ERC20Session) Transfer(to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.Contract.Transfer(&_ERC20.TransactOpts, to, value)
 }
 
 // Transfer is a paid mutator transaction binding the contract method 0xa9059cbb.
 //
-// Solidity: function transfer(address to, uint256 amount) returns(bool)
-func (_ERC20 *ERC20TransactorSession) Transfer(to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.Transfer(&_ERC20.TransactOpts, to, amount)
+// Solidity: function transfer(address to, uint256 value) returns(bool)
+func (_ERC20 *ERC20TransactorSession) Transfer(to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.Contract.Transfer(&_ERC20.TransactOpts, to, value)
 }
 
 // TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
 //
-// Solidity: function transferFrom(address from, address to, uint256 amount) returns(bool)
-func (_ERC20 *ERC20Transactor) TransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.contract.Transact(opts, "transferFrom", from, to, amount)
+// Solidity: function transferFrom(address from, address to, uint256 value) returns(bool)
+func (_ERC20 *ERC20Transactor) TransferFrom(opts *bind.TransactOpts, from common.Address, to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.contract.Transact(opts, "transferFrom", from, to, value)
 }
 
 // TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
 //
-// Solidity: function transferFrom(address from, address to, uint256 amount) returns(bool)
-func (_ERC20 *ERC20Session) TransferFrom(from common.Address, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.TransferFrom(&_ERC20.TransactOpts, from, to, amount)
+// Solidity: function transferFrom(address from, address to, uint256 value) returns(bool)
+func (_ERC20 *ERC20Session) TransferFrom(from common.Address, to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.Contract.TransferFrom(&_ERC20.TransactOpts, from, to, value)
 }
 
 // TransferFrom is a paid mutator transaction binding the contract method 0x23b872dd.
 //
-// Solidity: function transferFrom(address from, address to, uint256 amount) returns(bool)
-func (_ERC20 *ERC20TransactorSession) TransferFrom(from common.Address, to common.Address, amount *big.Int) (*types.Transaction, error) {
-	return _ERC20.Contract.TransferFrom(&_ERC20.TransactOpts, from, to, amount)
+// Solidity: function transferFrom(address from, address to, uint256 value) returns(bool)
+func (_ERC20 *ERC20TransactorSession) TransferFrom(from common.Address, to common.Address, value *big.Int) (*types.Transaction, error) {
+	return _ERC20.Contract.TransferFrom(&_ERC20.TransactOpts, from, to, value)
 }
 
 // ERC20ApprovalIterator is returned from FilterApproval and is used to iterate over the raw logs and unpacked data for Approval events raised by the ERC20 contract.
