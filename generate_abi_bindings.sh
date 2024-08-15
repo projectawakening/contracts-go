@@ -20,3 +20,6 @@ abigen --abi=${worldAbiTemp} --pkg=world --out=bindings/world/world.go
 abigen --abi=${ERC2771WorldAbiTemp} --pkg=ERC2771World --out=bindings/ERC2771World/ERC2771World.go
 abigen --abi=${ERC2771ForwarderAbiTemp} --pkg=ERC2771Forwarder --out=bindings/ERC2771Forwarder/ERC2771Forwarder.go
 abigen --abi=${ERC20AbiTemp} --pkg=ERC20 --out=bindings/ERC20/ERC20.go
+
+# temporary until all the errors are actually included in the World ABI
+abigen --abi=./abis/worldErrors.abi.json --pkg=worldErrors --out=bindings/worldErrors/worldErrors.go
