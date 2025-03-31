@@ -29,39 +29,60 @@ var (
 	_ = abi.ConvertType
 )
 
-// Coord is an auto generated low-level Go binding around an user-defined struct.
-type Coord struct {
-	X *big.Int
-	Y *big.Int
-	Z *big.Int
+// AggressionParams is an auto generated low-level Go binding around an user-defined struct.
+type AggressionParams struct {
+	SmartObjectId *big.Int
+	PriorityQueue []TargetPriority
+	Turret        Turret
+	Aggressor     SmartTurretTarget
+	Victim        SmartTurretTarget
 }
 
-// EntityRecordData is an auto generated low-level Go binding around an user-defined struct.
-type EntityRecordData struct {
-	TypeId *big.Int
-	ItemId *big.Int
-	Volume *big.Int
+// CreateAndAnchorParams is an auto generated low-level Go binding around an user-defined struct.
+type CreateAndAnchorParams struct {
+	SmartObjectId                    *big.Int
+	AssemblyType                     string
+	EntityRecordParams               EntityRecordParams
+	Owner                            common.Address
+	FuelUnitVolume                   *big.Int
+	FuelConsumptionIntervalInSeconds *big.Int
+	FuelMaxCapacity                  *big.Int
+	LocationData                     LocationData
 }
 
-// EntityRecordOffchainTableData is an auto generated low-level Go binding around an user-defined struct.
-type EntityRecordOffchainTableData struct {
+// CreateInventoryItemParams is an auto generated low-level Go binding around an user-defined struct.
+type CreateInventoryItemParams struct {
+	SmartObjectId *big.Int
+	TenantId      [32]byte
+	ItemId        *big.Int
+	TypeId        *big.Int
+	Volume        *big.Int
+	Quantity      *big.Int
+}
+
+// EntityMetadataParams is an auto generated low-level Go binding around an user-defined struct.
+type EntityMetadataParams struct {
 	Name        string
 	DappURL     string
 	Description string
 }
 
-// InventoryItem is an auto generated low-level Go binding around an user-defined struct.
-type InventoryItem struct {
-	InventoryItemId *big.Int
-	Owner           common.Address
-	ItemId          *big.Int
-	TypeId          *big.Int
-	Volume          *big.Int
-	Quantity        *big.Int
+// EntityRecordParams is an auto generated low-level Go binding around an user-defined struct.
+type EntityRecordParams struct {
+	TenantId [32]byte
+	TypeId   *big.Int
+	ItemId   *big.Int
+	Volume   *big.Int
 }
 
-// KillMailTableData is an auto generated low-level Go binding around an user-defined struct.
-type KillMailTableData struct {
+// InventoryItemParams is an auto generated low-level Go binding around an user-defined struct.
+type InventoryItemParams struct {
+	SmartObjectId *big.Int
+	Quantity      *big.Int
+}
+
+// KillMailData is an auto generated low-level Go binding around an user-defined struct.
+type KillMailData struct {
 	KillerCharacterId *big.Int
 	VictimCharacterId *big.Int
 	LossType          uint8
@@ -69,18 +90,12 @@ type KillMailTableData struct {
 	KillTimestamp     *big.Int
 }
 
-// LocationTableData is an auto generated low-level Go binding around an user-defined struct.
-type LocationTableData struct {
+// LocationData is an auto generated low-level Go binding around an user-defined struct.
+type LocationData struct {
 	SolarSystemId *big.Int
 	X             *big.Int
 	Y             *big.Int
 	Z             *big.Int
-}
-
-// SmartObjectData is an auto generated low-level Go binding around an user-defined struct.
-type SmartObjectData struct {
-	Owner    common.Address
-	TokenURI string
 }
 
 // SmartTurretTarget is an auto generated low-level Go binding around an user-defined struct.
@@ -91,13 +106,6 @@ type SmartTurretTarget struct {
 	HpRatio     *big.Int
 	ShieldRatio *big.Int
 	ArmorRatio  *big.Int
-}
-
-// StaticDataGlobalTableData is an auto generated low-level Go binding around an user-defined struct.
-type StaticDataGlobalTableData struct {
-	Name    string
-	Symbol  string
-	BaseURI string
 }
 
 // SystemCallData is an auto generated low-level Go binding around an user-defined struct.
@@ -119,13 +127,6 @@ type TargetPriority struct {
 	Weight *big.Int
 }
 
-// TransferItem is an auto generated low-level Go binding around an user-defined struct.
-type TransferItem struct {
-	InventoryItemId *big.Int
-	Owner           common.Address
-	Quantity        *big.Int
-}
-
 // Turret is an auto generated low-level Go binding around an user-defined struct.
 type Turret struct {
 	WeaponTypeId *big.Int
@@ -133,15 +134,9 @@ type Turret struct {
 	ChargesLeft  *big.Int
 }
 
-// WorldPosition is an auto generated low-level Go binding around an user-defined struct.
-type WorldPosition struct {
-	SolarSystemId *big.Int
-	Position      Coord
-}
-
 // WorldMetaData contains all meta data concerning the World contract.
 var WorldMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"function\",\"name\":\"batchCall\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallData[]\",\"components\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"batchCallFrom\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallFromData[]\",\"components\":[{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"call\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"callFrom\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"creator\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__aggression\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"turretOwnerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"aggressor\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"victim\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__anchor\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationTableData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__bringOffline\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__bringOnline\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__canJump\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__configureSmartGate\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__configureSmartTurret\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createAndAnchorSmartGate\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordData\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"worldPosition\",\"type\":\"tuple\",\"internalType\":\"structWorldPosition\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"position\",\"type\":\"tuple\",\"internalType\":\"structCoord\",\"components\":[{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxDistance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createAndAnchorSmartStorageUnit\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordData\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"worldPosition\",\"type\":\"tuple\",\"internalType\":\"structWorldPosition\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"position\",\"type\":\"tuple\",\"internalType\":\"structCoord\",\"components\":[{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"storageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralStorageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createAndAnchorSmartTurret\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordData\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"worldPosition\",\"type\":\"tuple\",\"internalType\":\"structWorldPosition\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"position\",\"type\":\"tuple\",\"internalType\":\"structCoord\",\"components\":[{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createAndDepositItemsToEphemeralInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createAndDepositItemsToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createCharacter\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"corpId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecord\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"entityRecordOffchain\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordOffchainTableData\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"tokenCid\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createEntityRecord\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__createEntityRecordOffchain\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__currentFuelAmount\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"eveworld__currentFuelAmountInWei\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"eveworld__depositFuel\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"unitAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__depositToEphemeralInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__depositToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__destroyDeployable\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__ephemeralToInventoryTransfer\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structTransferItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__globalPause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__globalResume\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__inProximity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"turretOwnerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turretTarget\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__inventoryToEphemeralTransfer\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structTransferItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__isGateLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"eveworld__isWithinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"eveworld__linkSmartGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__registerDeployable\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"fuelUnitVolumeInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacityInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__registerDeployableToken\",\"inputs\":[{\"name\":\"tokenAddress\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__registerERC721Token\",\"inputs\":[{\"name\":\"tokenAddress\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__reportKill\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killMailTableData\",\"type\":\"tuple\",\"internalType\":\"structKillMailTableData\",\"components\":[{\"name\":\"killerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"victimCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lossType\",\"type\":\"uint8\",\"internalType\":\"enumKillMailLossType\"},{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__saveLocation\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"location\",\"type\":\"tuple\",\"internalType\":\"structLocationTableData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setAccessEnforcement\",\"inputs\":[{\"name\":\"target\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setAccessListByRole\",\"inputs\":[{\"name\":\"accessRoleId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"accessList\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setAccessListPerSystemByRole\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"accessRoleId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"accessList\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setAllInventoryTransferAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setApprovedAccessList\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessList\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setBaseURI\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"baseURI\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setCharClassId\",\"inputs\":[{\"name\":\"classId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setCid\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"cid\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setDappURL\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setDeployableMetadata\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setDescription\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setEntityMetadata\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setEphemeralInventoryCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralStorageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setEphemeralToInventoryTransferAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setFuelConsumptionPerMinute\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setFuelMaxCapacity\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"capacityInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setInventoryCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"storageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setInventoryToEphemeralTransferAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setMetadata\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"data\",\"type\":\"tuple\",\"internalType\":\"structStaticDataGlobalTableData\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"symbol\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"baseURI\",\"type\":\"string\",\"internalType\":\"string\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setName\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setName\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setSSUClassId\",\"inputs\":[{\"name\":\"classId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setSmartAssemblyType\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"smartAssemblyType\",\"type\":\"uint8\",\"internalType\":\"enumSmartAssemblyType\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__setSymbol\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"symbol\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__unanchor\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__unlinkSmartGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__updateCorpId\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"corpId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__updateFuel\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__withdrawFromEphemeralInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__withdrawFromInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"eveworld__withdrawFuel\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"unitAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldSlice\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLayout\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getKeySchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getValueSchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"grantAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initModule\",\"type\":\"address\",\"internalType\":\"contractIModule\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installRootModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"popFromDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"byteLengthToPop\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"pushToDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"dataToPush\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespace\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerRootFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"worldFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystem\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"contractSystem\"},{\"name\":\"publicAccess\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerTable\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"},{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"keyNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"},{\"name\":\"fieldNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"revokeAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"storeVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"version\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"transferBalanceToAddress\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferBalanceToNamespace\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"worldVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"HelloStore\",\"inputs\":[{\"name\":\"storeVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"HelloWorld\",\"inputs\":[{\"name\":\"worldVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_DeleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SetRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"indexed\":false,\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"indexed\":false,\"internalType\":\"uint40\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"error\",\"name\":\"EncodedLengths_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_Empty\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"FieldLayout_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"staticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"computedStaticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthDoesNotFitInAWord\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsNotZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyDynamicFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Module_AlreadyInstalled\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_MissingDependency\",\"inputs\":[{\"name\":\"dependency\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Module_NonRootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_RootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Schema_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Schema_StaticTypeAfterDynamicType\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Slice_OutOfBounds\",\"inputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateAlreadyLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateNotLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotConfigured\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotWithtinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_SameSourceAndDestination\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_UndefinedClassId\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"SmartStorageUnitERC721AlreadyInitialized\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"SmartTurret_NotConfigured\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartTurret_UndefinedClassId\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Store_IndexOutOfBounds\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessedIndex\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidBounds\",\"inputs\":[{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidFieldNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidKeyNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidSplice\",\"inputs\":[{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"fieldLength\",\"type\":\"uint40\",\"internalType\":\"uint40\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaDynamicLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaStaticLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_TableAlreadyExists\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_TableNotFound\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_AccessDenied\",\"inputs\":[{\"name\":\"resource\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_AlreadyInitialized\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"World_CallbackNotAllowed\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_DelegationNotFound\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorAlreadyExists\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorNotFound\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InsufficientBalance\",\"inputs\":[{\"name\":\"balance\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"World_InterfaceNotSupported\",\"inputs\":[{\"name\":\"contractAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"interfaceId\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InvalidNamespace\",\"inputs\":[{\"name\":\"namespace\",\"type\":\"bytes14\",\"internalType\":\"bytes14\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceId\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceAlreadyExists\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceNotFound\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_SystemAlreadyExists\",\"inputs\":[{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_UnlimitedDelegationNotAllowed\",\"inputs\":[]}]",
+	ABI: "[{\"type\":\"function\",\"name\":\"batchCall\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallData[]\",\"components\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"batchCallFrom\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallFromData[]\",\"components\":[{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"call\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"callFrom\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"creator\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__adminSupportOrDirectOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__adminSupportOrDirectOwnerGates\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__aggression\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structAggressionParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"aggressor\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"victim\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__anchor\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__areGatesOnline\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__assignItemToInventory\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__assignOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"to\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__bringOffline\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__bringOnline\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__canCrossTransferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__canJump\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__canTransferFromEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__canTransferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__canTransferToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__configureDeployableAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureEntityRecordAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureEphemeralInteractAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureEphemeralInventoryAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureFuelAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureFuelParameters\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureGate\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureInventoryAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureInventoryInteractAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureKillMailAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureLocationAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureOwnershipAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureSmartAssemblyAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureSmartCharacterAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureSmartGateAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureSmartStorageUnitAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureSmartTurretAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__configureTurret\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAndAnchor\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAndAnchorGate\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"maxDistance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAndAnchorStorageUnit\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"storageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralStorageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAndAnchorTurret\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAndDepositEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structCreateInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAndDepositInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structCreateInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createAssembly\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createCharacter\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tribeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"entityRecordMetadata\",\"type\":\"tuple\",\"internalType\":\"structEntityMetadataParams\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createDeployable\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createMetadata\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordMetadata\",\"type\":\"tuple\",\"internalType\":\"structEntityMetadataParams\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__createRecord\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__crossTransferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fromEphemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"toEphemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__currentFuelAmountInWei\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__depositEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__depositFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__depositInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__destroyDeployable\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__getEphemeralOwner\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__getEphemeralSmartObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"pure\"},{\"type\":\"function\",\"name\":\"evefrontier__getInventoryOwner\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__getSmartCharacterClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__getSmartGateClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__getSmartStorageUnitClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__getSmartTurretClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__globalPause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__globalResume\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__inProximity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turretTarget\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__isAdmin\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isAnyGateLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isClassScoped\",\"inputs\":[{\"name\":\"classId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isEphemeralOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isGateLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isOwnerOfBothGates\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__isWithinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__linkGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyAdminOrCallAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyAdminOrClassScopedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyAdminOrOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyAdminOrScopeEnforcedCall\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyAdminSupportedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyAdminSupportedOwnerOrCall\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyCallAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyCallAccessOrDirectEphemeralOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyCallAccessWithScopeEnforced\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyClassScopedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyClassScopedOrCharAdminOrOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyDirectAdmin\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyDirectAdminOrCallAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyDirectEphemeralOwnerOrCall\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyDirectOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyEphemeralTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyOwnerOrEphemeralCrossTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyOwnerOrEphemeralTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyOwnerOrInventoryTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlyOwnerWithAdminSupportAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__onlySmartAssemblyClassScopedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__owner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"evefrontier__registerSmartCharacterClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__registerSmartGateClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__registerSmartStorageUnitClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__registerSmartTurretClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__removeCharacter\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__removeItemFromInventory\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__removeOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__reportKill\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killMailData\",\"type\":\"tuple\",\"internalType\":\"structKillMailData\",\"components\":[{\"name\":\"killerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"victimCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lossType\",\"type\":\"uint8\",\"internalType\":\"enumKillMailLossType\"},{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__saveLocation\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setAssemblyType\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"capacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setCrossTransferToEphemeralAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setDappURL\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setDescription\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setEphemeralCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setFuelAmount\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmountInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setFuelConsumptionIntervalInSeconds\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setFuelMaxCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setFuelUnitVolume\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setName\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setTransferFromEphemeralAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setTransferToEphemeralAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__setTransferToInventoryAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__transferFromEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__transferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__transferToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"toObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__unanchor\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__unlinkGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__updateAssemblyType\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__updateFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__updateTribeId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tribeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__withdrawEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__withdrawFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"evefrontier__withdrawInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldSlice\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLayout\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getKeySchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getValueSchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"grantAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initModule\",\"type\":\"address\",\"internalType\":\"contractIModule\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installRootModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"popFromDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"byteLengthToPop\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"pushToDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"dataToPush\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespace\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerRootFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"worldFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystem\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"contractSystem\"},{\"name\":\"publicAccess\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerTable\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"},{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"keyNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"},{\"name\":\"fieldNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"revokeAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"storeVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"version\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"transferBalanceToAddress\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferBalanceToNamespace\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"worldVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"HelloStore\",\"inputs\":[{\"name\":\"storeVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"HelloWorld\",\"inputs\":[{\"name\":\"worldVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_DeleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SetRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"indexed\":false,\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"indexed\":false,\"internalType\":\"uint40\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"error\",\"name\":\"Access_CannotTransferFromEphemeral\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminOrClassScoped\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminOrOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupported\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupportedOrDirectOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupportedOrDirectOwnerGates\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupportedOwnerOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotClassScoped\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotClassScopedAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectAdmin\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectAdminOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectEphemeralOwnerOrCanCrossTransferToEphemeral\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectOwnerOrCanTransferToEphemeral\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectOwnerOrCanTransferToInventory\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotEphemeralOwnerOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotEphemeralOwnerOrCallAccessWithEphemeralOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotOwnerWithAdminSupportAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_IncorrectState\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"currentState\",\"type\":\"uint8\",\"internalType\":\"enumState\"}]},{\"type\":\"error\",\"name\":\"Deployable_InvalidFuelConsumptionInterval\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_InvalidObjectOwner\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"smartObjectOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_NoFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_StateTransitionPaused\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Deployable_TooMuchFuelDeposited\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"amountDeposited\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EncodedLengths_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InsufficientCapacity\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"maxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"usedCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidEphemeralOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidItemDepositQuantity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidItemObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidSmartObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidTenantId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_NonExistentEntityRecord\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_Empty\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"FieldLayout_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"staticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"computedStaticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthDoesNotFitInAWord\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsNotZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyDynamicFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_ExceedsMaxCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"totalProjectedCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InsufficientFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"availableFuel\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelAmount\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelConsumptionInterval\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelMaxCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelUnitVolume\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_Ephemeral_InsufficientQuantity\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"providedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"availableQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InsufficientQuantity\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"providedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"availableQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InvalidInventory\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InvalidOperation\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InvalidQuantity\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"providedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"expectedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_NonexistentItemRecord\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_NonexistentObject\",\"inputs\":[{\"name\":\"objectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_ZeroQuantity\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InsufficientCapacity\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"maxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"usedCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidCapacity\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidItemDepositQuantity\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidItemObjectId\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidTenantId\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"Inventory_NonExistentEntityRecord\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"KillMail_AlreadyExists\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"KillMail_InvalidCharacterId\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Module_AlreadyInstalled\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_MissingDependency\",\"inputs\":[{\"name\":\"dependency\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Module_NonRootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_RootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Ownership_AlreadyOwned\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"currentOwner\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Ownership_InvalidAccount\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Ownership_InvalidOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"invalidOwner\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Ownership_InvalidSingleton\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Ownership_NonexistentObject\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Schema_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Schema_StaticTypeAfterDynamicType\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Slice_OutOfBounds\",\"inputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_DoesNotExist\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_InvalidObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_InvalidTenantId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_InvalidTypeId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_TypeCannotBeEmpty\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacterDoesNotExist\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_AlreadyCreated\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_InvalidObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_InvalidTenantId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_InvalidTypeId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateAlreadyLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateNotLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateNotOnline\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GatesNotOnline\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotConfigured\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotWithtinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_SameSourceAndDestination\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_UndefinedClassId\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Store_IndexOutOfBounds\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessedIndex\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidBounds\",\"inputs\":[{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidFieldNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidKeyNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidSplice\",\"inputs\":[{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"fieldLength\",\"type\":\"uint40\",\"internalType\":\"uint40\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaDynamicLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaStaticLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_TableAlreadyExists\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_TableNotFound\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_AccessDenied\",\"inputs\":[{\"name\":\"resource\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_AlreadyInitialized\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"World_CallbackNotAllowed\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_DelegationNotFound\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorAlreadyExists\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorNotFound\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InsufficientBalance\",\"inputs\":[{\"name\":\"balance\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"World_InterfaceNotSupported\",\"inputs\":[{\"name\":\"contractAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"interfaceId\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InvalidNamespace\",\"inputs\":[{\"name\":\"namespace\",\"type\":\"bytes14\",\"internalType\":\"bytes14\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceId\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceAlreadyExists\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceNotFound\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_SystemAlreadyExists\",\"inputs\":[{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_UnlimitedDelegationNotAllowed\",\"inputs\":[]}]",
 }
 
 // WorldABI is the input ABI used to generate the binding from.
@@ -321,74 +316,70 @@ func (_World *WorldCallerSession) Creator() (common.Address, error) {
 	return _World.Contract.Creator(&_World.CallOpts)
 }
 
-// EveworldCurrentFuelAmount is a free data retrieval call binding the contract method 0xfe055b2f.
+// EvefrontierAdminSupportOrDirectOwner is a free data retrieval call binding the contract method 0x746be375.
 //
-// Solidity: function eveworld__currentFuelAmount(uint256 entityId) view returns(uint256 amount)
-func (_World *WorldCaller) EveworldCurrentFuelAmount(opts *bind.CallOpts, entityId *big.Int) (*big.Int, error) {
+// Solidity: function evefrontier__adminSupportOrDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierAdminSupportOrDirectOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
 	var out []interface{}
-	err := _World.contract.Call(opts, &out, "eveworld__currentFuelAmount", entityId)
+	err := _World.contract.Call(opts, &out, "evefrontier__adminSupportOrDirectOwner", smartObjectId, data)
 
 	if err != nil {
-		return *new(*big.Int), err
+		return err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
+	return err
 
 }
 
-// EveworldCurrentFuelAmount is a free data retrieval call binding the contract method 0xfe055b2f.
+// EvefrontierAdminSupportOrDirectOwner is a free data retrieval call binding the contract method 0x746be375.
 //
-// Solidity: function eveworld__currentFuelAmount(uint256 entityId) view returns(uint256 amount)
-func (_World *WorldSession) EveworldCurrentFuelAmount(entityId *big.Int) (*big.Int, error) {
-	return _World.Contract.EveworldCurrentFuelAmount(&_World.CallOpts, entityId)
+// Solidity: function evefrontier__adminSupportOrDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierAdminSupportOrDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierAdminSupportOrDirectOwner(&_World.CallOpts, smartObjectId, data)
 }
 
-// EveworldCurrentFuelAmount is a free data retrieval call binding the contract method 0xfe055b2f.
+// EvefrontierAdminSupportOrDirectOwner is a free data retrieval call binding the contract method 0x746be375.
 //
-// Solidity: function eveworld__currentFuelAmount(uint256 entityId) view returns(uint256 amount)
-func (_World *WorldCallerSession) EveworldCurrentFuelAmount(entityId *big.Int) (*big.Int, error) {
-	return _World.Contract.EveworldCurrentFuelAmount(&_World.CallOpts, entityId)
+// Solidity: function evefrontier__adminSupportOrDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierAdminSupportOrDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierAdminSupportOrDirectOwner(&_World.CallOpts, smartObjectId, data)
 }
 
-// EveworldCurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x9335ecac.
+// EvefrontierAdminSupportOrDirectOwnerGates is a free data retrieval call binding the contract method 0xed8913bd.
 //
-// Solidity: function eveworld__currentFuelAmountInWei(uint256 entityId) view returns(uint256 amount)
-func (_World *WorldCaller) EveworldCurrentFuelAmountInWei(opts *bind.CallOpts, entityId *big.Int) (*big.Int, error) {
+// Solidity: function evefrontier__adminSupportOrDirectOwnerGates(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierAdminSupportOrDirectOwnerGates(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
 	var out []interface{}
-	err := _World.contract.Call(opts, &out, "eveworld__currentFuelAmountInWei", entityId)
+	err := _World.contract.Call(opts, &out, "evefrontier__adminSupportOrDirectOwnerGates", smartObjectId, data)
 
 	if err != nil {
-		return *new(*big.Int), err
+		return err
 	}
 
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
+	return err
 
 }
 
-// EveworldCurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x9335ecac.
+// EvefrontierAdminSupportOrDirectOwnerGates is a free data retrieval call binding the contract method 0xed8913bd.
 //
-// Solidity: function eveworld__currentFuelAmountInWei(uint256 entityId) view returns(uint256 amount)
-func (_World *WorldSession) EveworldCurrentFuelAmountInWei(entityId *big.Int) (*big.Int, error) {
-	return _World.Contract.EveworldCurrentFuelAmountInWei(&_World.CallOpts, entityId)
+// Solidity: function evefrontier__adminSupportOrDirectOwnerGates(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierAdminSupportOrDirectOwnerGates(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierAdminSupportOrDirectOwnerGates(&_World.CallOpts, smartObjectId, data)
 }
 
-// EveworldCurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x9335ecac.
+// EvefrontierAdminSupportOrDirectOwnerGates is a free data retrieval call binding the contract method 0xed8913bd.
 //
-// Solidity: function eveworld__currentFuelAmountInWei(uint256 entityId) view returns(uint256 amount)
-func (_World *WorldCallerSession) EveworldCurrentFuelAmountInWei(entityId *big.Int) (*big.Int, error) {
-	return _World.Contract.EveworldCurrentFuelAmountInWei(&_World.CallOpts, entityId)
+// Solidity: function evefrontier__adminSupportOrDirectOwnerGates(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierAdminSupportOrDirectOwnerGates(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierAdminSupportOrDirectOwnerGates(&_World.CallOpts, smartObjectId, data)
 }
 
-// EveworldIsGateLinked is a free data retrieval call binding the contract method 0xc3dc12f2.
+// EvefrontierAreGatesOnline is a free data retrieval call binding the contract method 0xad1780b3.
 //
-// Solidity: function eveworld__isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
-func (_World *WorldCaller) EveworldIsGateLinked(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+// Solidity: function evefrontier__areGatesOnline(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCaller) EvefrontierAreGatesOnline(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
 	var out []interface{}
-	err := _World.contract.Call(opts, &out, "eveworld__isGateLinked", sourceGateId, destinationGateId)
+	err := _World.contract.Call(opts, &out, "evefrontier__areGatesOnline", sourceGateId, destinationGateId)
 
 	if err != nil {
 		return *new(bool), err
@@ -400,26 +391,26 @@ func (_World *WorldCaller) EveworldIsGateLinked(opts *bind.CallOpts, sourceGateI
 
 }
 
-// EveworldIsGateLinked is a free data retrieval call binding the contract method 0xc3dc12f2.
+// EvefrontierAreGatesOnline is a free data retrieval call binding the contract method 0xad1780b3.
 //
-// Solidity: function eveworld__isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
-func (_World *WorldSession) EveworldIsGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
-	return _World.Contract.EveworldIsGateLinked(&_World.CallOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__areGatesOnline(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldSession) EvefrontierAreGatesOnline(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierAreGatesOnline(&_World.CallOpts, sourceGateId, destinationGateId)
 }
 
-// EveworldIsGateLinked is a free data retrieval call binding the contract method 0xc3dc12f2.
+// EvefrontierAreGatesOnline is a free data retrieval call binding the contract method 0xad1780b3.
 //
-// Solidity: function eveworld__isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
-func (_World *WorldCallerSession) EveworldIsGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
-	return _World.Contract.EveworldIsGateLinked(&_World.CallOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__areGatesOnline(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierAreGatesOnline(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierAreGatesOnline(&_World.CallOpts, sourceGateId, destinationGateId)
 }
 
-// EveworldIsWithinRange is a free data retrieval call binding the contract method 0xe16fff52.
+// EvefrontierCanCrossTransferToEphemeral is a free data retrieval call binding the contract method 0xa0fc493b.
 //
-// Solidity: function eveworld__isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
-func (_World *WorldCaller) EveworldIsWithinRange(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+// Solidity: function evefrontier__canCrossTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCaller) EvefrontierCanCrossTransferToEphemeral(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
 	var out []interface{}
-	err := _World.contract.Call(opts, &out, "eveworld__isWithinRange", sourceGateId, destinationGateId)
+	err := _World.contract.Call(opts, &out, "evefrontier__canCrossTransferToEphemeral", smartObjectId, caller)
 
 	if err != nil {
 		return *new(bool), err
@@ -431,18 +422,1276 @@ func (_World *WorldCaller) EveworldIsWithinRange(opts *bind.CallOpts, sourceGate
 
 }
 
-// EveworldIsWithinRange is a free data retrieval call binding the contract method 0xe16fff52.
+// EvefrontierCanCrossTransferToEphemeral is a free data retrieval call binding the contract method 0xa0fc493b.
 //
-// Solidity: function eveworld__isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
-func (_World *WorldSession) EveworldIsWithinRange(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
-	return _World.Contract.EveworldIsWithinRange(&_World.CallOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__canCrossTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldSession) EvefrontierCanCrossTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanCrossTransferToEphemeral(&_World.CallOpts, smartObjectId, caller)
 }
 
-// EveworldIsWithinRange is a free data retrieval call binding the contract method 0xe16fff52.
+// EvefrontierCanCrossTransferToEphemeral is a free data retrieval call binding the contract method 0xa0fc493b.
 //
-// Solidity: function eveworld__isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
-func (_World *WorldCallerSession) EveworldIsWithinRange(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
-	return _World.Contract.EveworldIsWithinRange(&_World.CallOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__canCrossTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierCanCrossTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanCrossTransferToEphemeral(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCanTransferFromEphemeral is a free data retrieval call binding the contract method 0xea0aa7e7.
+//
+// Solidity: function evefrontier__canTransferFromEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCaller) EvefrontierCanTransferFromEphemeral(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__canTransferFromEphemeral", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierCanTransferFromEphemeral is a free data retrieval call binding the contract method 0xea0aa7e7.
+//
+// Solidity: function evefrontier__canTransferFromEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldSession) EvefrontierCanTransferFromEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanTransferFromEphemeral(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCanTransferFromEphemeral is a free data retrieval call binding the contract method 0xea0aa7e7.
+//
+// Solidity: function evefrontier__canTransferFromEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierCanTransferFromEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanTransferFromEphemeral(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCanTransferToEphemeral is a free data retrieval call binding the contract method 0x971cd049.
+//
+// Solidity: function evefrontier__canTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCaller) EvefrontierCanTransferToEphemeral(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__canTransferToEphemeral", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierCanTransferToEphemeral is a free data retrieval call binding the contract method 0x971cd049.
+//
+// Solidity: function evefrontier__canTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldSession) EvefrontierCanTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanTransferToEphemeral(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCanTransferToEphemeral is a free data retrieval call binding the contract method 0x971cd049.
+//
+// Solidity: function evefrontier__canTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierCanTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanTransferToEphemeral(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCanTransferToInventory is a free data retrieval call binding the contract method 0x11bc02d9.
+//
+// Solidity: function evefrontier__canTransferToInventory(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCaller) EvefrontierCanTransferToInventory(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__canTransferToInventory", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierCanTransferToInventory is a free data retrieval call binding the contract method 0x11bc02d9.
+//
+// Solidity: function evefrontier__canTransferToInventory(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldSession) EvefrontierCanTransferToInventory(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanTransferToInventory(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCanTransferToInventory is a free data retrieval call binding the contract method 0x11bc02d9.
+//
+// Solidity: function evefrontier__canTransferToInventory(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierCanTransferToInventory(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierCanTransferToInventory(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierCurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x272a32d1.
+//
+// Solidity: function evefrontier__currentFuelAmountInWei(uint256 smartObjectId) view returns(uint256 amount)
+func (_World *WorldCaller) EvefrontierCurrentFuelAmountInWei(opts *bind.CallOpts, smartObjectId *big.Int) (*big.Int, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__currentFuelAmountInWei", smartObjectId)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// EvefrontierCurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x272a32d1.
+//
+// Solidity: function evefrontier__currentFuelAmountInWei(uint256 smartObjectId) view returns(uint256 amount)
+func (_World *WorldSession) EvefrontierCurrentFuelAmountInWei(smartObjectId *big.Int) (*big.Int, error) {
+	return _World.Contract.EvefrontierCurrentFuelAmountInWei(&_World.CallOpts, smartObjectId)
+}
+
+// EvefrontierCurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x272a32d1.
+//
+// Solidity: function evefrontier__currentFuelAmountInWei(uint256 smartObjectId) view returns(uint256 amount)
+func (_World *WorldCallerSession) EvefrontierCurrentFuelAmountInWei(smartObjectId *big.Int) (*big.Int, error) {
+	return _World.Contract.EvefrontierCurrentFuelAmountInWei(&_World.CallOpts, smartObjectId)
+}
+
+// EvefrontierGetEphemeralOwner is a free data retrieval call binding the contract method 0xbc4c917d.
+//
+// Solidity: function evefrontier__getEphemeralOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_World *WorldCaller) EvefrontierGetEphemeralOwner(opts *bind.CallOpts, inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getEphemeralOwner", inventoryObjectId, itemObjectId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// EvefrontierGetEphemeralOwner is a free data retrieval call binding the contract method 0xbc4c917d.
+//
+// Solidity: function evefrontier__getEphemeralOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_World *WorldSession) EvefrontierGetEphemeralOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _World.Contract.EvefrontierGetEphemeralOwner(&_World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// EvefrontierGetEphemeralOwner is a free data retrieval call binding the contract method 0xbc4c917d.
+//
+// Solidity: function evefrontier__getEphemeralOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_World *WorldCallerSession) EvefrontierGetEphemeralOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _World.Contract.EvefrontierGetEphemeralOwner(&_World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// EvefrontierGetEphemeralSmartObjectId is a free data retrieval call binding the contract method 0x9da4f12e.
+//
+// Solidity: function evefrontier__getEphemeralSmartObjectId(uint256 smartObjectId, address ephemeralOwner) pure returns(uint256)
+func (_World *WorldCaller) EvefrontierGetEphemeralSmartObjectId(opts *bind.CallOpts, smartObjectId *big.Int, ephemeralOwner common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getEphemeralSmartObjectId", smartObjectId, ephemeralOwner)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// EvefrontierGetEphemeralSmartObjectId is a free data retrieval call binding the contract method 0x9da4f12e.
+//
+// Solidity: function evefrontier__getEphemeralSmartObjectId(uint256 smartObjectId, address ephemeralOwner) pure returns(uint256)
+func (_World *WorldSession) EvefrontierGetEphemeralSmartObjectId(smartObjectId *big.Int, ephemeralOwner common.Address) (*big.Int, error) {
+	return _World.Contract.EvefrontierGetEphemeralSmartObjectId(&_World.CallOpts, smartObjectId, ephemeralOwner)
+}
+
+// EvefrontierGetEphemeralSmartObjectId is a free data retrieval call binding the contract method 0x9da4f12e.
+//
+// Solidity: function evefrontier__getEphemeralSmartObjectId(uint256 smartObjectId, address ephemeralOwner) pure returns(uint256)
+func (_World *WorldCallerSession) EvefrontierGetEphemeralSmartObjectId(smartObjectId *big.Int, ephemeralOwner common.Address) (*big.Int, error) {
+	return _World.Contract.EvefrontierGetEphemeralSmartObjectId(&_World.CallOpts, smartObjectId, ephemeralOwner)
+}
+
+// EvefrontierGetInventoryOwner is a free data retrieval call binding the contract method 0x3b570bc4.
+//
+// Solidity: function evefrontier__getInventoryOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_World *WorldCaller) EvefrontierGetInventoryOwner(opts *bind.CallOpts, inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getInventoryOwner", inventoryObjectId, itemObjectId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// EvefrontierGetInventoryOwner is a free data retrieval call binding the contract method 0x3b570bc4.
+//
+// Solidity: function evefrontier__getInventoryOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_World *WorldSession) EvefrontierGetInventoryOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _World.Contract.EvefrontierGetInventoryOwner(&_World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// EvefrontierGetInventoryOwner is a free data retrieval call binding the contract method 0x3b570bc4.
+//
+// Solidity: function evefrontier__getInventoryOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_World *WorldCallerSession) EvefrontierGetInventoryOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _World.Contract.EvefrontierGetInventoryOwner(&_World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// EvefrontierGetSmartCharacterClassId is a free data retrieval call binding the contract method 0x8e29e41f.
+//
+// Solidity: function evefrontier__getSmartCharacterClassId() view returns(uint256)
+func (_World *WorldCaller) EvefrontierGetSmartCharacterClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getSmartCharacterClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// EvefrontierGetSmartCharacterClassId is a free data retrieval call binding the contract method 0x8e29e41f.
+//
+// Solidity: function evefrontier__getSmartCharacterClassId() view returns(uint256)
+func (_World *WorldSession) EvefrontierGetSmartCharacterClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartCharacterClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartCharacterClassId is a free data retrieval call binding the contract method 0x8e29e41f.
+//
+// Solidity: function evefrontier__getSmartCharacterClassId() view returns(uint256)
+func (_World *WorldCallerSession) EvefrontierGetSmartCharacterClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartCharacterClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartGateClassId is a free data retrieval call binding the contract method 0xcd07f704.
+//
+// Solidity: function evefrontier__getSmartGateClassId() view returns(uint256)
+func (_World *WorldCaller) EvefrontierGetSmartGateClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getSmartGateClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// EvefrontierGetSmartGateClassId is a free data retrieval call binding the contract method 0xcd07f704.
+//
+// Solidity: function evefrontier__getSmartGateClassId() view returns(uint256)
+func (_World *WorldSession) EvefrontierGetSmartGateClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartGateClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartGateClassId is a free data retrieval call binding the contract method 0xcd07f704.
+//
+// Solidity: function evefrontier__getSmartGateClassId() view returns(uint256)
+func (_World *WorldCallerSession) EvefrontierGetSmartGateClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartGateClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartStorageUnitClassId is a free data retrieval call binding the contract method 0x7138c6fd.
+//
+// Solidity: function evefrontier__getSmartStorageUnitClassId() view returns(uint256)
+func (_World *WorldCaller) EvefrontierGetSmartStorageUnitClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getSmartStorageUnitClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// EvefrontierGetSmartStorageUnitClassId is a free data retrieval call binding the contract method 0x7138c6fd.
+//
+// Solidity: function evefrontier__getSmartStorageUnitClassId() view returns(uint256)
+func (_World *WorldSession) EvefrontierGetSmartStorageUnitClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartStorageUnitClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartStorageUnitClassId is a free data retrieval call binding the contract method 0x7138c6fd.
+//
+// Solidity: function evefrontier__getSmartStorageUnitClassId() view returns(uint256)
+func (_World *WorldCallerSession) EvefrontierGetSmartStorageUnitClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartStorageUnitClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartTurretClassId is a free data retrieval call binding the contract method 0x400a1dea.
+//
+// Solidity: function evefrontier__getSmartTurretClassId() view returns(uint256)
+func (_World *WorldCaller) EvefrontierGetSmartTurretClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__getSmartTurretClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// EvefrontierGetSmartTurretClassId is a free data retrieval call binding the contract method 0x400a1dea.
+//
+// Solidity: function evefrontier__getSmartTurretClassId() view returns(uint256)
+func (_World *WorldSession) EvefrontierGetSmartTurretClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartTurretClassId(&_World.CallOpts)
+}
+
+// EvefrontierGetSmartTurretClassId is a free data retrieval call binding the contract method 0x400a1dea.
+//
+// Solidity: function evefrontier__getSmartTurretClassId() view returns(uint256)
+func (_World *WorldCallerSession) EvefrontierGetSmartTurretClassId() (*big.Int, error) {
+	return _World.Contract.EvefrontierGetSmartTurretClassId(&_World.CallOpts)
+}
+
+// EvefrontierIsAdmin is a free data retrieval call binding the contract method 0x20c979b3.
+//
+// Solidity: function evefrontier__isAdmin(address caller) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsAdmin(opts *bind.CallOpts, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isAdmin", caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsAdmin is a free data retrieval call binding the contract method 0x20c979b3.
+//
+// Solidity: function evefrontier__isAdmin(address caller) view returns(bool)
+func (_World *WorldSession) EvefrontierIsAdmin(caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierIsAdmin(&_World.CallOpts, caller)
+}
+
+// EvefrontierIsAdmin is a free data retrieval call binding the contract method 0x20c979b3.
+//
+// Solidity: function evefrontier__isAdmin(address caller) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsAdmin(caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierIsAdmin(&_World.CallOpts, caller)
+}
+
+// EvefrontierIsAnyGateLinked is a free data retrieval call binding the contract method 0x3ef67471.
+//
+// Solidity: function evefrontier__isAnyGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsAnyGateLinked(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isAnyGateLinked", sourceGateId, destinationGateId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsAnyGateLinked is a free data retrieval call binding the contract method 0x3ef67471.
+//
+// Solidity: function evefrontier__isAnyGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldSession) EvefrontierIsAnyGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierIsAnyGateLinked(&_World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierIsAnyGateLinked is a free data retrieval call binding the contract method 0x3ef67471.
+//
+// Solidity: function evefrontier__isAnyGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsAnyGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierIsAnyGateLinked(&_World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierIsClassScoped is a free data retrieval call binding the contract method 0x7c5f6493.
+//
+// Solidity: function evefrontier__isClassScoped(uint256 classId, bytes32 systemId) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsClassScoped(opts *bind.CallOpts, classId *big.Int, systemId [32]byte) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isClassScoped", classId, systemId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsClassScoped is a free data retrieval call binding the contract method 0x7c5f6493.
+//
+// Solidity: function evefrontier__isClassScoped(uint256 classId, bytes32 systemId) view returns(bool)
+func (_World *WorldSession) EvefrontierIsClassScoped(classId *big.Int, systemId [32]byte) (bool, error) {
+	return _World.Contract.EvefrontierIsClassScoped(&_World.CallOpts, classId, systemId)
+}
+
+// EvefrontierIsClassScoped is a free data retrieval call binding the contract method 0x7c5f6493.
+//
+// Solidity: function evefrontier__isClassScoped(uint256 classId, bytes32 systemId) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsClassScoped(classId *big.Int, systemId [32]byte) (bool, error) {
+	return _World.Contract.EvefrontierIsClassScoped(&_World.CallOpts, classId, systemId)
+}
+
+// EvefrontierIsEphemeralOwner is a free data retrieval call binding the contract method 0x4ab4920e.
+//
+// Solidity: function evefrontier__isEphemeralOwner(uint256 smartObjectId, address caller, bytes data) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsEphemeralOwner(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address, data []byte) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isEphemeralOwner", smartObjectId, caller, data)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsEphemeralOwner is a free data retrieval call binding the contract method 0x4ab4920e.
+//
+// Solidity: function evefrontier__isEphemeralOwner(uint256 smartObjectId, address caller, bytes data) view returns(bool)
+func (_World *WorldSession) EvefrontierIsEphemeralOwner(smartObjectId *big.Int, caller common.Address, data []byte) (bool, error) {
+	return _World.Contract.EvefrontierIsEphemeralOwner(&_World.CallOpts, smartObjectId, caller, data)
+}
+
+// EvefrontierIsEphemeralOwner is a free data retrieval call binding the contract method 0x4ab4920e.
+//
+// Solidity: function evefrontier__isEphemeralOwner(uint256 smartObjectId, address caller, bytes data) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsEphemeralOwner(smartObjectId *big.Int, caller common.Address, data []byte) (bool, error) {
+	return _World.Contract.EvefrontierIsEphemeralOwner(&_World.CallOpts, smartObjectId, caller, data)
+}
+
+// EvefrontierIsGateLinked is a free data retrieval call binding the contract method 0xd9af843a.
+//
+// Solidity: function evefrontier__isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsGateLinked(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isGateLinked", sourceGateId, destinationGateId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsGateLinked is a free data retrieval call binding the contract method 0xd9af843a.
+//
+// Solidity: function evefrontier__isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldSession) EvefrontierIsGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierIsGateLinked(&_World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierIsGateLinked is a free data retrieval call binding the contract method 0xd9af843a.
+//
+// Solidity: function evefrontier__isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierIsGateLinked(&_World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierIsOwner is a free data retrieval call binding the contract method 0xe714222b.
+//
+// Solidity: function evefrontier__isOwner(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsOwner(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isOwner", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsOwner is a free data retrieval call binding the contract method 0xe714222b.
+//
+// Solidity: function evefrontier__isOwner(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldSession) EvefrontierIsOwner(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierIsOwner(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierIsOwner is a free data retrieval call binding the contract method 0xe714222b.
+//
+// Solidity: function evefrontier__isOwner(uint256 smartObjectId, address caller) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsOwner(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _World.Contract.EvefrontierIsOwner(&_World.CallOpts, smartObjectId, caller)
+}
+
+// EvefrontierIsOwnerOfBothGates is a free data retrieval call binding the contract method 0x2e37052f.
+//
+// Solidity: function evefrontier__isOwnerOfBothGates(address caller, bytes data) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsOwnerOfBothGates(opts *bind.CallOpts, caller common.Address, data []byte) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isOwnerOfBothGates", caller, data)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsOwnerOfBothGates is a free data retrieval call binding the contract method 0x2e37052f.
+//
+// Solidity: function evefrontier__isOwnerOfBothGates(address caller, bytes data) view returns(bool)
+func (_World *WorldSession) EvefrontierIsOwnerOfBothGates(caller common.Address, data []byte) (bool, error) {
+	return _World.Contract.EvefrontierIsOwnerOfBothGates(&_World.CallOpts, caller, data)
+}
+
+// EvefrontierIsOwnerOfBothGates is a free data retrieval call binding the contract method 0x2e37052f.
+//
+// Solidity: function evefrontier__isOwnerOfBothGates(address caller, bytes data) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsOwnerOfBothGates(caller common.Address, data []byte) (bool, error) {
+	return _World.Contract.EvefrontierIsOwnerOfBothGates(&_World.CallOpts, caller, data)
+}
+
+// EvefrontierIsWithinRange is a free data retrieval call binding the contract method 0x3bf821c8.
+//
+// Solidity: function evefrontier__isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCaller) EvefrontierIsWithinRange(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__isWithinRange", sourceGateId, destinationGateId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// EvefrontierIsWithinRange is a free data retrieval call binding the contract method 0x3bf821c8.
+//
+// Solidity: function evefrontier__isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldSession) EvefrontierIsWithinRange(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierIsWithinRange(&_World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierIsWithinRange is a free data retrieval call binding the contract method 0x3bf821c8.
+//
+// Solidity: function evefrontier__isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_World *WorldCallerSession) EvefrontierIsWithinRange(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _World.Contract.EvefrontierIsWithinRange(&_World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierOnlyAdminOrCallAccess is a free data retrieval call binding the contract method 0x5adad401.
+//
+// Solidity: function evefrontier__onlyAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyAdminOrCallAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyAdminOrCallAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyAdminOrCallAccess is a free data retrieval call binding the contract method 0x5adad401.
+//
+// Solidity: function evefrontier__onlyAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrCallAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrCallAccess is a free data retrieval call binding the contract method 0x5adad401.
+//
+// Solidity: function evefrontier__onlyAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrCallAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrClassScopedAccess is a free data retrieval call binding the contract method 0xa2b35df2.
+//
+// Solidity: function evefrontier__onlyAdminOrClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyAdminOrClassScopedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyAdminOrClassScopedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyAdminOrClassScopedAccess is a free data retrieval call binding the contract method 0xa2b35df2.
+//
+// Solidity: function evefrontier__onlyAdminOrClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyAdminOrClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrClassScopedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrClassScopedAccess is a free data retrieval call binding the contract method 0xa2b35df2.
+//
+// Solidity: function evefrontier__onlyAdminOrClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyAdminOrClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrClassScopedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrOwner is a free data retrieval call binding the contract method 0xf0aa3f76.
+//
+// Solidity: function evefrontier__onlyAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyAdminOrOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyAdminOrOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyAdminOrOwner is a free data retrieval call binding the contract method 0xf0aa3f76.
+//
+// Solidity: function evefrontier__onlyAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrOwner is a free data retrieval call binding the contract method 0xf0aa3f76.
+//
+// Solidity: function evefrontier__onlyAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrScopeEnforcedCall is a free data retrieval call binding the contract method 0x3f29c115.
+//
+// Solidity: function evefrontier__onlyAdminOrScopeEnforcedCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyAdminOrScopeEnforcedCall(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyAdminOrScopeEnforcedCall", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyAdminOrScopeEnforcedCall is a free data retrieval call binding the contract method 0x3f29c115.
+//
+// Solidity: function evefrontier__onlyAdminOrScopeEnforcedCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyAdminOrScopeEnforcedCall(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrScopeEnforcedCall(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminOrScopeEnforcedCall is a free data retrieval call binding the contract method 0x3f29c115.
+//
+// Solidity: function evefrontier__onlyAdminOrScopeEnforcedCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyAdminOrScopeEnforcedCall(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminOrScopeEnforcedCall(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminSupportedAccess is a free data retrieval call binding the contract method 0xcd039547.
+//
+// Solidity: function evefrontier__onlyAdminSupportedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyAdminSupportedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyAdminSupportedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyAdminSupportedAccess is a free data retrieval call binding the contract method 0xcd039547.
+//
+// Solidity: function evefrontier__onlyAdminSupportedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyAdminSupportedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminSupportedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminSupportedAccess is a free data retrieval call binding the contract method 0xcd039547.
+//
+// Solidity: function evefrontier__onlyAdminSupportedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyAdminSupportedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminSupportedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminSupportedOwnerOrCall is a free data retrieval call binding the contract method 0xf5d6c0db.
+//
+// Solidity: function evefrontier__onlyAdminSupportedOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyAdminSupportedOwnerOrCall(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyAdminSupportedOwnerOrCall", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyAdminSupportedOwnerOrCall is a free data retrieval call binding the contract method 0xf5d6c0db.
+//
+// Solidity: function evefrontier__onlyAdminSupportedOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyAdminSupportedOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminSupportedOwnerOrCall(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyAdminSupportedOwnerOrCall is a free data retrieval call binding the contract method 0xf5d6c0db.
+//
+// Solidity: function evefrontier__onlyAdminSupportedOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyAdminSupportedOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyAdminSupportedOwnerOrCall(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyCallAccess is a free data retrieval call binding the contract method 0x2ed8aeb2.
+//
+// Solidity: function evefrontier__onlyCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyCallAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyCallAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyCallAccess is a free data retrieval call binding the contract method 0x2ed8aeb2.
+//
+// Solidity: function evefrontier__onlyCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyCallAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyCallAccess is a free data retrieval call binding the contract method 0x2ed8aeb2.
+//
+// Solidity: function evefrontier__onlyCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyCallAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyCallAccessOrDirectEphemeralOwner is a free data retrieval call binding the contract method 0x7f243ee3.
+//
+// Solidity: function evefrontier__onlyCallAccessOrDirectEphemeralOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyCallAccessOrDirectEphemeralOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyCallAccessOrDirectEphemeralOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyCallAccessOrDirectEphemeralOwner is a free data retrieval call binding the contract method 0x7f243ee3.
+//
+// Solidity: function evefrontier__onlyCallAccessOrDirectEphemeralOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyCallAccessOrDirectEphemeralOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyCallAccessOrDirectEphemeralOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyCallAccessOrDirectEphemeralOwner is a free data retrieval call binding the contract method 0x7f243ee3.
+//
+// Solidity: function evefrontier__onlyCallAccessOrDirectEphemeralOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyCallAccessOrDirectEphemeralOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyCallAccessOrDirectEphemeralOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyCallAccessWithScopeEnforced is a free data retrieval call binding the contract method 0xaed734ed.
+//
+// Solidity: function evefrontier__onlyCallAccessWithScopeEnforced(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyCallAccessWithScopeEnforced(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyCallAccessWithScopeEnforced", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyCallAccessWithScopeEnforced is a free data retrieval call binding the contract method 0xaed734ed.
+//
+// Solidity: function evefrontier__onlyCallAccessWithScopeEnforced(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyCallAccessWithScopeEnforced(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyCallAccessWithScopeEnforced(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyCallAccessWithScopeEnforced is a free data retrieval call binding the contract method 0xaed734ed.
+//
+// Solidity: function evefrontier__onlyCallAccessWithScopeEnforced(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyCallAccessWithScopeEnforced(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyCallAccessWithScopeEnforced(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyClassScopedAccess is a free data retrieval call binding the contract method 0x19be9e2a.
+//
+// Solidity: function evefrontier__onlyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyClassScopedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyClassScopedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyClassScopedAccess is a free data retrieval call binding the contract method 0x19be9e2a.
+//
+// Solidity: function evefrontier__onlyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyClassScopedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyClassScopedAccess is a free data retrieval call binding the contract method 0x19be9e2a.
+//
+// Solidity: function evefrontier__onlyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyClassScopedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyClassScopedOrCharAdminOrOwner is a free data retrieval call binding the contract method 0x850b497e.
+//
+// Solidity: function evefrontier__onlyClassScopedOrCharAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyClassScopedOrCharAdminOrOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyClassScopedOrCharAdminOrOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyClassScopedOrCharAdminOrOwner is a free data retrieval call binding the contract method 0x850b497e.
+//
+// Solidity: function evefrontier__onlyClassScopedOrCharAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyClassScopedOrCharAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyClassScopedOrCharAdminOrOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyClassScopedOrCharAdminOrOwner is a free data retrieval call binding the contract method 0x850b497e.
+//
+// Solidity: function evefrontier__onlyClassScopedOrCharAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyClassScopedOrCharAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyClassScopedOrCharAdminOrOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectAdmin is a free data retrieval call binding the contract method 0x1525fb7a.
+//
+// Solidity: function evefrontier__onlyDirectAdmin(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyDirectAdmin(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyDirectAdmin", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyDirectAdmin is a free data retrieval call binding the contract method 0x1525fb7a.
+//
+// Solidity: function evefrontier__onlyDirectAdmin(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyDirectAdmin(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectAdmin(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectAdmin is a free data retrieval call binding the contract method 0x1525fb7a.
+//
+// Solidity: function evefrontier__onlyDirectAdmin(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyDirectAdmin(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectAdmin(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectAdminOrCallAccess is a free data retrieval call binding the contract method 0x930f4b0f.
+//
+// Solidity: function evefrontier__onlyDirectAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyDirectAdminOrCallAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyDirectAdminOrCallAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyDirectAdminOrCallAccess is a free data retrieval call binding the contract method 0x930f4b0f.
+//
+// Solidity: function evefrontier__onlyDirectAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyDirectAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectAdminOrCallAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectAdminOrCallAccess is a free data retrieval call binding the contract method 0x930f4b0f.
+//
+// Solidity: function evefrontier__onlyDirectAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyDirectAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectAdminOrCallAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectEphemeralOwnerOrCall is a free data retrieval call binding the contract method 0x9d334dd6.
+//
+// Solidity: function evefrontier__onlyDirectEphemeralOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyDirectEphemeralOwnerOrCall(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyDirectEphemeralOwnerOrCall", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyDirectEphemeralOwnerOrCall is a free data retrieval call binding the contract method 0x9d334dd6.
+//
+// Solidity: function evefrontier__onlyDirectEphemeralOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyDirectEphemeralOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectEphemeralOwnerOrCall(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectEphemeralOwnerOrCall is a free data retrieval call binding the contract method 0x9d334dd6.
+//
+// Solidity: function evefrontier__onlyDirectEphemeralOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyDirectEphemeralOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectEphemeralOwnerOrCall(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectOwner is a free data retrieval call binding the contract method 0x2f0f9300.
+//
+// Solidity: function evefrontier__onlyDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyDirectOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyDirectOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyDirectOwner is a free data retrieval call binding the contract method 0x2f0f9300.
+//
+// Solidity: function evefrontier__onlyDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyDirectOwner is a free data retrieval call binding the contract method 0x2f0f9300.
+//
+// Solidity: function evefrontier__onlyDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyDirectOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyEphemeralTransferRole is a free data retrieval call binding the contract method 0x1d282de3.
+//
+// Solidity: function evefrontier__onlyEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyEphemeralTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyEphemeralTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyEphemeralTransferRole is a free data retrieval call binding the contract method 0x1d282de3.
+//
+// Solidity: function evefrontier__onlyEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyEphemeralTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyEphemeralTransferRole is a free data retrieval call binding the contract method 0x1d282de3.
+//
+// Solidity: function evefrontier__onlyEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyEphemeralTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwner is a free data retrieval call binding the contract method 0x791f0c7e.
+//
+// Solidity: function evefrontier__onlyOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyOwner is a free data retrieval call binding the contract method 0x791f0c7e.
+//
+// Solidity: function evefrontier__onlyOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwner is a free data retrieval call binding the contract method 0x791f0c7e.
+//
+// Solidity: function evefrontier__onlyOwner(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyOwner(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwner(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerOrEphemeralCrossTransferRole is a free data retrieval call binding the contract method 0x2e640ef2.
+//
+// Solidity: function evefrontier__onlyOwnerOrEphemeralCrossTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyOwnerOrEphemeralCrossTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyOwnerOrEphemeralCrossTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyOwnerOrEphemeralCrossTransferRole is a free data retrieval call binding the contract method 0x2e640ef2.
+//
+// Solidity: function evefrontier__onlyOwnerOrEphemeralCrossTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyOwnerOrEphemeralCrossTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerOrEphemeralCrossTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerOrEphemeralCrossTransferRole is a free data retrieval call binding the contract method 0x2e640ef2.
+//
+// Solidity: function evefrontier__onlyOwnerOrEphemeralCrossTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyOwnerOrEphemeralCrossTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerOrEphemeralCrossTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerOrEphemeralTransferRole is a free data retrieval call binding the contract method 0x6ce81a90.
+//
+// Solidity: function evefrontier__onlyOwnerOrEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyOwnerOrEphemeralTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyOwnerOrEphemeralTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyOwnerOrEphemeralTransferRole is a free data retrieval call binding the contract method 0x6ce81a90.
+//
+// Solidity: function evefrontier__onlyOwnerOrEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyOwnerOrEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerOrEphemeralTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerOrEphemeralTransferRole is a free data retrieval call binding the contract method 0x6ce81a90.
+//
+// Solidity: function evefrontier__onlyOwnerOrEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyOwnerOrEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerOrEphemeralTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerOrInventoryTransferRole is a free data retrieval call binding the contract method 0x389ee55a.
+//
+// Solidity: function evefrontier__onlyOwnerOrInventoryTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyOwnerOrInventoryTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyOwnerOrInventoryTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyOwnerOrInventoryTransferRole is a free data retrieval call binding the contract method 0x389ee55a.
+//
+// Solidity: function evefrontier__onlyOwnerOrInventoryTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyOwnerOrInventoryTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerOrInventoryTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerOrInventoryTransferRole is a free data retrieval call binding the contract method 0x389ee55a.
+//
+// Solidity: function evefrontier__onlyOwnerOrInventoryTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyOwnerOrInventoryTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerOrInventoryTransferRole(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerWithAdminSupportAccess is a free data retrieval call binding the contract method 0xed894f4e.
+//
+// Solidity: function evefrontier__onlyOwnerWithAdminSupportAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlyOwnerWithAdminSupportAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlyOwnerWithAdminSupportAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlyOwnerWithAdminSupportAccess is a free data retrieval call binding the contract method 0xed894f4e.
+//
+// Solidity: function evefrontier__onlyOwnerWithAdminSupportAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlyOwnerWithAdminSupportAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerWithAdminSupportAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlyOwnerWithAdminSupportAccess is a free data retrieval call binding the contract method 0xed894f4e.
+//
+// Solidity: function evefrontier__onlyOwnerWithAdminSupportAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlyOwnerWithAdminSupportAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlyOwnerWithAdminSupportAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlySmartAssemblyClassScopedAccess is a free data retrieval call binding the contract method 0x62201c94.
+//
+// Solidity: function evefrontier__onlySmartAssemblyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCaller) EvefrontierOnlySmartAssemblyClassScopedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__onlySmartAssemblyClassScopedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// EvefrontierOnlySmartAssemblyClassScopedAccess is a free data retrieval call binding the contract method 0x62201c94.
+//
+// Solidity: function evefrontier__onlySmartAssemblyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldSession) EvefrontierOnlySmartAssemblyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlySmartAssemblyClassScopedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOnlySmartAssemblyClassScopedAccess is a free data retrieval call binding the contract method 0x62201c94.
+//
+// Solidity: function evefrontier__onlySmartAssemblyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_World *WorldCallerSession) EvefrontierOnlySmartAssemblyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _World.Contract.EvefrontierOnlySmartAssemblyClassScopedAccess(&_World.CallOpts, smartObjectId, data)
+}
+
+// EvefrontierOwner is a free data retrieval call binding the contract method 0xb79c9133.
+//
+// Solidity: function evefrontier__owner(uint256 smartObjectId) view returns(address)
+func (_World *WorldCaller) EvefrontierOwner(opts *bind.CallOpts, smartObjectId *big.Int) (common.Address, error) {
+	var out []interface{}
+	err := _World.contract.Call(opts, &out, "evefrontier__owner", smartObjectId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// EvefrontierOwner is a free data retrieval call binding the contract method 0xb79c9133.
+//
+// Solidity: function evefrontier__owner(uint256 smartObjectId) view returns(address)
+func (_World *WorldSession) EvefrontierOwner(smartObjectId *big.Int) (common.Address, error) {
+	return _World.Contract.EvefrontierOwner(&_World.CallOpts, smartObjectId)
+}
+
+// EvefrontierOwner is a free data retrieval call binding the contract method 0xb79c9133.
+//
+// Solidity: function evefrontier__owner(uint256 smartObjectId) view returns(address)
+func (_World *WorldCallerSession) EvefrontierOwner(smartObjectId *big.Int) (common.Address, error) {
+	return _World.Contract.EvefrontierOwner(&_World.CallOpts, smartObjectId)
 }
 
 // GetDynamicField is a free data retrieval call binding the contract method 0x1e788977.
@@ -1053,1285 +2302,1663 @@ func (_World *WorldTransactorSession) DeleteRecord(tableId [32]byte, keyTuple []
 	return _World.Contract.DeleteRecord(&_World.TransactOpts, tableId, keyTuple)
 }
 
-// EveworldAggression is a paid mutator transaction binding the contract method 0xcbabbe17.
+// EvefrontierAggression is a paid mutator transaction binding the contract method 0x32a4e99b.
 //
-// Solidity: function eveworld__aggression(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) aggressor, (uint256,uint256,uint256,uint256,uint256,uint256) victim) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_World *WorldTransactor) EveworldAggression(opts *bind.TransactOpts, smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, aggressor SmartTurretTarget, victim SmartTurretTarget) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__aggression", smartObjectId, turretOwnerCharacterId, priorityQueue, turret, aggressor, victim)
+// Solidity: function evefrontier__aggression((uint256,((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[],(uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256)) params) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_World *WorldTransactor) EvefrontierAggression(opts *bind.TransactOpts, params AggressionParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__aggression", params)
 }
 
-// EveworldAggression is a paid mutator transaction binding the contract method 0xcbabbe17.
+// EvefrontierAggression is a paid mutator transaction binding the contract method 0x32a4e99b.
 //
-// Solidity: function eveworld__aggression(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) aggressor, (uint256,uint256,uint256,uint256,uint256,uint256) victim) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_World *WorldSession) EveworldAggression(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, aggressor SmartTurretTarget, victim SmartTurretTarget) (*types.Transaction, error) {
-	return _World.Contract.EveworldAggression(&_World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, aggressor, victim)
+// Solidity: function evefrontier__aggression((uint256,((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[],(uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256)) params) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_World *WorldSession) EvefrontierAggression(params AggressionParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAggression(&_World.TransactOpts, params)
 }
 
-// EveworldAggression is a paid mutator transaction binding the contract method 0xcbabbe17.
+// EvefrontierAggression is a paid mutator transaction binding the contract method 0x32a4e99b.
 //
-// Solidity: function eveworld__aggression(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) aggressor, (uint256,uint256,uint256,uint256,uint256,uint256) victim) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_World *WorldTransactorSession) EveworldAggression(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, aggressor SmartTurretTarget, victim SmartTurretTarget) (*types.Transaction, error) {
-	return _World.Contract.EveworldAggression(&_World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, aggressor, victim)
+// Solidity: function evefrontier__aggression((uint256,((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[],(uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256)) params) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_World *WorldTransactorSession) EvefrontierAggression(params AggressionParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAggression(&_World.TransactOpts, params)
 }
 
-// EveworldAnchor is a paid mutator transaction binding the contract method 0x708c3bf5.
+// EvefrontierAnchor is a paid mutator transaction binding the contract method 0xb43e2f20.
 //
-// Solidity: function eveworld__anchor(uint256 entityId, (uint256,uint256,uint256,uint256) locationData) returns()
-func (_World *WorldTransactor) EveworldAnchor(opts *bind.TransactOpts, entityId *big.Int, locationData LocationTableData) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__anchor", entityId, locationData)
+// Solidity: function evefrontier__anchor(uint256 smartObjectId, address owner, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_World *WorldTransactor) EvefrontierAnchor(opts *bind.TransactOpts, smartObjectId *big.Int, owner common.Address, locationData LocationData) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__anchor", smartObjectId, owner, locationData)
 }
 
-// EveworldAnchor is a paid mutator transaction binding the contract method 0x708c3bf5.
+// EvefrontierAnchor is a paid mutator transaction binding the contract method 0xb43e2f20.
 //
-// Solidity: function eveworld__anchor(uint256 entityId, (uint256,uint256,uint256,uint256) locationData) returns()
-func (_World *WorldSession) EveworldAnchor(entityId *big.Int, locationData LocationTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldAnchor(&_World.TransactOpts, entityId, locationData)
+// Solidity: function evefrontier__anchor(uint256 smartObjectId, address owner, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_World *WorldSession) EvefrontierAnchor(smartObjectId *big.Int, owner common.Address, locationData LocationData) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAnchor(&_World.TransactOpts, smartObjectId, owner, locationData)
 }
 
-// EveworldAnchor is a paid mutator transaction binding the contract method 0x708c3bf5.
+// EvefrontierAnchor is a paid mutator transaction binding the contract method 0xb43e2f20.
 //
-// Solidity: function eveworld__anchor(uint256 entityId, (uint256,uint256,uint256,uint256) locationData) returns()
-func (_World *WorldTransactorSession) EveworldAnchor(entityId *big.Int, locationData LocationTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldAnchor(&_World.TransactOpts, entityId, locationData)
+// Solidity: function evefrontier__anchor(uint256 smartObjectId, address owner, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_World *WorldTransactorSession) EvefrontierAnchor(smartObjectId *big.Int, owner common.Address, locationData LocationData) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAnchor(&_World.TransactOpts, smartObjectId, owner, locationData)
 }
 
-// EveworldBringOffline is a paid mutator transaction binding the contract method 0x9d147e19.
+// EvefrontierAssignItemToInventory is a paid mutator transaction binding the contract method 0x523ce2d5.
 //
-// Solidity: function eveworld__bringOffline(uint256 entityId) returns()
-func (_World *WorldTransactor) EveworldBringOffline(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__bringOffline", entityId)
+// Solidity: function evefrontier__assignItemToInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_World *WorldTransactor) EvefrontierAssignItemToInventory(opts *bind.TransactOpts, inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__assignItemToInventory", inventoryObjectId, itemObjectId, quantity)
 }
 
-// EveworldBringOffline is a paid mutator transaction binding the contract method 0x9d147e19.
+// EvefrontierAssignItemToInventory is a paid mutator transaction binding the contract method 0x523ce2d5.
 //
-// Solidity: function eveworld__bringOffline(uint256 entityId) returns()
-func (_World *WorldSession) EveworldBringOffline(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldBringOffline(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__assignItemToInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_World *WorldSession) EvefrontierAssignItemToInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAssignItemToInventory(&_World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
 }
 
-// EveworldBringOffline is a paid mutator transaction binding the contract method 0x9d147e19.
+// EvefrontierAssignItemToInventory is a paid mutator transaction binding the contract method 0x523ce2d5.
 //
-// Solidity: function eveworld__bringOffline(uint256 entityId) returns()
-func (_World *WorldTransactorSession) EveworldBringOffline(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldBringOffline(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__assignItemToInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_World *WorldTransactorSession) EvefrontierAssignItemToInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAssignItemToInventory(&_World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
 }
 
-// EveworldBringOnline is a paid mutator transaction binding the contract method 0x2a4606fb.
+// EvefrontierAssignOwner is a paid mutator transaction binding the contract method 0xaccb037a.
 //
-// Solidity: function eveworld__bringOnline(uint256 entityId) returns()
-func (_World *WorldTransactor) EveworldBringOnline(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__bringOnline", entityId)
+// Solidity: function evefrontier__assignOwner(uint256 smartObjectId, address to) returns()
+func (_World *WorldTransactor) EvefrontierAssignOwner(opts *bind.TransactOpts, smartObjectId *big.Int, to common.Address) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__assignOwner", smartObjectId, to)
 }
 
-// EveworldBringOnline is a paid mutator transaction binding the contract method 0x2a4606fb.
+// EvefrontierAssignOwner is a paid mutator transaction binding the contract method 0xaccb037a.
 //
-// Solidity: function eveworld__bringOnline(uint256 entityId) returns()
-func (_World *WorldSession) EveworldBringOnline(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldBringOnline(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__assignOwner(uint256 smartObjectId, address to) returns()
+func (_World *WorldSession) EvefrontierAssignOwner(smartObjectId *big.Int, to common.Address) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAssignOwner(&_World.TransactOpts, smartObjectId, to)
 }
 
-// EveworldBringOnline is a paid mutator transaction binding the contract method 0x2a4606fb.
+// EvefrontierAssignOwner is a paid mutator transaction binding the contract method 0xaccb037a.
 //
-// Solidity: function eveworld__bringOnline(uint256 entityId) returns()
-func (_World *WorldTransactorSession) EveworldBringOnline(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldBringOnline(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__assignOwner(uint256 smartObjectId, address to) returns()
+func (_World *WorldTransactorSession) EvefrontierAssignOwner(smartObjectId *big.Int, to common.Address) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierAssignOwner(&_World.TransactOpts, smartObjectId, to)
 }
 
-// EveworldCanJump is a paid mutator transaction binding the contract method 0xacb54c49.
+// EvefrontierBringOffline is a paid mutator transaction binding the contract method 0x918b0ba0.
 //
-// Solidity: function eveworld__canJump(uint256 characterId, uint256 sourceGateId, uint256 destinationGateId) returns(bool)
-func (_World *WorldTransactor) EveworldCanJump(opts *bind.TransactOpts, characterId *big.Int, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__canJump", characterId, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__bringOffline(uint256 smartObjectId) returns()
+func (_World *WorldTransactor) EvefrontierBringOffline(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__bringOffline", smartObjectId)
 }
 
-// EveworldCanJump is a paid mutator transaction binding the contract method 0xacb54c49.
+// EvefrontierBringOffline is a paid mutator transaction binding the contract method 0x918b0ba0.
 //
-// Solidity: function eveworld__canJump(uint256 characterId, uint256 sourceGateId, uint256 destinationGateId) returns(bool)
-func (_World *WorldSession) EveworldCanJump(characterId *big.Int, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCanJump(&_World.TransactOpts, characterId, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__bringOffline(uint256 smartObjectId) returns()
+func (_World *WorldSession) EvefrontierBringOffline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierBringOffline(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldCanJump is a paid mutator transaction binding the contract method 0xacb54c49.
+// EvefrontierBringOffline is a paid mutator transaction binding the contract method 0x918b0ba0.
 //
-// Solidity: function eveworld__canJump(uint256 characterId, uint256 sourceGateId, uint256 destinationGateId) returns(bool)
-func (_World *WorldTransactorSession) EveworldCanJump(characterId *big.Int, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCanJump(&_World.TransactOpts, characterId, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__bringOffline(uint256 smartObjectId) returns()
+func (_World *WorldTransactorSession) EvefrontierBringOffline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierBringOffline(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldConfigureSmartGate is a paid mutator transaction binding the contract method 0xefb17cbc.
+// EvefrontierBringOnline is a paid mutator transaction binding the contract method 0xe47344f8.
 //
-// Solidity: function eveworld__configureSmartGate(uint256 smartObjectId, bytes32 systemId) returns()
-func (_World *WorldTransactor) EveworldConfigureSmartGate(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__configureSmartGate", smartObjectId, systemId)
+// Solidity: function evefrontier__bringOnline(uint256 smartObjectId) returns()
+func (_World *WorldTransactor) EvefrontierBringOnline(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__bringOnline", smartObjectId)
 }
 
-// EveworldConfigureSmartGate is a paid mutator transaction binding the contract method 0xefb17cbc.
+// EvefrontierBringOnline is a paid mutator transaction binding the contract method 0xe47344f8.
 //
-// Solidity: function eveworld__configureSmartGate(uint256 smartObjectId, bytes32 systemId) returns()
-func (_World *WorldSession) EveworldConfigureSmartGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _World.Contract.EveworldConfigureSmartGate(&_World.TransactOpts, smartObjectId, systemId)
+// Solidity: function evefrontier__bringOnline(uint256 smartObjectId) returns()
+func (_World *WorldSession) EvefrontierBringOnline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierBringOnline(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldConfigureSmartGate is a paid mutator transaction binding the contract method 0xefb17cbc.
+// EvefrontierBringOnline is a paid mutator transaction binding the contract method 0xe47344f8.
 //
-// Solidity: function eveworld__configureSmartGate(uint256 smartObjectId, bytes32 systemId) returns()
-func (_World *WorldTransactorSession) EveworldConfigureSmartGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _World.Contract.EveworldConfigureSmartGate(&_World.TransactOpts, smartObjectId, systemId)
+// Solidity: function evefrontier__bringOnline(uint256 smartObjectId) returns()
+func (_World *WorldTransactorSession) EvefrontierBringOnline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierBringOnline(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldConfigureSmartTurret is a paid mutator transaction binding the contract method 0xc0b938af.
+// EvefrontierCanJump is a paid mutator transaction binding the contract method 0x87adbfd1.
 //
-// Solidity: function eveworld__configureSmartTurret(uint256 smartObjectId, bytes32 systemId) returns()
-func (_World *WorldTransactor) EveworldConfigureSmartTurret(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__configureSmartTurret", smartObjectId, systemId)
+// Solidity: function evefrontier__canJump(uint256 sourceGateId, uint256 destinationGateId) returns(bool)
+func (_World *WorldTransactor) EvefrontierCanJump(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__canJump", sourceGateId, destinationGateId)
 }
 
-// EveworldConfigureSmartTurret is a paid mutator transaction binding the contract method 0xc0b938af.
+// EvefrontierCanJump is a paid mutator transaction binding the contract method 0x87adbfd1.
 //
-// Solidity: function eveworld__configureSmartTurret(uint256 smartObjectId, bytes32 systemId) returns()
-func (_World *WorldSession) EveworldConfigureSmartTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _World.Contract.EveworldConfigureSmartTurret(&_World.TransactOpts, smartObjectId, systemId)
+// Solidity: function evefrontier__canJump(uint256 sourceGateId, uint256 destinationGateId) returns(bool)
+func (_World *WorldSession) EvefrontierCanJump(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCanJump(&_World.TransactOpts, sourceGateId, destinationGateId)
 }
 
-// EveworldConfigureSmartTurret is a paid mutator transaction binding the contract method 0xc0b938af.
+// EvefrontierCanJump is a paid mutator transaction binding the contract method 0x87adbfd1.
 //
-// Solidity: function eveworld__configureSmartTurret(uint256 smartObjectId, bytes32 systemId) returns()
-func (_World *WorldTransactorSession) EveworldConfigureSmartTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _World.Contract.EveworldConfigureSmartTurret(&_World.TransactOpts, smartObjectId, systemId)
+// Solidity: function evefrontier__canJump(uint256 sourceGateId, uint256 destinationGateId) returns(bool)
+func (_World *WorldTransactorSession) EvefrontierCanJump(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCanJump(&_World.TransactOpts, sourceGateId, destinationGateId)
 }
 
-// EveworldCreateAndAnchorSmartGate is a paid mutator transaction binding the contract method 0x22414d41.
+// EvefrontierConfigureDeployableAccess is a paid mutator transaction binding the contract method 0x783d1442.
 //
-// Solidity: function eveworld__createAndAnchorSmartGate(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 maxDistance) returns()
-func (_World *WorldTransactor) EveworldCreateAndAnchorSmartGate(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, maxDistance *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createAndAnchorSmartGate", smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, maxDistance)
+// Solidity: function evefrontier__configureDeployableAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureDeployableAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureDeployableAccess")
 }
 
-// EveworldCreateAndAnchorSmartGate is a paid mutator transaction binding the contract method 0x22414d41.
+// EvefrontierConfigureDeployableAccess is a paid mutator transaction binding the contract method 0x783d1442.
 //
-// Solidity: function eveworld__createAndAnchorSmartGate(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 maxDistance) returns()
-func (_World *WorldSession) EveworldCreateAndAnchorSmartGate(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, maxDistance *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndAnchorSmartGate(&_World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, maxDistance)
+// Solidity: function evefrontier__configureDeployableAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureDeployableAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureDeployableAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndAnchorSmartGate is a paid mutator transaction binding the contract method 0x22414d41.
+// EvefrontierConfigureDeployableAccess is a paid mutator transaction binding the contract method 0x783d1442.
 //
-// Solidity: function eveworld__createAndAnchorSmartGate(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 maxDistance) returns()
-func (_World *WorldTransactorSession) EveworldCreateAndAnchorSmartGate(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, maxDistance *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndAnchorSmartGate(&_World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, maxDistance)
+// Solidity: function evefrontier__configureDeployableAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureDeployableAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureDeployableAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndAnchorSmartStorageUnit is a paid mutator transaction binding the contract method 0xa1353e41.
+// EvefrontierConfigureEntityRecordAccess is a paid mutator transaction binding the contract method 0xbb82285c.
 //
-// Solidity: function eveworld__createAndAnchorSmartStorageUnit(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
-func (_World *WorldTransactor) EveworldCreateAndAnchorSmartStorageUnit(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createAndAnchorSmartStorageUnit", smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, storageCapacity, ephemeralStorageCapacity)
+// Solidity: function evefrontier__configureEntityRecordAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureEntityRecordAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureEntityRecordAccess")
 }
 
-// EveworldCreateAndAnchorSmartStorageUnit is a paid mutator transaction binding the contract method 0xa1353e41.
+// EvefrontierConfigureEntityRecordAccess is a paid mutator transaction binding the contract method 0xbb82285c.
 //
-// Solidity: function eveworld__createAndAnchorSmartStorageUnit(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
-func (_World *WorldSession) EveworldCreateAndAnchorSmartStorageUnit(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndAnchorSmartStorageUnit(&_World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, storageCapacity, ephemeralStorageCapacity)
+// Solidity: function evefrontier__configureEntityRecordAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureEntityRecordAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureEntityRecordAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndAnchorSmartStorageUnit is a paid mutator transaction binding the contract method 0xa1353e41.
+// EvefrontierConfigureEntityRecordAccess is a paid mutator transaction binding the contract method 0xbb82285c.
 //
-// Solidity: function eveworld__createAndAnchorSmartStorageUnit(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
-func (_World *WorldTransactorSession) EveworldCreateAndAnchorSmartStorageUnit(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndAnchorSmartStorageUnit(&_World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, storageCapacity, ephemeralStorageCapacity)
+// Solidity: function evefrontier__configureEntityRecordAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureEntityRecordAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureEntityRecordAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndAnchorSmartTurret is a paid mutator transaction binding the contract method 0xc22f9932.
+// EvefrontierConfigureEphemeralInteractAccess is a paid mutator transaction binding the contract method 0x98a66514.
 //
-// Solidity: function eveworld__createAndAnchorSmartTurret(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
-func (_World *WorldTransactor) EveworldCreateAndAnchorSmartTurret(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createAndAnchorSmartTurret", smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+// Solidity: function evefrontier__configureEphemeralInteractAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureEphemeralInteractAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureEphemeralInteractAccess")
 }
 
-// EveworldCreateAndAnchorSmartTurret is a paid mutator transaction binding the contract method 0xc22f9932.
+// EvefrontierConfigureEphemeralInteractAccess is a paid mutator transaction binding the contract method 0x98a66514.
 //
-// Solidity: function eveworld__createAndAnchorSmartTurret(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
-func (_World *WorldSession) EveworldCreateAndAnchorSmartTurret(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndAnchorSmartTurret(&_World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+// Solidity: function evefrontier__configureEphemeralInteractAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureEphemeralInteractAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureEphemeralInteractAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndAnchorSmartTurret is a paid mutator transaction binding the contract method 0xc22f9932.
+// EvefrontierConfigureEphemeralInteractAccess is a paid mutator transaction binding the contract method 0x98a66514.
 //
-// Solidity: function eveworld__createAndAnchorSmartTurret(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
-func (_World *WorldTransactorSession) EveworldCreateAndAnchorSmartTurret(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndAnchorSmartTurret(&_World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+// Solidity: function evefrontier__configureEphemeralInteractAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureEphemeralInteractAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureEphemeralInteractAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndDepositItemsToEphemeralInventory is a paid mutator transaction binding the contract method 0x88633ae4.
+// EvefrontierConfigureEphemeralInventoryAccess is a paid mutator transaction binding the contract method 0x7beb2dc5.
 //
-// Solidity: function eveworld__createAndDepositItemsToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldCreateAndDepositItemsToEphemeralInventory(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createAndDepositItemsToEphemeralInventory", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureEphemeralInventoryAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureEphemeralInventoryAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureEphemeralInventoryAccess")
 }
 
-// EveworldCreateAndDepositItemsToEphemeralInventory is a paid mutator transaction binding the contract method 0x88633ae4.
+// EvefrontierConfigureEphemeralInventoryAccess is a paid mutator transaction binding the contract method 0x7beb2dc5.
 //
-// Solidity: function eveworld__createAndDepositItemsToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldSession) EveworldCreateAndDepositItemsToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndDepositItemsToEphemeralInventory(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureEphemeralInventoryAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureEphemeralInventoryAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureEphemeralInventoryAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndDepositItemsToEphemeralInventory is a paid mutator transaction binding the contract method 0x88633ae4.
+// EvefrontierConfigureEphemeralInventoryAccess is a paid mutator transaction binding the contract method 0x7beb2dc5.
 //
-// Solidity: function eveworld__createAndDepositItemsToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldCreateAndDepositItemsToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndDepositItemsToEphemeralInventory(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureEphemeralInventoryAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureEphemeralInventoryAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureEphemeralInventoryAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndDepositItemsToInventory is a paid mutator transaction binding the contract method 0xd6f49960.
+// EvefrontierConfigureFuelAccess is a paid mutator transaction binding the contract method 0x27341a1d.
 //
-// Solidity: function eveworld__createAndDepositItemsToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldCreateAndDepositItemsToInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createAndDepositItemsToInventory", smartObjectId, items)
+// Solidity: function evefrontier__configureFuelAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureFuelAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureFuelAccess")
 }
 
-// EveworldCreateAndDepositItemsToInventory is a paid mutator transaction binding the contract method 0xd6f49960.
+// EvefrontierConfigureFuelAccess is a paid mutator transaction binding the contract method 0x27341a1d.
 //
-// Solidity: function eveworld__createAndDepositItemsToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldSession) EveworldCreateAndDepositItemsToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndDepositItemsToInventory(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__configureFuelAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureFuelAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureFuelAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateAndDepositItemsToInventory is a paid mutator transaction binding the contract method 0xd6f49960.
+// EvefrontierConfigureFuelAccess is a paid mutator transaction binding the contract method 0x27341a1d.
 //
-// Solidity: function eveworld__createAndDepositItemsToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldCreateAndDepositItemsToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateAndDepositItemsToInventory(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__configureFuelAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureFuelAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureFuelAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateCharacter is a paid mutator transaction binding the contract method 0x552a848c.
+// EvefrontierConfigureFuelParameters is a paid mutator transaction binding the contract method 0x68898f4a.
 //
-// Solidity: function eveworld__createCharacter(uint256 characterId, address characterAddress, uint256 corpId, (uint256,uint256,uint256) entityRecord, (string,string,string) entityRecordOffchain, string tokenCid) returns()
-func (_World *WorldTransactor) EveworldCreateCharacter(opts *bind.TransactOpts, characterId *big.Int, characterAddress common.Address, corpId *big.Int, entityRecord EntityRecordData, entityRecordOffchain EntityRecordOffchainTableData, tokenCid string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createCharacter", characterId, characterAddress, corpId, entityRecord, entityRecordOffchain, tokenCid)
+// Solidity: function evefrontier__configureFuelParameters(uint256 smartObjectId, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 fuelAmount) returns()
+func (_World *WorldTransactor) EvefrontierConfigureFuelParameters(opts *bind.TransactOpts, smartObjectId *big.Int, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureFuelParameters", smartObjectId, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, fuelAmount)
 }
 
-// EveworldCreateCharacter is a paid mutator transaction binding the contract method 0x552a848c.
+// EvefrontierConfigureFuelParameters is a paid mutator transaction binding the contract method 0x68898f4a.
 //
-// Solidity: function eveworld__createCharacter(uint256 characterId, address characterAddress, uint256 corpId, (uint256,uint256,uint256) entityRecord, (string,string,string) entityRecordOffchain, string tokenCid) returns()
-func (_World *WorldSession) EveworldCreateCharacter(characterId *big.Int, characterAddress common.Address, corpId *big.Int, entityRecord EntityRecordData, entityRecordOffchain EntityRecordOffchainTableData, tokenCid string) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateCharacter(&_World.TransactOpts, characterId, characterAddress, corpId, entityRecord, entityRecordOffchain, tokenCid)
+// Solidity: function evefrontier__configureFuelParameters(uint256 smartObjectId, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 fuelAmount) returns()
+func (_World *WorldSession) EvefrontierConfigureFuelParameters(smartObjectId *big.Int, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureFuelParameters(&_World.TransactOpts, smartObjectId, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, fuelAmount)
 }
 
-// EveworldCreateCharacter is a paid mutator transaction binding the contract method 0x552a848c.
+// EvefrontierConfigureFuelParameters is a paid mutator transaction binding the contract method 0x68898f4a.
 //
-// Solidity: function eveworld__createCharacter(uint256 characterId, address characterAddress, uint256 corpId, (uint256,uint256,uint256) entityRecord, (string,string,string) entityRecordOffchain, string tokenCid) returns()
-func (_World *WorldTransactorSession) EveworldCreateCharacter(characterId *big.Int, characterAddress common.Address, corpId *big.Int, entityRecord EntityRecordData, entityRecordOffchain EntityRecordOffchainTableData, tokenCid string) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateCharacter(&_World.TransactOpts, characterId, characterAddress, corpId, entityRecord, entityRecordOffchain, tokenCid)
+// Solidity: function evefrontier__configureFuelParameters(uint256 smartObjectId, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 fuelAmount) returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureFuelParameters(smartObjectId *big.Int, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureFuelParameters(&_World.TransactOpts, smartObjectId, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, fuelAmount)
 }
 
-// EveworldCreateEntityRecord is a paid mutator transaction binding the contract method 0x3d3bf32e.
+// EvefrontierConfigureGate is a paid mutator transaction binding the contract method 0x4646184b.
 //
-// Solidity: function eveworld__createEntityRecord(uint256 entityId, uint256 itemId, uint256 typeId, uint256 volume) returns()
-func (_World *WorldTransactor) EveworldCreateEntityRecord(opts *bind.TransactOpts, entityId *big.Int, itemId *big.Int, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createEntityRecord", entityId, itemId, typeId, volume)
+// Solidity: function evefrontier__configureGate(uint256 smartObjectId, bytes32 systemId) returns()
+func (_World *WorldTransactor) EvefrontierConfigureGate(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureGate", smartObjectId, systemId)
 }
 
-// EveworldCreateEntityRecord is a paid mutator transaction binding the contract method 0x3d3bf32e.
+// EvefrontierConfigureGate is a paid mutator transaction binding the contract method 0x4646184b.
 //
-// Solidity: function eveworld__createEntityRecord(uint256 entityId, uint256 itemId, uint256 typeId, uint256 volume) returns()
-func (_World *WorldSession) EveworldCreateEntityRecord(entityId *big.Int, itemId *big.Int, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateEntityRecord(&_World.TransactOpts, entityId, itemId, typeId, volume)
+// Solidity: function evefrontier__configureGate(uint256 smartObjectId, bytes32 systemId) returns()
+func (_World *WorldSession) EvefrontierConfigureGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureGate(&_World.TransactOpts, smartObjectId, systemId)
 }
 
-// EveworldCreateEntityRecord is a paid mutator transaction binding the contract method 0x3d3bf32e.
+// EvefrontierConfigureGate is a paid mutator transaction binding the contract method 0x4646184b.
 //
-// Solidity: function eveworld__createEntityRecord(uint256 entityId, uint256 itemId, uint256 typeId, uint256 volume) returns()
-func (_World *WorldTransactorSession) EveworldCreateEntityRecord(entityId *big.Int, itemId *big.Int, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateEntityRecord(&_World.TransactOpts, entityId, itemId, typeId, volume)
+// Solidity: function evefrontier__configureGate(uint256 smartObjectId, bytes32 systemId) returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureGate(&_World.TransactOpts, smartObjectId, systemId)
 }
 
-// EveworldCreateEntityRecordOffchain is a paid mutator transaction binding the contract method 0x31fa27a3.
+// EvefrontierConfigureInventoryAccess is a paid mutator transaction binding the contract method 0x4d4bdfda.
 //
-// Solidity: function eveworld__createEntityRecordOffchain(uint256 entityId, string name, string dappURL, string description) returns()
-func (_World *WorldTransactor) EveworldCreateEntityRecordOffchain(opts *bind.TransactOpts, entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__createEntityRecordOffchain", entityId, name, dappURL, description)
+// Solidity: function evefrontier__configureInventoryAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureInventoryAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureInventoryAccess")
 }
 
-// EveworldCreateEntityRecordOffchain is a paid mutator transaction binding the contract method 0x31fa27a3.
+// EvefrontierConfigureInventoryAccess is a paid mutator transaction binding the contract method 0x4d4bdfda.
 //
-// Solidity: function eveworld__createEntityRecordOffchain(uint256 entityId, string name, string dappURL, string description) returns()
-func (_World *WorldSession) EveworldCreateEntityRecordOffchain(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateEntityRecordOffchain(&_World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function evefrontier__configureInventoryAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureInventoryAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureInventoryAccess(&_World.TransactOpts)
 }
 
-// EveworldCreateEntityRecordOffchain is a paid mutator transaction binding the contract method 0x31fa27a3.
+// EvefrontierConfigureInventoryAccess is a paid mutator transaction binding the contract method 0x4d4bdfda.
 //
-// Solidity: function eveworld__createEntityRecordOffchain(uint256 entityId, string name, string dappURL, string description) returns()
-func (_World *WorldTransactorSession) EveworldCreateEntityRecordOffchain(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldCreateEntityRecordOffchain(&_World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function evefrontier__configureInventoryAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureInventoryAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureInventoryAccess(&_World.TransactOpts)
 }
 
-// EveworldDepositFuel is a paid mutator transaction binding the contract method 0x23cbd201.
+// EvefrontierConfigureInventoryInteractAccess is a paid mutator transaction binding the contract method 0x8c22b4f6.
 //
-// Solidity: function eveworld__depositFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_World *WorldTransactor) EveworldDepositFuel(opts *bind.TransactOpts, entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__depositFuel", entityId, unitAmount)
+// Solidity: function evefrontier__configureInventoryInteractAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureInventoryInteractAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureInventoryInteractAccess")
 }
 
-// EveworldDepositFuel is a paid mutator transaction binding the contract method 0x23cbd201.
+// EvefrontierConfigureInventoryInteractAccess is a paid mutator transaction binding the contract method 0x8c22b4f6.
 //
-// Solidity: function eveworld__depositFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_World *WorldSession) EveworldDepositFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldDepositFuel(&_World.TransactOpts, entityId, unitAmount)
+// Solidity: function evefrontier__configureInventoryInteractAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureInventoryInteractAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureInventoryInteractAccess(&_World.TransactOpts)
 }
 
-// EveworldDepositFuel is a paid mutator transaction binding the contract method 0x23cbd201.
+// EvefrontierConfigureInventoryInteractAccess is a paid mutator transaction binding the contract method 0x8c22b4f6.
 //
-// Solidity: function eveworld__depositFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_World *WorldTransactorSession) EveworldDepositFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldDepositFuel(&_World.TransactOpts, entityId, unitAmount)
+// Solidity: function evefrontier__configureInventoryInteractAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureInventoryInteractAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureInventoryInteractAccess(&_World.TransactOpts)
 }
 
-// EveworldDepositToEphemeralInventory is a paid mutator transaction binding the contract method 0x90d1f28e.
+// EvefrontierConfigureKillMailAccess is a paid mutator transaction binding the contract method 0xe4216edb.
 //
-// Solidity: function eveworld__depositToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldDepositToEphemeralInventory(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__depositToEphemeralInventory", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureKillMailAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureKillMailAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureKillMailAccess")
 }
 
-// EveworldDepositToEphemeralInventory is a paid mutator transaction binding the contract method 0x90d1f28e.
+// EvefrontierConfigureKillMailAccess is a paid mutator transaction binding the contract method 0xe4216edb.
 //
-// Solidity: function eveworld__depositToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldSession) EveworldDepositToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldDepositToEphemeralInventory(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureKillMailAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureKillMailAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureKillMailAccess(&_World.TransactOpts)
 }
 
-// EveworldDepositToEphemeralInventory is a paid mutator transaction binding the contract method 0x90d1f28e.
+// EvefrontierConfigureKillMailAccess is a paid mutator transaction binding the contract method 0xe4216edb.
 //
-// Solidity: function eveworld__depositToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldDepositToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldDepositToEphemeralInventory(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureKillMailAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureKillMailAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureKillMailAccess(&_World.TransactOpts)
 }
 
-// EveworldDepositToInventory is a paid mutator transaction binding the contract method 0x37b52bd6.
+// EvefrontierConfigureLocationAccess is a paid mutator transaction binding the contract method 0x17cd377c.
 //
-// Solidity: function eveworld__depositToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldDepositToInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__depositToInventory", smartObjectId, items)
+// Solidity: function evefrontier__configureLocationAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureLocationAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureLocationAccess")
 }
 
-// EveworldDepositToInventory is a paid mutator transaction binding the contract method 0x37b52bd6.
+// EvefrontierConfigureLocationAccess is a paid mutator transaction binding the contract method 0x17cd377c.
 //
-// Solidity: function eveworld__depositToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldSession) EveworldDepositToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldDepositToInventory(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__configureLocationAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureLocationAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureLocationAccess(&_World.TransactOpts)
 }
 
-// EveworldDepositToInventory is a paid mutator transaction binding the contract method 0x37b52bd6.
+// EvefrontierConfigureLocationAccess is a paid mutator transaction binding the contract method 0x17cd377c.
 //
-// Solidity: function eveworld__depositToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldDepositToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldDepositToInventory(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__configureLocationAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureLocationAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureLocationAccess(&_World.TransactOpts)
 }
 
-// EveworldDestroyDeployable is a paid mutator transaction binding the contract method 0xad47cec7.
+// EvefrontierConfigureOwnershipAccess is a paid mutator transaction binding the contract method 0xc197291b.
 //
-// Solidity: function eveworld__destroyDeployable(uint256 entityId) returns()
-func (_World *WorldTransactor) EveworldDestroyDeployable(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__destroyDeployable", entityId)
+// Solidity: function evefrontier__configureOwnershipAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureOwnershipAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureOwnershipAccess")
 }
 
-// EveworldDestroyDeployable is a paid mutator transaction binding the contract method 0xad47cec7.
+// EvefrontierConfigureOwnershipAccess is a paid mutator transaction binding the contract method 0xc197291b.
 //
-// Solidity: function eveworld__destroyDeployable(uint256 entityId) returns()
-func (_World *WorldSession) EveworldDestroyDeployable(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldDestroyDeployable(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__configureOwnershipAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureOwnershipAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureOwnershipAccess(&_World.TransactOpts)
 }
 
-// EveworldDestroyDeployable is a paid mutator transaction binding the contract method 0xad47cec7.
+// EvefrontierConfigureOwnershipAccess is a paid mutator transaction binding the contract method 0xc197291b.
 //
-// Solidity: function eveworld__destroyDeployable(uint256 entityId) returns()
-func (_World *WorldTransactorSession) EveworldDestroyDeployable(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldDestroyDeployable(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__configureOwnershipAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureOwnershipAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureOwnershipAccess(&_World.TransactOpts)
 }
 
-// EveworldEphemeralToInventoryTransfer is a paid mutator transaction binding the contract method 0x1876e798.
+// EvefrontierConfigureSmartAssemblyAccess is a paid mutator transaction binding the contract method 0xbbe175c4.
 //
-// Solidity: function eveworld__ephemeralToInventoryTransfer(uint256 smartObjectId, (uint256,address,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldEphemeralToInventoryTransfer(opts *bind.TransactOpts, smartObjectId *big.Int, items []TransferItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__ephemeralToInventoryTransfer", smartObjectId, items)
+// Solidity: function evefrontier__configureSmartAssemblyAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureSmartAssemblyAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureSmartAssemblyAccess")
 }
 
-// EveworldEphemeralToInventoryTransfer is a paid mutator transaction binding the contract method 0x1876e798.
+// EvefrontierConfigureSmartAssemblyAccess is a paid mutator transaction binding the contract method 0xbbe175c4.
 //
-// Solidity: function eveworld__ephemeralToInventoryTransfer(uint256 smartObjectId, (uint256,address,uint256)[] items) returns()
-func (_World *WorldSession) EveworldEphemeralToInventoryTransfer(smartObjectId *big.Int, items []TransferItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldEphemeralToInventoryTransfer(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__configureSmartAssemblyAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureSmartAssemblyAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartAssemblyAccess(&_World.TransactOpts)
 }
 
-// EveworldEphemeralToInventoryTransfer is a paid mutator transaction binding the contract method 0x1876e798.
+// EvefrontierConfigureSmartAssemblyAccess is a paid mutator transaction binding the contract method 0xbbe175c4.
 //
-// Solidity: function eveworld__ephemeralToInventoryTransfer(uint256 smartObjectId, (uint256,address,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldEphemeralToInventoryTransfer(smartObjectId *big.Int, items []TransferItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldEphemeralToInventoryTransfer(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__configureSmartAssemblyAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureSmartAssemblyAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartAssemblyAccess(&_World.TransactOpts)
 }
 
-// EveworldGlobalPause is a paid mutator transaction binding the contract method 0xf023982a.
+// EvefrontierConfigureSmartCharacterAccess is a paid mutator transaction binding the contract method 0x195b4a20.
 //
-// Solidity: function eveworld__globalPause() returns()
-func (_World *WorldTransactor) EveworldGlobalPause(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__globalPause")
+// Solidity: function evefrontier__configureSmartCharacterAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureSmartCharacterAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureSmartCharacterAccess")
 }
 
-// EveworldGlobalPause is a paid mutator transaction binding the contract method 0xf023982a.
+// EvefrontierConfigureSmartCharacterAccess is a paid mutator transaction binding the contract method 0x195b4a20.
 //
-// Solidity: function eveworld__globalPause() returns()
-func (_World *WorldSession) EveworldGlobalPause() (*types.Transaction, error) {
-	return _World.Contract.EveworldGlobalPause(&_World.TransactOpts)
+// Solidity: function evefrontier__configureSmartCharacterAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureSmartCharacterAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartCharacterAccess(&_World.TransactOpts)
 }
 
-// EveworldGlobalPause is a paid mutator transaction binding the contract method 0xf023982a.
+// EvefrontierConfigureSmartCharacterAccess is a paid mutator transaction binding the contract method 0x195b4a20.
 //
-// Solidity: function eveworld__globalPause() returns()
-func (_World *WorldTransactorSession) EveworldGlobalPause() (*types.Transaction, error) {
-	return _World.Contract.EveworldGlobalPause(&_World.TransactOpts)
+// Solidity: function evefrontier__configureSmartCharacterAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureSmartCharacterAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartCharacterAccess(&_World.TransactOpts)
 }
 
-// EveworldGlobalResume is a paid mutator transaction binding the contract method 0x03a630f1.
+// EvefrontierConfigureSmartGateAccess is a paid mutator transaction binding the contract method 0x68b34f22.
 //
-// Solidity: function eveworld__globalResume() returns()
-func (_World *WorldTransactor) EveworldGlobalResume(opts *bind.TransactOpts) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__globalResume")
+// Solidity: function evefrontier__configureSmartGateAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureSmartGateAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureSmartGateAccess")
 }
 
-// EveworldGlobalResume is a paid mutator transaction binding the contract method 0x03a630f1.
+// EvefrontierConfigureSmartGateAccess is a paid mutator transaction binding the contract method 0x68b34f22.
 //
-// Solidity: function eveworld__globalResume() returns()
-func (_World *WorldSession) EveworldGlobalResume() (*types.Transaction, error) {
-	return _World.Contract.EveworldGlobalResume(&_World.TransactOpts)
+// Solidity: function evefrontier__configureSmartGateAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureSmartGateAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartGateAccess(&_World.TransactOpts)
 }
 
-// EveworldGlobalResume is a paid mutator transaction binding the contract method 0x03a630f1.
+// EvefrontierConfigureSmartGateAccess is a paid mutator transaction binding the contract method 0x68b34f22.
 //
-// Solidity: function eveworld__globalResume() returns()
-func (_World *WorldTransactorSession) EveworldGlobalResume() (*types.Transaction, error) {
-	return _World.Contract.EveworldGlobalResume(&_World.TransactOpts)
+// Solidity: function evefrontier__configureSmartGateAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureSmartGateAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartGateAccess(&_World.TransactOpts)
 }
 
-// EveworldInProximity is a paid mutator transaction binding the contract method 0x238d7ca6.
+// EvefrontierConfigureSmartStorageUnitAccess is a paid mutator transaction binding the contract method 0x17c4abce.
 //
-// Solidity: function eveworld__inProximity(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_World *WorldTransactor) EveworldInProximity(opts *bind.TransactOpts, smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__inProximity", smartObjectId, turretOwnerCharacterId, priorityQueue, turret, turretTarget)
+// Solidity: function evefrontier__configureSmartStorageUnitAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureSmartStorageUnitAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureSmartStorageUnitAccess")
 }
 
-// EveworldInProximity is a paid mutator transaction binding the contract method 0x238d7ca6.
+// EvefrontierConfigureSmartStorageUnitAccess is a paid mutator transaction binding the contract method 0x17c4abce.
 //
-// Solidity: function eveworld__inProximity(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_World *WorldSession) EveworldInProximity(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
-	return _World.Contract.EveworldInProximity(&_World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, turretTarget)
+// Solidity: function evefrontier__configureSmartStorageUnitAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureSmartStorageUnitAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartStorageUnitAccess(&_World.TransactOpts)
 }
 
-// EveworldInProximity is a paid mutator transaction binding the contract method 0x238d7ca6.
+// EvefrontierConfigureSmartStorageUnitAccess is a paid mutator transaction binding the contract method 0x17c4abce.
 //
-// Solidity: function eveworld__inProximity(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_World *WorldTransactorSession) EveworldInProximity(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
-	return _World.Contract.EveworldInProximity(&_World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, turretTarget)
+// Solidity: function evefrontier__configureSmartStorageUnitAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureSmartStorageUnitAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartStorageUnitAccess(&_World.TransactOpts)
 }
 
-// EveworldInventoryToEphemeralTransfer is a paid mutator transaction binding the contract method 0x88a07424.
+// EvefrontierConfigureSmartTurretAccess is a paid mutator transaction binding the contract method 0xca4a3a60.
 //
-// Solidity: function eveworld__inventoryToEphemeralTransfer(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldInventoryToEphemeralTransfer(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []TransferItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__inventoryToEphemeralTransfer", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureSmartTurretAccess() returns()
+func (_World *WorldTransactor) EvefrontierConfigureSmartTurretAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureSmartTurretAccess")
 }
 
-// EveworldInventoryToEphemeralTransfer is a paid mutator transaction binding the contract method 0x88a07424.
+// EvefrontierConfigureSmartTurretAccess is a paid mutator transaction binding the contract method 0xca4a3a60.
 //
-// Solidity: function eveworld__inventoryToEphemeralTransfer(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256)[] items) returns()
-func (_World *WorldSession) EveworldInventoryToEphemeralTransfer(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []TransferItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldInventoryToEphemeralTransfer(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureSmartTurretAccess() returns()
+func (_World *WorldSession) EvefrontierConfigureSmartTurretAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartTurretAccess(&_World.TransactOpts)
 }
 
-// EveworldInventoryToEphemeralTransfer is a paid mutator transaction binding the contract method 0x88a07424.
+// EvefrontierConfigureSmartTurretAccess is a paid mutator transaction binding the contract method 0xca4a3a60.
 //
-// Solidity: function eveworld__inventoryToEphemeralTransfer(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldInventoryToEphemeralTransfer(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []TransferItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldInventoryToEphemeralTransfer(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__configureSmartTurretAccess() returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureSmartTurretAccess() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureSmartTurretAccess(&_World.TransactOpts)
 }
 
-// EveworldLinkSmartGates is a paid mutator transaction binding the contract method 0x5ada755f.
+// EvefrontierConfigureTurret is a paid mutator transaction binding the contract method 0x25a7ae12.
 //
-// Solidity: function eveworld__linkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_World *WorldTransactor) EveworldLinkSmartGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__linkSmartGates", sourceGateId, destinationGateId)
+// Solidity: function evefrontier__configureTurret(uint256 smartObjectId, bytes32 systemId) returns()
+func (_World *WorldTransactor) EvefrontierConfigureTurret(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__configureTurret", smartObjectId, systemId)
 }
 
-// EveworldLinkSmartGates is a paid mutator transaction binding the contract method 0x5ada755f.
+// EvefrontierConfigureTurret is a paid mutator transaction binding the contract method 0x25a7ae12.
 //
-// Solidity: function eveworld__linkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_World *WorldSession) EveworldLinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldLinkSmartGates(&_World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__configureTurret(uint256 smartObjectId, bytes32 systemId) returns()
+func (_World *WorldSession) EvefrontierConfigureTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureTurret(&_World.TransactOpts, smartObjectId, systemId)
 }
 
-// EveworldLinkSmartGates is a paid mutator transaction binding the contract method 0x5ada755f.
+// EvefrontierConfigureTurret is a paid mutator transaction binding the contract method 0x25a7ae12.
 //
-// Solidity: function eveworld__linkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_World *WorldTransactorSession) EveworldLinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldLinkSmartGates(&_World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__configureTurret(uint256 smartObjectId, bytes32 systemId) returns()
+func (_World *WorldTransactorSession) EvefrontierConfigureTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierConfigureTurret(&_World.TransactOpts, smartObjectId, systemId)
 }
 
-// EveworldRegisterDeployable is a paid mutator transaction binding the contract method 0x2ebaa73a.
+// EvefrontierCreateAndAnchor is a paid mutator transaction binding the contract method 0x6ec907f0.
 //
-// Solidity: function eveworld__registerDeployable(uint256 entityId, (address,string) smartObjectData, uint256 fuelUnitVolumeInWei, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacityInWei) returns()
-func (_World *WorldTransactor) EveworldRegisterDeployable(opts *bind.TransactOpts, entityId *big.Int, smartObjectData SmartObjectData, fuelUnitVolumeInWei *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacityInWei *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__registerDeployable", entityId, smartObjectData, fuelUnitVolumeInWei, fuelConsumptionIntervalInSeconds, fuelMaxCapacityInWei)
+// Solidity: function evefrontier__createAndAnchor((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_World *WorldTransactor) EvefrontierCreateAndAnchor(opts *bind.TransactOpts, params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAndAnchor", params)
 }
 
-// EveworldRegisterDeployable is a paid mutator transaction binding the contract method 0x2ebaa73a.
+// EvefrontierCreateAndAnchor is a paid mutator transaction binding the contract method 0x6ec907f0.
 //
-// Solidity: function eveworld__registerDeployable(uint256 entityId, (address,string) smartObjectData, uint256 fuelUnitVolumeInWei, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacityInWei) returns()
-func (_World *WorldSession) EveworldRegisterDeployable(entityId *big.Int, smartObjectData SmartObjectData, fuelUnitVolumeInWei *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacityInWei *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldRegisterDeployable(&_World.TransactOpts, entityId, smartObjectData, fuelUnitVolumeInWei, fuelConsumptionIntervalInSeconds, fuelMaxCapacityInWei)
+// Solidity: function evefrontier__createAndAnchor((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_World *WorldSession) EvefrontierCreateAndAnchor(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchor(&_World.TransactOpts, params)
 }
 
-// EveworldRegisterDeployable is a paid mutator transaction binding the contract method 0x2ebaa73a.
+// EvefrontierCreateAndAnchor is a paid mutator transaction binding the contract method 0x6ec907f0.
 //
-// Solidity: function eveworld__registerDeployable(uint256 entityId, (address,string) smartObjectData, uint256 fuelUnitVolumeInWei, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacityInWei) returns()
-func (_World *WorldTransactorSession) EveworldRegisterDeployable(entityId *big.Int, smartObjectData SmartObjectData, fuelUnitVolumeInWei *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacityInWei *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldRegisterDeployable(&_World.TransactOpts, entityId, smartObjectData, fuelUnitVolumeInWei, fuelConsumptionIntervalInSeconds, fuelMaxCapacityInWei)
+// Solidity: function evefrontier__createAndAnchor((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAndAnchor(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchor(&_World.TransactOpts, params)
 }
 
-// EveworldRegisterDeployableToken is a paid mutator transaction binding the contract method 0xd9ba88ef.
+// EvefrontierCreateAndAnchorGate is a paid mutator transaction binding the contract method 0x4fdb1fc9.
 //
-// Solidity: function eveworld__registerDeployableToken(address tokenAddress) returns()
-func (_World *WorldTransactor) EveworldRegisterDeployableToken(opts *bind.TransactOpts, tokenAddress common.Address) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__registerDeployableToken", tokenAddress)
+// Solidity: function evefrontier__createAndAnchorGate((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 maxDistance) returns()
+func (_World *WorldTransactor) EvefrontierCreateAndAnchorGate(opts *bind.TransactOpts, params CreateAndAnchorParams, maxDistance *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAndAnchorGate", params, maxDistance)
 }
 
-// EveworldRegisterDeployableToken is a paid mutator transaction binding the contract method 0xd9ba88ef.
+// EvefrontierCreateAndAnchorGate is a paid mutator transaction binding the contract method 0x4fdb1fc9.
 //
-// Solidity: function eveworld__registerDeployableToken(address tokenAddress) returns()
-func (_World *WorldSession) EveworldRegisterDeployableToken(tokenAddress common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldRegisterDeployableToken(&_World.TransactOpts, tokenAddress)
+// Solidity: function evefrontier__createAndAnchorGate((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 maxDistance) returns()
+func (_World *WorldSession) EvefrontierCreateAndAnchorGate(params CreateAndAnchorParams, maxDistance *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchorGate(&_World.TransactOpts, params, maxDistance)
 }
 
-// EveworldRegisterDeployableToken is a paid mutator transaction binding the contract method 0xd9ba88ef.
+// EvefrontierCreateAndAnchorGate is a paid mutator transaction binding the contract method 0x4fdb1fc9.
 //
-// Solidity: function eveworld__registerDeployableToken(address tokenAddress) returns()
-func (_World *WorldTransactorSession) EveworldRegisterDeployableToken(tokenAddress common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldRegisterDeployableToken(&_World.TransactOpts, tokenAddress)
+// Solidity: function evefrontier__createAndAnchorGate((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 maxDistance) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAndAnchorGate(params CreateAndAnchorParams, maxDistance *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchorGate(&_World.TransactOpts, params, maxDistance)
 }
 
-// EveworldRegisterERC721Token is a paid mutator transaction binding the contract method 0xb94de5b5.
+// EvefrontierCreateAndAnchorStorageUnit is a paid mutator transaction binding the contract method 0x15f2b5be.
 //
-// Solidity: function eveworld__registerERC721Token(address tokenAddress) returns()
-func (_World *WorldTransactor) EveworldRegisterERC721Token(opts *bind.TransactOpts, tokenAddress common.Address) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__registerERC721Token", tokenAddress)
+// Solidity: function evefrontier__createAndAnchorStorageUnit((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
+func (_World *WorldTransactor) EvefrontierCreateAndAnchorStorageUnit(opts *bind.TransactOpts, params CreateAndAnchorParams, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAndAnchorStorageUnit", params, storageCapacity, ephemeralStorageCapacity)
 }
 
-// EveworldRegisterERC721Token is a paid mutator transaction binding the contract method 0xb94de5b5.
+// EvefrontierCreateAndAnchorStorageUnit is a paid mutator transaction binding the contract method 0x15f2b5be.
 //
-// Solidity: function eveworld__registerERC721Token(address tokenAddress) returns()
-func (_World *WorldSession) EveworldRegisterERC721Token(tokenAddress common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldRegisterERC721Token(&_World.TransactOpts, tokenAddress)
+// Solidity: function evefrontier__createAndAnchorStorageUnit((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
+func (_World *WorldSession) EvefrontierCreateAndAnchorStorageUnit(params CreateAndAnchorParams, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchorStorageUnit(&_World.TransactOpts, params, storageCapacity, ephemeralStorageCapacity)
 }
 
-// EveworldRegisterERC721Token is a paid mutator transaction binding the contract method 0xb94de5b5.
+// EvefrontierCreateAndAnchorStorageUnit is a paid mutator transaction binding the contract method 0x15f2b5be.
 //
-// Solidity: function eveworld__registerERC721Token(address tokenAddress) returns()
-func (_World *WorldTransactorSession) EveworldRegisterERC721Token(tokenAddress common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldRegisterERC721Token(&_World.TransactOpts, tokenAddress)
+// Solidity: function evefrontier__createAndAnchorStorageUnit((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAndAnchorStorageUnit(params CreateAndAnchorParams, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchorStorageUnit(&_World.TransactOpts, params, storageCapacity, ephemeralStorageCapacity)
 }
 
-// EveworldReportKill is a paid mutator transaction binding the contract method 0xe6efbb55.
+// EvefrontierCreateAndAnchorTurret is a paid mutator transaction binding the contract method 0x482ac89f.
 //
-// Solidity: function eveworld__reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailTableData) returns()
-func (_World *WorldTransactor) EveworldReportKill(opts *bind.TransactOpts, killMailId *big.Int, killMailTableData KillMailTableData) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__reportKill", killMailId, killMailTableData)
+// Solidity: function evefrontier__createAndAnchorTurret((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_World *WorldTransactor) EvefrontierCreateAndAnchorTurret(opts *bind.TransactOpts, params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAndAnchorTurret", params)
 }
 
-// EveworldReportKill is a paid mutator transaction binding the contract method 0xe6efbb55.
+// EvefrontierCreateAndAnchorTurret is a paid mutator transaction binding the contract method 0x482ac89f.
 //
-// Solidity: function eveworld__reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailTableData) returns()
-func (_World *WorldSession) EveworldReportKill(killMailId *big.Int, killMailTableData KillMailTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldReportKill(&_World.TransactOpts, killMailId, killMailTableData)
+// Solidity: function evefrontier__createAndAnchorTurret((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_World *WorldSession) EvefrontierCreateAndAnchorTurret(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchorTurret(&_World.TransactOpts, params)
 }
 
-// EveworldReportKill is a paid mutator transaction binding the contract method 0xe6efbb55.
+// EvefrontierCreateAndAnchorTurret is a paid mutator transaction binding the contract method 0x482ac89f.
 //
-// Solidity: function eveworld__reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailTableData) returns()
-func (_World *WorldTransactorSession) EveworldReportKill(killMailId *big.Int, killMailTableData KillMailTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldReportKill(&_World.TransactOpts, killMailId, killMailTableData)
+// Solidity: function evefrontier__createAndAnchorTurret((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAndAnchorTurret(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndAnchorTurret(&_World.TransactOpts, params)
 }
 
-// EveworldSaveLocation is a paid mutator transaction binding the contract method 0x452934c5.
+// EvefrontierCreateAndDepositEphemeral is a paid mutator transaction binding the contract method 0x5b6122a8.
 //
-// Solidity: function eveworld__saveLocation(uint256 entityId, (uint256,uint256,uint256,uint256) location) returns()
-func (_World *WorldTransactor) EveworldSaveLocation(opts *bind.TransactOpts, entityId *big.Int, location LocationTableData) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__saveLocation", entityId, location)
+// Solidity: function evefrontier__createAndDepositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierCreateAndDepositEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAndDepositEphemeral", smartObjectId, ephemeralOwner, items)
 }
 
-// EveworldSaveLocation is a paid mutator transaction binding the contract method 0x452934c5.
+// EvefrontierCreateAndDepositEphemeral is a paid mutator transaction binding the contract method 0x5b6122a8.
 //
-// Solidity: function eveworld__saveLocation(uint256 entityId, (uint256,uint256,uint256,uint256) location) returns()
-func (_World *WorldSession) EveworldSaveLocation(entityId *big.Int, location LocationTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldSaveLocation(&_World.TransactOpts, entityId, location)
+// Solidity: function evefrontier__createAndDepositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierCreateAndDepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndDepositEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
-// EveworldSaveLocation is a paid mutator transaction binding the contract method 0x452934c5.
+// EvefrontierCreateAndDepositEphemeral is a paid mutator transaction binding the contract method 0x5b6122a8.
 //
-// Solidity: function eveworld__saveLocation(uint256 entityId, (uint256,uint256,uint256,uint256) location) returns()
-func (_World *WorldTransactorSession) EveworldSaveLocation(entityId *big.Int, location LocationTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldSaveLocation(&_World.TransactOpts, entityId, location)
+// Solidity: function evefrontier__createAndDepositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAndDepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndDepositEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
-// EveworldSetAccessEnforcement is a paid mutator transaction binding the contract method 0xc108f384.
+// EvefrontierCreateAndDepositInventory is a paid mutator transaction binding the contract method 0xff4fe5fa.
 //
-// Solidity: function eveworld__setAccessEnforcement(bytes32 target, bool isEnforced) returns()
-func (_World *WorldTransactor) EveworldSetAccessEnforcement(opts *bind.TransactOpts, target [32]byte, isEnforced bool) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setAccessEnforcement", target, isEnforced)
+// Solidity: function evefrontier__createAndDepositInventory(uint256 smartObjectId, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierCreateAndDepositInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAndDepositInventory", smartObjectId, items)
 }
 
-// EveworldSetAccessEnforcement is a paid mutator transaction binding the contract method 0xc108f384.
+// EvefrontierCreateAndDepositInventory is a paid mutator transaction binding the contract method 0xff4fe5fa.
 //
-// Solidity: function eveworld__setAccessEnforcement(bytes32 target, bool isEnforced) returns()
-func (_World *WorldSession) EveworldSetAccessEnforcement(target [32]byte, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAccessEnforcement(&_World.TransactOpts, target, isEnforced)
+// Solidity: function evefrontier__createAndDepositInventory(uint256 smartObjectId, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierCreateAndDepositInventory(smartObjectId *big.Int, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndDepositInventory(&_World.TransactOpts, smartObjectId, items)
 }
 
-// EveworldSetAccessEnforcement is a paid mutator transaction binding the contract method 0xc108f384.
+// EvefrontierCreateAndDepositInventory is a paid mutator transaction binding the contract method 0xff4fe5fa.
 //
-// Solidity: function eveworld__setAccessEnforcement(bytes32 target, bool isEnforced) returns()
-func (_World *WorldTransactorSession) EveworldSetAccessEnforcement(target [32]byte, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAccessEnforcement(&_World.TransactOpts, target, isEnforced)
+// Solidity: function evefrontier__createAndDepositInventory(uint256 smartObjectId, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAndDepositInventory(smartObjectId *big.Int, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAndDepositInventory(&_World.TransactOpts, smartObjectId, items)
 }
 
-// EveworldSetAccessListByRole is a paid mutator transaction binding the contract method 0x73acabe9.
+// EvefrontierCreateAssembly is a paid mutator transaction binding the contract method 0x3a057ea4.
 //
-// Solidity: function eveworld__setAccessListByRole(bytes32 accessRoleId, address[] accessList) returns()
-func (_World *WorldTransactor) EveworldSetAccessListByRole(opts *bind.TransactOpts, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setAccessListByRole", accessRoleId, accessList)
+// Solidity: function evefrontier__createAssembly(uint256 smartObjectId, string assemblyType, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_World *WorldTransactor) EvefrontierCreateAssembly(opts *bind.TransactOpts, smartObjectId *big.Int, assemblyType string, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createAssembly", smartObjectId, assemblyType, entityRecordParams)
 }
 
-// EveworldSetAccessListByRole is a paid mutator transaction binding the contract method 0x73acabe9.
+// EvefrontierCreateAssembly is a paid mutator transaction binding the contract method 0x3a057ea4.
 //
-// Solidity: function eveworld__setAccessListByRole(bytes32 accessRoleId, address[] accessList) returns()
-func (_World *WorldSession) EveworldSetAccessListByRole(accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAccessListByRole(&_World.TransactOpts, accessRoleId, accessList)
+// Solidity: function evefrontier__createAssembly(uint256 smartObjectId, string assemblyType, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_World *WorldSession) EvefrontierCreateAssembly(smartObjectId *big.Int, assemblyType string, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAssembly(&_World.TransactOpts, smartObjectId, assemblyType, entityRecordParams)
 }
 
-// EveworldSetAccessListByRole is a paid mutator transaction binding the contract method 0x73acabe9.
+// EvefrontierCreateAssembly is a paid mutator transaction binding the contract method 0x3a057ea4.
 //
-// Solidity: function eveworld__setAccessListByRole(bytes32 accessRoleId, address[] accessList) returns()
-func (_World *WorldTransactorSession) EveworldSetAccessListByRole(accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAccessListByRole(&_World.TransactOpts, accessRoleId, accessList)
+// Solidity: function evefrontier__createAssembly(uint256 smartObjectId, string assemblyType, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateAssembly(smartObjectId *big.Int, assemblyType string, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateAssembly(&_World.TransactOpts, smartObjectId, assemblyType, entityRecordParams)
 }
 
-// EveworldSetAccessListPerSystemByRole is a paid mutator transaction binding the contract method 0xf6a1b9aa.
+// EvefrontierCreateCharacter is a paid mutator transaction binding the contract method 0x6279d7c6.
 //
-// Solidity: function eveworld__setAccessListPerSystemByRole(bytes32 systemId, bytes32 accessRoleId, address[] accessList) returns()
-func (_World *WorldTransactor) EveworldSetAccessListPerSystemByRole(opts *bind.TransactOpts, systemId [32]byte, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setAccessListPerSystemByRole", systemId, accessRoleId, accessList)
+// Solidity: function evefrontier__createCharacter(uint256 smartObjectId, address owner, uint256 tribeId, (bytes32,uint256,uint256,uint256) entityRecordParams, (string,string,string) entityRecordMetadata) returns()
+func (_World *WorldTransactor) EvefrontierCreateCharacter(opts *bind.TransactOpts, smartObjectId *big.Int, owner common.Address, tribeId *big.Int, entityRecordParams EntityRecordParams, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createCharacter", smartObjectId, owner, tribeId, entityRecordParams, entityRecordMetadata)
 }
 
-// EveworldSetAccessListPerSystemByRole is a paid mutator transaction binding the contract method 0xf6a1b9aa.
+// EvefrontierCreateCharacter is a paid mutator transaction binding the contract method 0x6279d7c6.
 //
-// Solidity: function eveworld__setAccessListPerSystemByRole(bytes32 systemId, bytes32 accessRoleId, address[] accessList) returns()
-func (_World *WorldSession) EveworldSetAccessListPerSystemByRole(systemId [32]byte, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAccessListPerSystemByRole(&_World.TransactOpts, systemId, accessRoleId, accessList)
+// Solidity: function evefrontier__createCharacter(uint256 smartObjectId, address owner, uint256 tribeId, (bytes32,uint256,uint256,uint256) entityRecordParams, (string,string,string) entityRecordMetadata) returns()
+func (_World *WorldSession) EvefrontierCreateCharacter(smartObjectId *big.Int, owner common.Address, tribeId *big.Int, entityRecordParams EntityRecordParams, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateCharacter(&_World.TransactOpts, smartObjectId, owner, tribeId, entityRecordParams, entityRecordMetadata)
 }
 
-// EveworldSetAccessListPerSystemByRole is a paid mutator transaction binding the contract method 0xf6a1b9aa.
+// EvefrontierCreateCharacter is a paid mutator transaction binding the contract method 0x6279d7c6.
 //
-// Solidity: function eveworld__setAccessListPerSystemByRole(bytes32 systemId, bytes32 accessRoleId, address[] accessList) returns()
-func (_World *WorldTransactorSession) EveworldSetAccessListPerSystemByRole(systemId [32]byte, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAccessListPerSystemByRole(&_World.TransactOpts, systemId, accessRoleId, accessList)
+// Solidity: function evefrontier__createCharacter(uint256 smartObjectId, address owner, uint256 tribeId, (bytes32,uint256,uint256,uint256) entityRecordParams, (string,string,string) entityRecordMetadata) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateCharacter(smartObjectId *big.Int, owner common.Address, tribeId *big.Int, entityRecordParams EntityRecordParams, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateCharacter(&_World.TransactOpts, smartObjectId, owner, tribeId, entityRecordParams, entityRecordMetadata)
 }
 
-// EveworldSetAllInventoryTransferAccess is a paid mutator transaction binding the contract method 0x94bdc13e.
+// EvefrontierCreateDeployable is a paid mutator transaction binding the contract method 0x338e948d.
 //
-// Solidity: function eveworld__setAllInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldTransactor) EveworldSetAllInventoryTransferAccess(opts *bind.TransactOpts, smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setAllInventoryTransferAccess", smartObjectId, isEnforced)
+// Solidity: function evefrontier__createDeployable(uint256 smartObjectId, address owner, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
+func (_World *WorldTransactor) EvefrontierCreateDeployable(opts *bind.TransactOpts, smartObjectId *big.Int, owner common.Address, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createDeployable", smartObjectId, owner, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
 }
 
-// EveworldSetAllInventoryTransferAccess is a paid mutator transaction binding the contract method 0x94bdc13e.
+// EvefrontierCreateDeployable is a paid mutator transaction binding the contract method 0x338e948d.
 //
-// Solidity: function eveworld__setAllInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldSession) EveworldSetAllInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAllInventoryTransferAccess(&_World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function evefrontier__createDeployable(uint256 smartObjectId, address owner, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
+func (_World *WorldSession) EvefrontierCreateDeployable(smartObjectId *big.Int, owner common.Address, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateDeployable(&_World.TransactOpts, smartObjectId, owner, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
 }
 
-// EveworldSetAllInventoryTransferAccess is a paid mutator transaction binding the contract method 0x94bdc13e.
+// EvefrontierCreateDeployable is a paid mutator transaction binding the contract method 0x338e948d.
 //
-// Solidity: function eveworld__setAllInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldTransactorSession) EveworldSetAllInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetAllInventoryTransferAccess(&_World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function evefrontier__createDeployable(uint256 smartObjectId, address owner, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateDeployable(smartObjectId *big.Int, owner common.Address, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateDeployable(&_World.TransactOpts, smartObjectId, owner, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
 }
 
-// EveworldSetApprovedAccessList is a paid mutator transaction binding the contract method 0xcf353892.
+// EvefrontierCreateMetadata is a paid mutator transaction binding the contract method 0x35b7b9c2.
 //
-// Solidity: function eveworld__setApprovedAccessList(uint256 smartObjectId, address[] accessList) returns()
-func (_World *WorldTransactor) EveworldSetApprovedAccessList(opts *bind.TransactOpts, smartObjectId *big.Int, accessList []common.Address) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setApprovedAccessList", smartObjectId, accessList)
+// Solidity: function evefrontier__createMetadata(uint256 smartObjectId, (string,string,string) entityRecordMetadata) returns()
+func (_World *WorldTransactor) EvefrontierCreateMetadata(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createMetadata", smartObjectId, entityRecordMetadata)
 }
 
-// EveworldSetApprovedAccessList is a paid mutator transaction binding the contract method 0xcf353892.
+// EvefrontierCreateMetadata is a paid mutator transaction binding the contract method 0x35b7b9c2.
 //
-// Solidity: function eveworld__setApprovedAccessList(uint256 smartObjectId, address[] accessList) returns()
-func (_World *WorldSession) EveworldSetApprovedAccessList(smartObjectId *big.Int, accessList []common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetApprovedAccessList(&_World.TransactOpts, smartObjectId, accessList)
+// Solidity: function evefrontier__createMetadata(uint256 smartObjectId, (string,string,string) entityRecordMetadata) returns()
+func (_World *WorldSession) EvefrontierCreateMetadata(smartObjectId *big.Int, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateMetadata(&_World.TransactOpts, smartObjectId, entityRecordMetadata)
 }
 
-// EveworldSetApprovedAccessList is a paid mutator transaction binding the contract method 0xcf353892.
+// EvefrontierCreateMetadata is a paid mutator transaction binding the contract method 0x35b7b9c2.
 //
-// Solidity: function eveworld__setApprovedAccessList(uint256 smartObjectId, address[] accessList) returns()
-func (_World *WorldTransactorSession) EveworldSetApprovedAccessList(smartObjectId *big.Int, accessList []common.Address) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetApprovedAccessList(&_World.TransactOpts, smartObjectId, accessList)
+// Solidity: function evefrontier__createMetadata(uint256 smartObjectId, (string,string,string) entityRecordMetadata) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateMetadata(smartObjectId *big.Int, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateMetadata(&_World.TransactOpts, smartObjectId, entityRecordMetadata)
 }
 
-// EveworldSetBaseURI is a paid mutator transaction binding the contract method 0xdfb18ad6.
+// EvefrontierCreateRecord is a paid mutator transaction binding the contract method 0xa474cc97.
 //
-// Solidity: function eveworld__setBaseURI(bytes32 systemId, string baseURI) returns()
-func (_World *WorldTransactor) EveworldSetBaseURI(opts *bind.TransactOpts, systemId [32]byte, baseURI string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setBaseURI", systemId, baseURI)
+// Solidity: function evefrontier__createRecord(uint256 smartObjectId, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_World *WorldTransactor) EvefrontierCreateRecord(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__createRecord", smartObjectId, entityRecordParams)
 }
 
-// EveworldSetBaseURI is a paid mutator transaction binding the contract method 0xdfb18ad6.
+// EvefrontierCreateRecord is a paid mutator transaction binding the contract method 0xa474cc97.
 //
-// Solidity: function eveworld__setBaseURI(bytes32 systemId, string baseURI) returns()
-func (_World *WorldSession) EveworldSetBaseURI(systemId [32]byte, baseURI string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetBaseURI(&_World.TransactOpts, systemId, baseURI)
+// Solidity: function evefrontier__createRecord(uint256 smartObjectId, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_World *WorldSession) EvefrontierCreateRecord(smartObjectId *big.Int, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateRecord(&_World.TransactOpts, smartObjectId, entityRecordParams)
 }
 
-// EveworldSetBaseURI is a paid mutator transaction binding the contract method 0xdfb18ad6.
+// EvefrontierCreateRecord is a paid mutator transaction binding the contract method 0xa474cc97.
 //
-// Solidity: function eveworld__setBaseURI(bytes32 systemId, string baseURI) returns()
-func (_World *WorldTransactorSession) EveworldSetBaseURI(systemId [32]byte, baseURI string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetBaseURI(&_World.TransactOpts, systemId, baseURI)
+// Solidity: function evefrontier__createRecord(uint256 smartObjectId, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_World *WorldTransactorSession) EvefrontierCreateRecord(smartObjectId *big.Int, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCreateRecord(&_World.TransactOpts, smartObjectId, entityRecordParams)
 }
 
-// EveworldSetCharClassId is a paid mutator transaction binding the contract method 0x217fd119.
+// EvefrontierCrossTransferToEphemeral is a paid mutator transaction binding the contract method 0x8127ba2a.
 //
-// Solidity: function eveworld__setCharClassId(uint256 classId) returns()
-func (_World *WorldTransactor) EveworldSetCharClassId(opts *bind.TransactOpts, classId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setCharClassId", classId)
+// Solidity: function evefrontier__crossTransferToEphemeral(uint256 smartObjectId, address fromEphemeralOwner, address toEphemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierCrossTransferToEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, fromEphemeralOwner common.Address, toEphemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__crossTransferToEphemeral", smartObjectId, fromEphemeralOwner, toEphemeralOwner, items)
 }
 
-// EveworldSetCharClassId is a paid mutator transaction binding the contract method 0x217fd119.
+// EvefrontierCrossTransferToEphemeral is a paid mutator transaction binding the contract method 0x8127ba2a.
 //
-// Solidity: function eveworld__setCharClassId(uint256 classId) returns()
-func (_World *WorldSession) EveworldSetCharClassId(classId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetCharClassId(&_World.TransactOpts, classId)
+// Solidity: function evefrontier__crossTransferToEphemeral(uint256 smartObjectId, address fromEphemeralOwner, address toEphemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierCrossTransferToEphemeral(smartObjectId *big.Int, fromEphemeralOwner common.Address, toEphemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCrossTransferToEphemeral(&_World.TransactOpts, smartObjectId, fromEphemeralOwner, toEphemeralOwner, items)
 }
 
-// EveworldSetCharClassId is a paid mutator transaction binding the contract method 0x217fd119.
+// EvefrontierCrossTransferToEphemeral is a paid mutator transaction binding the contract method 0x8127ba2a.
 //
-// Solidity: function eveworld__setCharClassId(uint256 classId) returns()
-func (_World *WorldTransactorSession) EveworldSetCharClassId(classId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetCharClassId(&_World.TransactOpts, classId)
+// Solidity: function evefrontier__crossTransferToEphemeral(uint256 smartObjectId, address fromEphemeralOwner, address toEphemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierCrossTransferToEphemeral(smartObjectId *big.Int, fromEphemeralOwner common.Address, toEphemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierCrossTransferToEphemeral(&_World.TransactOpts, smartObjectId, fromEphemeralOwner, toEphemeralOwner, items)
 }
 
-// EveworldSetCid is a paid mutator transaction binding the contract method 0x0b124c11.
+// EvefrontierDepositEphemeral is a paid mutator transaction binding the contract method 0x01721642.
 //
-// Solidity: function eveworld__setCid(uint256 entityId, string cid) returns()
-func (_World *WorldTransactor) EveworldSetCid(opts *bind.TransactOpts, entityId *big.Int, cid string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setCid", entityId, cid)
+// Solidity: function evefrontier__depositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierDepositEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__depositEphemeral", smartObjectId, ephemeralOwner, items)
 }
 
-// EveworldSetCid is a paid mutator transaction binding the contract method 0x0b124c11.
+// EvefrontierDepositEphemeral is a paid mutator transaction binding the contract method 0x01721642.
 //
-// Solidity: function eveworld__setCid(uint256 entityId, string cid) returns()
-func (_World *WorldSession) EveworldSetCid(entityId *big.Int, cid string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetCid(&_World.TransactOpts, entityId, cid)
+// Solidity: function evefrontier__depositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierDepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDepositEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
-// EveworldSetCid is a paid mutator transaction binding the contract method 0x0b124c11.
+// EvefrontierDepositEphemeral is a paid mutator transaction binding the contract method 0x01721642.
 //
-// Solidity: function eveworld__setCid(uint256 entityId, string cid) returns()
-func (_World *WorldTransactorSession) EveworldSetCid(entityId *big.Int, cid string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetCid(&_World.TransactOpts, entityId, cid)
+// Solidity: function evefrontier__depositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierDepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDepositEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
-// EveworldSetDappURL is a paid mutator transaction binding the contract method 0x589db2f0.
+// EvefrontierDepositFuel is a paid mutator transaction binding the contract method 0x68274158.
 //
-// Solidity: function eveworld__setDappURL(uint256 entityId, string dappURL) returns()
-func (_World *WorldTransactor) EveworldSetDappURL(opts *bind.TransactOpts, entityId *big.Int, dappURL string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setDappURL", entityId, dappURL)
+// Solidity: function evefrontier__depositFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_World *WorldTransactor) EvefrontierDepositFuel(opts *bind.TransactOpts, smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__depositFuel", smartObjectId, fuelAmount)
 }
 
-// EveworldSetDappURL is a paid mutator transaction binding the contract method 0x589db2f0.
+// EvefrontierDepositFuel is a paid mutator transaction binding the contract method 0x68274158.
 //
-// Solidity: function eveworld__setDappURL(uint256 entityId, string dappURL) returns()
-func (_World *WorldSession) EveworldSetDappURL(entityId *big.Int, dappURL string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetDappURL(&_World.TransactOpts, entityId, dappURL)
+// Solidity: function evefrontier__depositFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_World *WorldSession) EvefrontierDepositFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDepositFuel(&_World.TransactOpts, smartObjectId, fuelAmount)
 }
 
-// EveworldSetDappURL is a paid mutator transaction binding the contract method 0x589db2f0.
+// EvefrontierDepositFuel is a paid mutator transaction binding the contract method 0x68274158.
 //
-// Solidity: function eveworld__setDappURL(uint256 entityId, string dappURL) returns()
-func (_World *WorldTransactorSession) EveworldSetDappURL(entityId *big.Int, dappURL string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetDappURL(&_World.TransactOpts, entityId, dappURL)
+// Solidity: function evefrontier__depositFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_World *WorldTransactorSession) EvefrontierDepositFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDepositFuel(&_World.TransactOpts, smartObjectId, fuelAmount)
 }
 
-// EveworldSetDeployableMetadata is a paid mutator transaction binding the contract method 0x121aefc7.
+// EvefrontierDepositInventory is a paid mutator transaction binding the contract method 0x1a3c8327.
 //
-// Solidity: function eveworld__setDeployableMetadata(uint256 smartObjectId, string name, string dappURL, string description) returns()
-func (_World *WorldTransactor) EveworldSetDeployableMetadata(opts *bind.TransactOpts, smartObjectId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setDeployableMetadata", smartObjectId, name, dappURL, description)
+// Solidity: function evefrontier__depositInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierDepositInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__depositInventory", smartObjectId, items)
 }
 
-// EveworldSetDeployableMetadata is a paid mutator transaction binding the contract method 0x121aefc7.
+// EvefrontierDepositInventory is a paid mutator transaction binding the contract method 0x1a3c8327.
 //
-// Solidity: function eveworld__setDeployableMetadata(uint256 smartObjectId, string name, string dappURL, string description) returns()
-func (_World *WorldSession) EveworldSetDeployableMetadata(smartObjectId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetDeployableMetadata(&_World.TransactOpts, smartObjectId, name, dappURL, description)
+// Solidity: function evefrontier__depositInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierDepositInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDepositInventory(&_World.TransactOpts, smartObjectId, items)
 }
 
-// EveworldSetDeployableMetadata is a paid mutator transaction binding the contract method 0x121aefc7.
+// EvefrontierDepositInventory is a paid mutator transaction binding the contract method 0x1a3c8327.
 //
-// Solidity: function eveworld__setDeployableMetadata(uint256 smartObjectId, string name, string dappURL, string description) returns()
-func (_World *WorldTransactorSession) EveworldSetDeployableMetadata(smartObjectId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetDeployableMetadata(&_World.TransactOpts, smartObjectId, name, dappURL, description)
+// Solidity: function evefrontier__depositInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierDepositInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDepositInventory(&_World.TransactOpts, smartObjectId, items)
 }
 
-// EveworldSetDescription is a paid mutator transaction binding the contract method 0xbb7218b2.
+// EvefrontierDestroyDeployable is a paid mutator transaction binding the contract method 0xa1e758dd.
 //
-// Solidity: function eveworld__setDescription(uint256 entityId, string description) returns()
-func (_World *WorldTransactor) EveworldSetDescription(opts *bind.TransactOpts, entityId *big.Int, description string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setDescription", entityId, description)
+// Solidity: function evefrontier__destroyDeployable(uint256 smartObjectId) returns()
+func (_World *WorldTransactor) EvefrontierDestroyDeployable(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__destroyDeployable", smartObjectId)
 }
 
-// EveworldSetDescription is a paid mutator transaction binding the contract method 0xbb7218b2.
+// EvefrontierDestroyDeployable is a paid mutator transaction binding the contract method 0xa1e758dd.
 //
-// Solidity: function eveworld__setDescription(uint256 entityId, string description) returns()
-func (_World *WorldSession) EveworldSetDescription(entityId *big.Int, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetDescription(&_World.TransactOpts, entityId, description)
+// Solidity: function evefrontier__destroyDeployable(uint256 smartObjectId) returns()
+func (_World *WorldSession) EvefrontierDestroyDeployable(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDestroyDeployable(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldSetDescription is a paid mutator transaction binding the contract method 0xbb7218b2.
+// EvefrontierDestroyDeployable is a paid mutator transaction binding the contract method 0xa1e758dd.
 //
-// Solidity: function eveworld__setDescription(uint256 entityId, string description) returns()
-func (_World *WorldTransactorSession) EveworldSetDescription(entityId *big.Int, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetDescription(&_World.TransactOpts, entityId, description)
+// Solidity: function evefrontier__destroyDeployable(uint256 smartObjectId) returns()
+func (_World *WorldTransactorSession) EvefrontierDestroyDeployable(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierDestroyDeployable(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldSetEntityMetadata is a paid mutator transaction binding the contract method 0xc493045b.
+// EvefrontierGlobalPause is a paid mutator transaction binding the contract method 0x2ebc6b59.
 //
-// Solidity: function eveworld__setEntityMetadata(uint256 entityId, string name, string dappURL, string description) returns()
-func (_World *WorldTransactor) EveworldSetEntityMetadata(opts *bind.TransactOpts, entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setEntityMetadata", entityId, name, dappURL, description)
+// Solidity: function evefrontier__globalPause() returns()
+func (_World *WorldTransactor) EvefrontierGlobalPause(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__globalPause")
 }
 
-// EveworldSetEntityMetadata is a paid mutator transaction binding the contract method 0xc493045b.
+// EvefrontierGlobalPause is a paid mutator transaction binding the contract method 0x2ebc6b59.
 //
-// Solidity: function eveworld__setEntityMetadata(uint256 entityId, string name, string dappURL, string description) returns()
-func (_World *WorldSession) EveworldSetEntityMetadata(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetEntityMetadata(&_World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function evefrontier__globalPause() returns()
+func (_World *WorldSession) EvefrontierGlobalPause() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierGlobalPause(&_World.TransactOpts)
 }
 
-// EveworldSetEntityMetadata is a paid mutator transaction binding the contract method 0xc493045b.
+// EvefrontierGlobalPause is a paid mutator transaction binding the contract method 0x2ebc6b59.
 //
-// Solidity: function eveworld__setEntityMetadata(uint256 entityId, string name, string dappURL, string description) returns()
-func (_World *WorldTransactorSession) EveworldSetEntityMetadata(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetEntityMetadata(&_World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function evefrontier__globalPause() returns()
+func (_World *WorldTransactorSession) EvefrontierGlobalPause() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierGlobalPause(&_World.TransactOpts)
 }
 
-// EveworldSetEphemeralInventoryCapacity is a paid mutator transaction binding the contract method 0xba4034b6.
+// EvefrontierGlobalResume is a paid mutator transaction binding the contract method 0x4244078f.
 //
-// Solidity: function eveworld__setEphemeralInventoryCapacity(uint256 smartObjectId, uint256 ephemeralStorageCapacity) returns()
-func (_World *WorldTransactor) EveworldSetEphemeralInventoryCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setEphemeralInventoryCapacity", smartObjectId, ephemeralStorageCapacity)
+// Solidity: function evefrontier__globalResume() returns()
+func (_World *WorldTransactor) EvefrontierGlobalResume(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__globalResume")
 }
 
-// EveworldSetEphemeralInventoryCapacity is a paid mutator transaction binding the contract method 0xba4034b6.
+// EvefrontierGlobalResume is a paid mutator transaction binding the contract method 0x4244078f.
 //
-// Solidity: function eveworld__setEphemeralInventoryCapacity(uint256 smartObjectId, uint256 ephemeralStorageCapacity) returns()
-func (_World *WorldSession) EveworldSetEphemeralInventoryCapacity(smartObjectId *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetEphemeralInventoryCapacity(&_World.TransactOpts, smartObjectId, ephemeralStorageCapacity)
+// Solidity: function evefrontier__globalResume() returns()
+func (_World *WorldSession) EvefrontierGlobalResume() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierGlobalResume(&_World.TransactOpts)
 }
 
-// EveworldSetEphemeralInventoryCapacity is a paid mutator transaction binding the contract method 0xba4034b6.
+// EvefrontierGlobalResume is a paid mutator transaction binding the contract method 0x4244078f.
 //
-// Solidity: function eveworld__setEphemeralInventoryCapacity(uint256 smartObjectId, uint256 ephemeralStorageCapacity) returns()
-func (_World *WorldTransactorSession) EveworldSetEphemeralInventoryCapacity(smartObjectId *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetEphemeralInventoryCapacity(&_World.TransactOpts, smartObjectId, ephemeralStorageCapacity)
+// Solidity: function evefrontier__globalResume() returns()
+func (_World *WorldTransactorSession) EvefrontierGlobalResume() (*types.Transaction, error) {
+	return _World.Contract.EvefrontierGlobalResume(&_World.TransactOpts)
 }
 
-// EveworldSetEphemeralToInventoryTransferAccess is a paid mutator transaction binding the contract method 0xfd9930c0.
+// EvefrontierInProximity is a paid mutator transaction binding the contract method 0xd515b309.
 //
-// Solidity: function eveworld__setEphemeralToInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldTransactor) EveworldSetEphemeralToInventoryTransferAccess(opts *bind.TransactOpts, smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setEphemeralToInventoryTransferAccess", smartObjectId, isEnforced)
+// Solidity: function evefrontier__inProximity(uint256 smartObjectId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_World *WorldTransactor) EvefrontierInProximity(opts *bind.TransactOpts, smartObjectId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__inProximity", smartObjectId, priorityQueue, turret, turretTarget)
 }
 
-// EveworldSetEphemeralToInventoryTransferAccess is a paid mutator transaction binding the contract method 0xfd9930c0.
+// EvefrontierInProximity is a paid mutator transaction binding the contract method 0xd515b309.
 //
-// Solidity: function eveworld__setEphemeralToInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldSession) EveworldSetEphemeralToInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetEphemeralToInventoryTransferAccess(&_World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function evefrontier__inProximity(uint256 smartObjectId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_World *WorldSession) EvefrontierInProximity(smartObjectId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierInProximity(&_World.TransactOpts, smartObjectId, priorityQueue, turret, turretTarget)
 }
 
-// EveworldSetEphemeralToInventoryTransferAccess is a paid mutator transaction binding the contract method 0xfd9930c0.
+// EvefrontierInProximity is a paid mutator transaction binding the contract method 0xd515b309.
 //
-// Solidity: function eveworld__setEphemeralToInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldTransactorSession) EveworldSetEphemeralToInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetEphemeralToInventoryTransferAccess(&_World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function evefrontier__inProximity(uint256 smartObjectId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_World *WorldTransactorSession) EvefrontierInProximity(smartObjectId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierInProximity(&_World.TransactOpts, smartObjectId, priorityQueue, turret, turretTarget)
 }
 
-// EveworldSetFuelConsumptionPerMinute is a paid mutator transaction binding the contract method 0x906c8d2d.
+// EvefrontierLinkGates is a paid mutator transaction binding the contract method 0x90ae5fe8.
 //
-// Solidity: function eveworld__setFuelConsumptionPerMinute(uint256 entityId, uint256 fuelConsumptionIntervalInSeconds) returns()
-func (_World *WorldTransactor) EveworldSetFuelConsumptionPerMinute(opts *bind.TransactOpts, entityId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setFuelConsumptionPerMinute", entityId, fuelConsumptionIntervalInSeconds)
+// Solidity: function evefrontier__linkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_World *WorldTransactor) EvefrontierLinkGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__linkGates", sourceGateId, destinationGateId)
 }
 
-// EveworldSetFuelConsumptionPerMinute is a paid mutator transaction binding the contract method 0x906c8d2d.
+// EvefrontierLinkGates is a paid mutator transaction binding the contract method 0x90ae5fe8.
 //
-// Solidity: function eveworld__setFuelConsumptionPerMinute(uint256 entityId, uint256 fuelConsumptionIntervalInSeconds) returns()
-func (_World *WorldSession) EveworldSetFuelConsumptionPerMinute(entityId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetFuelConsumptionPerMinute(&_World.TransactOpts, entityId, fuelConsumptionIntervalInSeconds)
+// Solidity: function evefrontier__linkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_World *WorldSession) EvefrontierLinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierLinkGates(&_World.TransactOpts, sourceGateId, destinationGateId)
 }
 
-// EveworldSetFuelConsumptionPerMinute is a paid mutator transaction binding the contract method 0x906c8d2d.
+// EvefrontierLinkGates is a paid mutator transaction binding the contract method 0x90ae5fe8.
 //
-// Solidity: function eveworld__setFuelConsumptionPerMinute(uint256 entityId, uint256 fuelConsumptionIntervalInSeconds) returns()
-func (_World *WorldTransactorSession) EveworldSetFuelConsumptionPerMinute(entityId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetFuelConsumptionPerMinute(&_World.TransactOpts, entityId, fuelConsumptionIntervalInSeconds)
+// Solidity: function evefrontier__linkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_World *WorldTransactorSession) EvefrontierLinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierLinkGates(&_World.TransactOpts, sourceGateId, destinationGateId)
 }
 
-// EveworldSetFuelMaxCapacity is a paid mutator transaction binding the contract method 0xcd80c3ae.
+// EvefrontierRegisterSmartCharacterClass is a paid mutator transaction binding the contract method 0x8f7b1549.
 //
-// Solidity: function eveworld__setFuelMaxCapacity(uint256 entityId, uint256 capacityInWei) returns()
-func (_World *WorldTransactor) EveworldSetFuelMaxCapacity(opts *bind.TransactOpts, entityId *big.Int, capacityInWei *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setFuelMaxCapacity", entityId, capacityInWei)
+// Solidity: function evefrontier__registerSmartCharacterClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactor) EvefrontierRegisterSmartCharacterClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__registerSmartCharacterClass", typeId, volume)
 }
 
-// EveworldSetFuelMaxCapacity is a paid mutator transaction binding the contract method 0xcd80c3ae.
+// EvefrontierRegisterSmartCharacterClass is a paid mutator transaction binding the contract method 0x8f7b1549.
 //
-// Solidity: function eveworld__setFuelMaxCapacity(uint256 entityId, uint256 capacityInWei) returns()
-func (_World *WorldSession) EveworldSetFuelMaxCapacity(entityId *big.Int, capacityInWei *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetFuelMaxCapacity(&_World.TransactOpts, entityId, capacityInWei)
+// Solidity: function evefrontier__registerSmartCharacterClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldSession) EvefrontierRegisterSmartCharacterClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartCharacterClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetFuelMaxCapacity is a paid mutator transaction binding the contract method 0xcd80c3ae.
+// EvefrontierRegisterSmartCharacterClass is a paid mutator transaction binding the contract method 0x8f7b1549.
 //
-// Solidity: function eveworld__setFuelMaxCapacity(uint256 entityId, uint256 capacityInWei) returns()
-func (_World *WorldTransactorSession) EveworldSetFuelMaxCapacity(entityId *big.Int, capacityInWei *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetFuelMaxCapacity(&_World.TransactOpts, entityId, capacityInWei)
+// Solidity: function evefrontier__registerSmartCharacterClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactorSession) EvefrontierRegisterSmartCharacterClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartCharacterClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetInventoryCapacity is a paid mutator transaction binding the contract method 0xce754284.
+// EvefrontierRegisterSmartGateClass is a paid mutator transaction binding the contract method 0xee2bf1b9.
 //
-// Solidity: function eveworld__setInventoryCapacity(uint256 smartObjectId, uint256 storageCapacity) returns()
-func (_World *WorldTransactor) EveworldSetInventoryCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, storageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setInventoryCapacity", smartObjectId, storageCapacity)
+// Solidity: function evefrontier__registerSmartGateClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactor) EvefrontierRegisterSmartGateClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__registerSmartGateClass", typeId, volume)
 }
 
-// EveworldSetInventoryCapacity is a paid mutator transaction binding the contract method 0xce754284.
+// EvefrontierRegisterSmartGateClass is a paid mutator transaction binding the contract method 0xee2bf1b9.
 //
-// Solidity: function eveworld__setInventoryCapacity(uint256 smartObjectId, uint256 storageCapacity) returns()
-func (_World *WorldSession) EveworldSetInventoryCapacity(smartObjectId *big.Int, storageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetInventoryCapacity(&_World.TransactOpts, smartObjectId, storageCapacity)
+// Solidity: function evefrontier__registerSmartGateClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldSession) EvefrontierRegisterSmartGateClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartGateClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetInventoryCapacity is a paid mutator transaction binding the contract method 0xce754284.
+// EvefrontierRegisterSmartGateClass is a paid mutator transaction binding the contract method 0xee2bf1b9.
 //
-// Solidity: function eveworld__setInventoryCapacity(uint256 smartObjectId, uint256 storageCapacity) returns()
-func (_World *WorldTransactorSession) EveworldSetInventoryCapacity(smartObjectId *big.Int, storageCapacity *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetInventoryCapacity(&_World.TransactOpts, smartObjectId, storageCapacity)
+// Solidity: function evefrontier__registerSmartGateClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactorSession) EvefrontierRegisterSmartGateClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartGateClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetInventoryToEphemeralTransferAccess is a paid mutator transaction binding the contract method 0x50bdd562.
+// EvefrontierRegisterSmartStorageUnitClass is a paid mutator transaction binding the contract method 0x555af808.
 //
-// Solidity: function eveworld__setInventoryToEphemeralTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldTransactor) EveworldSetInventoryToEphemeralTransferAccess(opts *bind.TransactOpts, smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setInventoryToEphemeralTransferAccess", smartObjectId, isEnforced)
+// Solidity: function evefrontier__registerSmartStorageUnitClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactor) EvefrontierRegisterSmartStorageUnitClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__registerSmartStorageUnitClass", typeId, volume)
 }
 
-// EveworldSetInventoryToEphemeralTransferAccess is a paid mutator transaction binding the contract method 0x50bdd562.
+// EvefrontierRegisterSmartStorageUnitClass is a paid mutator transaction binding the contract method 0x555af808.
 //
-// Solidity: function eveworld__setInventoryToEphemeralTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldSession) EveworldSetInventoryToEphemeralTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetInventoryToEphemeralTransferAccess(&_World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function evefrontier__registerSmartStorageUnitClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldSession) EvefrontierRegisterSmartStorageUnitClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartStorageUnitClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetInventoryToEphemeralTransferAccess is a paid mutator transaction binding the contract method 0x50bdd562.
+// EvefrontierRegisterSmartStorageUnitClass is a paid mutator transaction binding the contract method 0x555af808.
 //
-// Solidity: function eveworld__setInventoryToEphemeralTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_World *WorldTransactorSession) EveworldSetInventoryToEphemeralTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetInventoryToEphemeralTransferAccess(&_World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function evefrontier__registerSmartStorageUnitClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactorSession) EvefrontierRegisterSmartStorageUnitClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartStorageUnitClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetMetadata is a paid mutator transaction binding the contract method 0xddc0ed7f.
+// EvefrontierRegisterSmartTurretClass is a paid mutator transaction binding the contract method 0x5ddf5eef.
 //
-// Solidity: function eveworld__setMetadata(bytes32 systemId, (string,string,string) data) returns()
-func (_World *WorldTransactor) EveworldSetMetadata(opts *bind.TransactOpts, systemId [32]byte, data StaticDataGlobalTableData) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setMetadata", systemId, data)
+// Solidity: function evefrontier__registerSmartTurretClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactor) EvefrontierRegisterSmartTurretClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__registerSmartTurretClass", typeId, volume)
 }
 
-// EveworldSetMetadata is a paid mutator transaction binding the contract method 0xddc0ed7f.
+// EvefrontierRegisterSmartTurretClass is a paid mutator transaction binding the contract method 0x5ddf5eef.
 //
-// Solidity: function eveworld__setMetadata(bytes32 systemId, (string,string,string) data) returns()
-func (_World *WorldSession) EveworldSetMetadata(systemId [32]byte, data StaticDataGlobalTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetMetadata(&_World.TransactOpts, systemId, data)
+// Solidity: function evefrontier__registerSmartTurretClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldSession) EvefrontierRegisterSmartTurretClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartTurretClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetMetadata is a paid mutator transaction binding the contract method 0xddc0ed7f.
+// EvefrontierRegisterSmartTurretClass is a paid mutator transaction binding the contract method 0x5ddf5eef.
 //
-// Solidity: function eveworld__setMetadata(bytes32 systemId, (string,string,string) data) returns()
-func (_World *WorldTransactorSession) EveworldSetMetadata(systemId [32]byte, data StaticDataGlobalTableData) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetMetadata(&_World.TransactOpts, systemId, data)
+// Solidity: function evefrontier__registerSmartTurretClass(uint256 typeId, uint256 volume) returns()
+func (_World *WorldTransactorSession) EvefrontierRegisterSmartTurretClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRegisterSmartTurretClass(&_World.TransactOpts, typeId, volume)
 }
 
-// EveworldSetName is a paid mutator transaction binding the contract method 0x37453fd9.
+// EvefrontierRemoveCharacter is a paid mutator transaction binding the contract method 0xe4ada7c4.
 //
-// Solidity: function eveworld__setName(uint256 entityId, string name) returns()
-func (_World *WorldTransactor) EveworldSetName(opts *bind.TransactOpts, entityId *big.Int, name string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setName", entityId, name)
+// Solidity: function evefrontier__removeCharacter(uint256 smartObjectId) returns()
+func (_World *WorldTransactor) EvefrontierRemoveCharacter(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__removeCharacter", smartObjectId)
 }
 
-// EveworldSetName is a paid mutator transaction binding the contract method 0x37453fd9.
+// EvefrontierRemoveCharacter is a paid mutator transaction binding the contract method 0xe4ada7c4.
 //
-// Solidity: function eveworld__setName(uint256 entityId, string name) returns()
-func (_World *WorldSession) EveworldSetName(entityId *big.Int, name string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetName(&_World.TransactOpts, entityId, name)
+// Solidity: function evefrontier__removeCharacter(uint256 smartObjectId) returns()
+func (_World *WorldSession) EvefrontierRemoveCharacter(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRemoveCharacter(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldSetName is a paid mutator transaction binding the contract method 0x37453fd9.
+// EvefrontierRemoveCharacter is a paid mutator transaction binding the contract method 0xe4ada7c4.
 //
-// Solidity: function eveworld__setName(uint256 entityId, string name) returns()
-func (_World *WorldTransactorSession) EveworldSetName(entityId *big.Int, name string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetName(&_World.TransactOpts, entityId, name)
+// Solidity: function evefrontier__removeCharacter(uint256 smartObjectId) returns()
+func (_World *WorldTransactorSession) EvefrontierRemoveCharacter(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRemoveCharacter(&_World.TransactOpts, smartObjectId)
 }
 
-// EveworldSetName0 is a paid mutator transaction binding the contract method 0x648bb531.
+// EvefrontierRemoveItemFromInventory is a paid mutator transaction binding the contract method 0xf86ebd47.
 //
-// Solidity: function eveworld__setName(bytes32 systemId, string name) returns()
-func (_World *WorldTransactor) EveworldSetName0(opts *bind.TransactOpts, systemId [32]byte, name string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setName0", systemId, name)
+// Solidity: function evefrontier__removeItemFromInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_World *WorldTransactor) EvefrontierRemoveItemFromInventory(opts *bind.TransactOpts, inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__removeItemFromInventory", inventoryObjectId, itemObjectId, quantity)
 }
 
-// EveworldSetName0 is a paid mutator transaction binding the contract method 0x648bb531.
+// EvefrontierRemoveItemFromInventory is a paid mutator transaction binding the contract method 0xf86ebd47.
 //
-// Solidity: function eveworld__setName(bytes32 systemId, string name) returns()
-func (_World *WorldSession) EveworldSetName0(systemId [32]byte, name string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetName0(&_World.TransactOpts, systemId, name)
+// Solidity: function evefrontier__removeItemFromInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_World *WorldSession) EvefrontierRemoveItemFromInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRemoveItemFromInventory(&_World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
 }
 
-// EveworldSetName0 is a paid mutator transaction binding the contract method 0x648bb531.
+// EvefrontierRemoveItemFromInventory is a paid mutator transaction binding the contract method 0xf86ebd47.
 //
-// Solidity: function eveworld__setName(bytes32 systemId, string name) returns()
-func (_World *WorldTransactorSession) EveworldSetName0(systemId [32]byte, name string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetName0(&_World.TransactOpts, systemId, name)
+// Solidity: function evefrontier__removeItemFromInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_World *WorldTransactorSession) EvefrontierRemoveItemFromInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRemoveItemFromInventory(&_World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
 }
 
-// EveworldSetSSUClassId is a paid mutator transaction binding the contract method 0xddd96344.
+// EvefrontierRemoveOwner is a paid mutator transaction binding the contract method 0x2c65361b.
 //
-// Solidity: function eveworld__setSSUClassId(uint256 classId) returns()
-func (_World *WorldTransactor) EveworldSetSSUClassId(opts *bind.TransactOpts, classId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setSSUClassId", classId)
+// Solidity: function evefrontier__removeOwner(uint256 smartObjectId, address from) returns()
+func (_World *WorldTransactor) EvefrontierRemoveOwner(opts *bind.TransactOpts, smartObjectId *big.Int, from common.Address) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__removeOwner", smartObjectId, from)
 }
 
-// EveworldSetSSUClassId is a paid mutator transaction binding the contract method 0xddd96344.
+// EvefrontierRemoveOwner is a paid mutator transaction binding the contract method 0x2c65361b.
 //
-// Solidity: function eveworld__setSSUClassId(uint256 classId) returns()
-func (_World *WorldSession) EveworldSetSSUClassId(classId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetSSUClassId(&_World.TransactOpts, classId)
+// Solidity: function evefrontier__removeOwner(uint256 smartObjectId, address from) returns()
+func (_World *WorldSession) EvefrontierRemoveOwner(smartObjectId *big.Int, from common.Address) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRemoveOwner(&_World.TransactOpts, smartObjectId, from)
 }
 
-// EveworldSetSSUClassId is a paid mutator transaction binding the contract method 0xddd96344.
+// EvefrontierRemoveOwner is a paid mutator transaction binding the contract method 0x2c65361b.
 //
-// Solidity: function eveworld__setSSUClassId(uint256 classId) returns()
-func (_World *WorldTransactorSession) EveworldSetSSUClassId(classId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetSSUClassId(&_World.TransactOpts, classId)
+// Solidity: function evefrontier__removeOwner(uint256 smartObjectId, address from) returns()
+func (_World *WorldTransactorSession) EvefrontierRemoveOwner(smartObjectId *big.Int, from common.Address) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierRemoveOwner(&_World.TransactOpts, smartObjectId, from)
 }
 
-// EveworldSetSmartAssemblyType is a paid mutator transaction binding the contract method 0xe8bb13da.
+// EvefrontierReportKill is a paid mutator transaction binding the contract method 0x4f204e3f.
 //
-// Solidity: function eveworld__setSmartAssemblyType(uint256 entityId, uint8 smartAssemblyType) returns()
-func (_World *WorldTransactor) EveworldSetSmartAssemblyType(opts *bind.TransactOpts, entityId *big.Int, smartAssemblyType uint8) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setSmartAssemblyType", entityId, smartAssemblyType)
+// Solidity: function evefrontier__reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailData) returns()
+func (_World *WorldTransactor) EvefrontierReportKill(opts *bind.TransactOpts, killMailId *big.Int, killMailData KillMailData) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__reportKill", killMailId, killMailData)
 }
 
-// EveworldSetSmartAssemblyType is a paid mutator transaction binding the contract method 0xe8bb13da.
+// EvefrontierReportKill is a paid mutator transaction binding the contract method 0x4f204e3f.
 //
-// Solidity: function eveworld__setSmartAssemblyType(uint256 entityId, uint8 smartAssemblyType) returns()
-func (_World *WorldSession) EveworldSetSmartAssemblyType(entityId *big.Int, smartAssemblyType uint8) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetSmartAssemblyType(&_World.TransactOpts, entityId, smartAssemblyType)
+// Solidity: function evefrontier__reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailData) returns()
+func (_World *WorldSession) EvefrontierReportKill(killMailId *big.Int, killMailData KillMailData) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierReportKill(&_World.TransactOpts, killMailId, killMailData)
 }
 
-// EveworldSetSmartAssemblyType is a paid mutator transaction binding the contract method 0xe8bb13da.
+// EvefrontierReportKill is a paid mutator transaction binding the contract method 0x4f204e3f.
 //
-// Solidity: function eveworld__setSmartAssemblyType(uint256 entityId, uint8 smartAssemblyType) returns()
-func (_World *WorldTransactorSession) EveworldSetSmartAssemblyType(entityId *big.Int, smartAssemblyType uint8) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetSmartAssemblyType(&_World.TransactOpts, entityId, smartAssemblyType)
+// Solidity: function evefrontier__reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailData) returns()
+func (_World *WorldTransactorSession) EvefrontierReportKill(killMailId *big.Int, killMailData KillMailData) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierReportKill(&_World.TransactOpts, killMailId, killMailData)
 }
 
-// EveworldSetSymbol is a paid mutator transaction binding the contract method 0x08e7ccb8.
+// EvefrontierSaveLocation is a paid mutator transaction binding the contract method 0x1470877e.
 //
-// Solidity: function eveworld__setSymbol(bytes32 systemId, string symbol) returns()
-func (_World *WorldTransactor) EveworldSetSymbol(opts *bind.TransactOpts, systemId [32]byte, symbol string) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__setSymbol", systemId, symbol)
+// Solidity: function evefrontier__saveLocation(uint256 smartObjectId, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_World *WorldTransactor) EvefrontierSaveLocation(opts *bind.TransactOpts, smartObjectId *big.Int, locationData LocationData) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__saveLocation", smartObjectId, locationData)
 }
 
-// EveworldSetSymbol is a paid mutator transaction binding the contract method 0x08e7ccb8.
+// EvefrontierSaveLocation is a paid mutator transaction binding the contract method 0x1470877e.
 //
-// Solidity: function eveworld__setSymbol(bytes32 systemId, string symbol) returns()
-func (_World *WorldSession) EveworldSetSymbol(systemId [32]byte, symbol string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetSymbol(&_World.TransactOpts, systemId, symbol)
+// Solidity: function evefrontier__saveLocation(uint256 smartObjectId, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_World *WorldSession) EvefrontierSaveLocation(smartObjectId *big.Int, locationData LocationData) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSaveLocation(&_World.TransactOpts, smartObjectId, locationData)
 }
 
-// EveworldSetSymbol is a paid mutator transaction binding the contract method 0x08e7ccb8.
+// EvefrontierSaveLocation is a paid mutator transaction binding the contract method 0x1470877e.
 //
-// Solidity: function eveworld__setSymbol(bytes32 systemId, string symbol) returns()
-func (_World *WorldTransactorSession) EveworldSetSymbol(systemId [32]byte, symbol string) (*types.Transaction, error) {
-	return _World.Contract.EveworldSetSymbol(&_World.TransactOpts, systemId, symbol)
+// Solidity: function evefrontier__saveLocation(uint256 smartObjectId, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_World *WorldTransactorSession) EvefrontierSaveLocation(smartObjectId *big.Int, locationData LocationData) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSaveLocation(&_World.TransactOpts, smartObjectId, locationData)
 }
 
-// EveworldUnanchor is a paid mutator transaction binding the contract method 0x694e5e2c.
+// EvefrontierSetAssemblyType is a paid mutator transaction binding the contract method 0x0a1d5e46.
 //
-// Solidity: function eveworld__unanchor(uint256 entityId) returns()
-func (_World *WorldTransactor) EveworldUnanchor(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__unanchor", entityId)
+// Solidity: function evefrontier__setAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_World *WorldTransactor) EvefrontierSetAssemblyType(opts *bind.TransactOpts, smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setAssemblyType", smartObjectId, assemblyType)
 }
 
-// EveworldUnanchor is a paid mutator transaction binding the contract method 0x694e5e2c.
+// EvefrontierSetAssemblyType is a paid mutator transaction binding the contract method 0x0a1d5e46.
 //
-// Solidity: function eveworld__unanchor(uint256 entityId) returns()
-func (_World *WorldSession) EveworldUnanchor(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUnanchor(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__setAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_World *WorldSession) EvefrontierSetAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetAssemblyType(&_World.TransactOpts, smartObjectId, assemblyType)
 }
 
-// EveworldUnanchor is a paid mutator transaction binding the contract method 0x694e5e2c.
+// EvefrontierSetAssemblyType is a paid mutator transaction binding the contract method 0x0a1d5e46.
 //
-// Solidity: function eveworld__unanchor(uint256 entityId) returns()
-func (_World *WorldTransactorSession) EveworldUnanchor(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUnanchor(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__setAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_World *WorldTransactorSession) EvefrontierSetAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetAssemblyType(&_World.TransactOpts, smartObjectId, assemblyType)
 }
 
-// EveworldUnlinkSmartGates is a paid mutator transaction binding the contract method 0xce0bf1e6.
+// EvefrontierSetCapacity is a paid mutator transaction binding the contract method 0xf82cdbd0.
 //
-// Solidity: function eveworld__unlinkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_World *WorldTransactor) EveworldUnlinkSmartGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__unlinkSmartGates", sourceGateId, destinationGateId)
+// Solidity: function evefrontier__setCapacity(uint256 smartObjectId, uint256 capacity) returns()
+func (_World *WorldTransactor) EvefrontierSetCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, capacity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setCapacity", smartObjectId, capacity)
 }
 
-// EveworldUnlinkSmartGates is a paid mutator transaction binding the contract method 0xce0bf1e6.
+// EvefrontierSetCapacity is a paid mutator transaction binding the contract method 0xf82cdbd0.
 //
-// Solidity: function eveworld__unlinkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_World *WorldSession) EveworldUnlinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUnlinkSmartGates(&_World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__setCapacity(uint256 smartObjectId, uint256 capacity) returns()
+func (_World *WorldSession) EvefrontierSetCapacity(smartObjectId *big.Int, capacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetCapacity(&_World.TransactOpts, smartObjectId, capacity)
 }
 
-// EveworldUnlinkSmartGates is a paid mutator transaction binding the contract method 0xce0bf1e6.
+// EvefrontierSetCapacity is a paid mutator transaction binding the contract method 0xf82cdbd0.
 //
-// Solidity: function eveworld__unlinkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_World *WorldTransactorSession) EveworldUnlinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUnlinkSmartGates(&_World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function evefrontier__setCapacity(uint256 smartObjectId, uint256 capacity) returns()
+func (_World *WorldTransactorSession) EvefrontierSetCapacity(smartObjectId *big.Int, capacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetCapacity(&_World.TransactOpts, smartObjectId, capacity)
 }
 
-// EveworldUpdateCorpId is a paid mutator transaction binding the contract method 0x715464e7.
+// EvefrontierSetCrossTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0x272e071f.
 //
-// Solidity: function eveworld__updateCorpId(uint256 characterId, uint256 corpId) returns()
-func (_World *WorldTransactor) EveworldUpdateCorpId(opts *bind.TransactOpts, characterId *big.Int, corpId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__updateCorpId", characterId, corpId)
+// Solidity: function evefrontier__setCrossTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactor) EvefrontierSetCrossTransferToEphemeralAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setCrossTransferToEphemeralAccess", smartObjectId, accessAddress, isAllowed)
 }
 
-// EveworldUpdateCorpId is a paid mutator transaction binding the contract method 0x715464e7.
+// EvefrontierSetCrossTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0x272e071f.
 //
-// Solidity: function eveworld__updateCorpId(uint256 characterId, uint256 corpId) returns()
-func (_World *WorldSession) EveworldUpdateCorpId(characterId *big.Int, corpId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUpdateCorpId(&_World.TransactOpts, characterId, corpId)
+// Solidity: function evefrontier__setCrossTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldSession) EvefrontierSetCrossTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetCrossTransferToEphemeralAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
 }
 
-// EveworldUpdateCorpId is a paid mutator transaction binding the contract method 0x715464e7.
+// EvefrontierSetCrossTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0x272e071f.
 //
-// Solidity: function eveworld__updateCorpId(uint256 characterId, uint256 corpId) returns()
-func (_World *WorldTransactorSession) EveworldUpdateCorpId(characterId *big.Int, corpId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUpdateCorpId(&_World.TransactOpts, characterId, corpId)
+// Solidity: function evefrontier__setCrossTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactorSession) EvefrontierSetCrossTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetCrossTransferToEphemeralAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
 }
 
-// EveworldUpdateFuel is a paid mutator transaction binding the contract method 0x77eb0abf.
+// EvefrontierSetDappURL is a paid mutator transaction binding the contract method 0x9066625a.
 //
-// Solidity: function eveworld__updateFuel(uint256 entityId) returns()
-func (_World *WorldTransactor) EveworldUpdateFuel(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__updateFuel", entityId)
+// Solidity: function evefrontier__setDappURL(uint256 smartObjectId, string dappURL) returns()
+func (_World *WorldTransactor) EvefrontierSetDappURL(opts *bind.TransactOpts, smartObjectId *big.Int, dappURL string) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setDappURL", smartObjectId, dappURL)
 }
 
-// EveworldUpdateFuel is a paid mutator transaction binding the contract method 0x77eb0abf.
+// EvefrontierSetDappURL is a paid mutator transaction binding the contract method 0x9066625a.
 //
-// Solidity: function eveworld__updateFuel(uint256 entityId) returns()
-func (_World *WorldSession) EveworldUpdateFuel(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUpdateFuel(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__setDappURL(uint256 smartObjectId, string dappURL) returns()
+func (_World *WorldSession) EvefrontierSetDappURL(smartObjectId *big.Int, dappURL string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetDappURL(&_World.TransactOpts, smartObjectId, dappURL)
 }
 
-// EveworldUpdateFuel is a paid mutator transaction binding the contract method 0x77eb0abf.
+// EvefrontierSetDappURL is a paid mutator transaction binding the contract method 0x9066625a.
 //
-// Solidity: function eveworld__updateFuel(uint256 entityId) returns()
-func (_World *WorldTransactorSession) EveworldUpdateFuel(entityId *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldUpdateFuel(&_World.TransactOpts, entityId)
+// Solidity: function evefrontier__setDappURL(uint256 smartObjectId, string dappURL) returns()
+func (_World *WorldTransactorSession) EvefrontierSetDappURL(smartObjectId *big.Int, dappURL string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetDappURL(&_World.TransactOpts, smartObjectId, dappURL)
 }
 
-// EveworldWithdrawFromEphemeralInventory is a paid mutator transaction binding the contract method 0x54160975.
+// EvefrontierSetDescription is a paid mutator transaction binding the contract method 0x8587cadc.
 //
-// Solidity: function eveworld__withdrawFromEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldWithdrawFromEphemeralInventory(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__withdrawFromEphemeralInventory", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__setDescription(uint256 smartObjectId, string description) returns()
+func (_World *WorldTransactor) EvefrontierSetDescription(opts *bind.TransactOpts, smartObjectId *big.Int, description string) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setDescription", smartObjectId, description)
 }
 
-// EveworldWithdrawFromEphemeralInventory is a paid mutator transaction binding the contract method 0x54160975.
+// EvefrontierSetDescription is a paid mutator transaction binding the contract method 0x8587cadc.
 //
-// Solidity: function eveworld__withdrawFromEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldSession) EveworldWithdrawFromEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldWithdrawFromEphemeralInventory(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__setDescription(uint256 smartObjectId, string description) returns()
+func (_World *WorldSession) EvefrontierSetDescription(smartObjectId *big.Int, description string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetDescription(&_World.TransactOpts, smartObjectId, description)
 }
 
-// EveworldWithdrawFromEphemeralInventory is a paid mutator transaction binding the contract method 0x54160975.
+// EvefrontierSetDescription is a paid mutator transaction binding the contract method 0x8587cadc.
 //
-// Solidity: function eveworld__withdrawFromEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldWithdrawFromEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldWithdrawFromEphemeralInventory(&_World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function evefrontier__setDescription(uint256 smartObjectId, string description) returns()
+func (_World *WorldTransactorSession) EvefrontierSetDescription(smartObjectId *big.Int, description string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetDescription(&_World.TransactOpts, smartObjectId, description)
 }
 
-// EveworldWithdrawFromInventory is a paid mutator transaction binding the contract method 0x6e7e1184.
+// EvefrontierSetEphemeralCapacity is a paid mutator transaction binding the contract method 0x92ceb04a.
 //
-// Solidity: function eveworld__withdrawFromInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactor) EveworldWithdrawFromInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__withdrawFromInventory", smartObjectId, items)
+// Solidity: function evefrontier__setEphemeralCapacity(uint256 smartObjectId, uint256 ephemeralCapacity) returns()
+func (_World *WorldTransactor) EvefrontierSetEphemeralCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralCapacity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setEphemeralCapacity", smartObjectId, ephemeralCapacity)
 }
 
-// EveworldWithdrawFromInventory is a paid mutator transaction binding the contract method 0x6e7e1184.
+// EvefrontierSetEphemeralCapacity is a paid mutator transaction binding the contract method 0x92ceb04a.
 //
-// Solidity: function eveworld__withdrawFromInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldSession) EveworldWithdrawFromInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldWithdrawFromInventory(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__setEphemeralCapacity(uint256 smartObjectId, uint256 ephemeralCapacity) returns()
+func (_World *WorldSession) EvefrontierSetEphemeralCapacity(smartObjectId *big.Int, ephemeralCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetEphemeralCapacity(&_World.TransactOpts, smartObjectId, ephemeralCapacity)
 }
 
-// EveworldWithdrawFromInventory is a paid mutator transaction binding the contract method 0x6e7e1184.
+// EvefrontierSetEphemeralCapacity is a paid mutator transaction binding the contract method 0x92ceb04a.
 //
-// Solidity: function eveworld__withdrawFromInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_World *WorldTransactorSession) EveworldWithdrawFromInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _World.Contract.EveworldWithdrawFromInventory(&_World.TransactOpts, smartObjectId, items)
+// Solidity: function evefrontier__setEphemeralCapacity(uint256 smartObjectId, uint256 ephemeralCapacity) returns()
+func (_World *WorldTransactorSession) EvefrontierSetEphemeralCapacity(smartObjectId *big.Int, ephemeralCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetEphemeralCapacity(&_World.TransactOpts, smartObjectId, ephemeralCapacity)
 }
 
-// EveworldWithdrawFuel is a paid mutator transaction binding the contract method 0x365d7949.
+// EvefrontierSetFuelAmount is a paid mutator transaction binding the contract method 0xa2542c4e.
 //
-// Solidity: function eveworld__withdrawFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_World *WorldTransactor) EveworldWithdrawFuel(opts *bind.TransactOpts, entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _World.contract.Transact(opts, "eveworld__withdrawFuel", entityId, unitAmount)
+// Solidity: function evefrontier__setFuelAmount(uint256 smartObjectId, uint256 fuelAmountInWei) returns()
+func (_World *WorldTransactor) EvefrontierSetFuelAmount(opts *bind.TransactOpts, smartObjectId *big.Int, fuelAmountInWei *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setFuelAmount", smartObjectId, fuelAmountInWei)
 }
 
-// EveworldWithdrawFuel is a paid mutator transaction binding the contract method 0x365d7949.
+// EvefrontierSetFuelAmount is a paid mutator transaction binding the contract method 0xa2542c4e.
 //
-// Solidity: function eveworld__withdrawFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_World *WorldSession) EveworldWithdrawFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldWithdrawFuel(&_World.TransactOpts, entityId, unitAmount)
+// Solidity: function evefrontier__setFuelAmount(uint256 smartObjectId, uint256 fuelAmountInWei) returns()
+func (_World *WorldSession) EvefrontierSetFuelAmount(smartObjectId *big.Int, fuelAmountInWei *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelAmount(&_World.TransactOpts, smartObjectId, fuelAmountInWei)
 }
 
-// EveworldWithdrawFuel is a paid mutator transaction binding the contract method 0x365d7949.
+// EvefrontierSetFuelAmount is a paid mutator transaction binding the contract method 0xa2542c4e.
 //
-// Solidity: function eveworld__withdrawFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_World *WorldTransactorSession) EveworldWithdrawFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _World.Contract.EveworldWithdrawFuel(&_World.TransactOpts, entityId, unitAmount)
+// Solidity: function evefrontier__setFuelAmount(uint256 smartObjectId, uint256 fuelAmountInWei) returns()
+func (_World *WorldTransactorSession) EvefrontierSetFuelAmount(smartObjectId *big.Int, fuelAmountInWei *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelAmount(&_World.TransactOpts, smartObjectId, fuelAmountInWei)
+}
+
+// EvefrontierSetFuelConsumptionIntervalInSeconds is a paid mutator transaction binding the contract method 0xc70ccf0e.
+//
+// Solidity: function evefrontier__setFuelConsumptionIntervalInSeconds(uint256 smartObjectId, uint256 fuelConsumptionIntervalInSeconds) returns()
+func (_World *WorldTransactor) EvefrontierSetFuelConsumptionIntervalInSeconds(opts *bind.TransactOpts, smartObjectId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setFuelConsumptionIntervalInSeconds", smartObjectId, fuelConsumptionIntervalInSeconds)
+}
+
+// EvefrontierSetFuelConsumptionIntervalInSeconds is a paid mutator transaction binding the contract method 0xc70ccf0e.
+//
+// Solidity: function evefrontier__setFuelConsumptionIntervalInSeconds(uint256 smartObjectId, uint256 fuelConsumptionIntervalInSeconds) returns()
+func (_World *WorldSession) EvefrontierSetFuelConsumptionIntervalInSeconds(smartObjectId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelConsumptionIntervalInSeconds(&_World.TransactOpts, smartObjectId, fuelConsumptionIntervalInSeconds)
+}
+
+// EvefrontierSetFuelConsumptionIntervalInSeconds is a paid mutator transaction binding the contract method 0xc70ccf0e.
+//
+// Solidity: function evefrontier__setFuelConsumptionIntervalInSeconds(uint256 smartObjectId, uint256 fuelConsumptionIntervalInSeconds) returns()
+func (_World *WorldTransactorSession) EvefrontierSetFuelConsumptionIntervalInSeconds(smartObjectId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelConsumptionIntervalInSeconds(&_World.TransactOpts, smartObjectId, fuelConsumptionIntervalInSeconds)
+}
+
+// EvefrontierSetFuelMaxCapacity is a paid mutator transaction binding the contract method 0x57cf8783.
+//
+// Solidity: function evefrontier__setFuelMaxCapacity(uint256 smartObjectId, uint256 fuelMaxCapacity) returns()
+func (_World *WorldTransactor) EvefrontierSetFuelMaxCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setFuelMaxCapacity", smartObjectId, fuelMaxCapacity)
+}
+
+// EvefrontierSetFuelMaxCapacity is a paid mutator transaction binding the contract method 0x57cf8783.
+//
+// Solidity: function evefrontier__setFuelMaxCapacity(uint256 smartObjectId, uint256 fuelMaxCapacity) returns()
+func (_World *WorldSession) EvefrontierSetFuelMaxCapacity(smartObjectId *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelMaxCapacity(&_World.TransactOpts, smartObjectId, fuelMaxCapacity)
+}
+
+// EvefrontierSetFuelMaxCapacity is a paid mutator transaction binding the contract method 0x57cf8783.
+//
+// Solidity: function evefrontier__setFuelMaxCapacity(uint256 smartObjectId, uint256 fuelMaxCapacity) returns()
+func (_World *WorldTransactorSession) EvefrontierSetFuelMaxCapacity(smartObjectId *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelMaxCapacity(&_World.TransactOpts, smartObjectId, fuelMaxCapacity)
+}
+
+// EvefrontierSetFuelUnitVolume is a paid mutator transaction binding the contract method 0xc96184f6.
+//
+// Solidity: function evefrontier__setFuelUnitVolume(uint256 smartObjectId, uint256 fuelUnitVolume) returns()
+func (_World *WorldTransactor) EvefrontierSetFuelUnitVolume(opts *bind.TransactOpts, smartObjectId *big.Int, fuelUnitVolume *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setFuelUnitVolume", smartObjectId, fuelUnitVolume)
+}
+
+// EvefrontierSetFuelUnitVolume is a paid mutator transaction binding the contract method 0xc96184f6.
+//
+// Solidity: function evefrontier__setFuelUnitVolume(uint256 smartObjectId, uint256 fuelUnitVolume) returns()
+func (_World *WorldSession) EvefrontierSetFuelUnitVolume(smartObjectId *big.Int, fuelUnitVolume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelUnitVolume(&_World.TransactOpts, smartObjectId, fuelUnitVolume)
+}
+
+// EvefrontierSetFuelUnitVolume is a paid mutator transaction binding the contract method 0xc96184f6.
+//
+// Solidity: function evefrontier__setFuelUnitVolume(uint256 smartObjectId, uint256 fuelUnitVolume) returns()
+func (_World *WorldTransactorSession) EvefrontierSetFuelUnitVolume(smartObjectId *big.Int, fuelUnitVolume *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetFuelUnitVolume(&_World.TransactOpts, smartObjectId, fuelUnitVolume)
+}
+
+// EvefrontierSetName is a paid mutator transaction binding the contract method 0xc2b27db2.
+//
+// Solidity: function evefrontier__setName(uint256 smartObjectId, string name) returns()
+func (_World *WorldTransactor) EvefrontierSetName(opts *bind.TransactOpts, smartObjectId *big.Int, name string) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setName", smartObjectId, name)
+}
+
+// EvefrontierSetName is a paid mutator transaction binding the contract method 0xc2b27db2.
+//
+// Solidity: function evefrontier__setName(uint256 smartObjectId, string name) returns()
+func (_World *WorldSession) EvefrontierSetName(smartObjectId *big.Int, name string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetName(&_World.TransactOpts, smartObjectId, name)
+}
+
+// EvefrontierSetName is a paid mutator transaction binding the contract method 0xc2b27db2.
+//
+// Solidity: function evefrontier__setName(uint256 smartObjectId, string name) returns()
+func (_World *WorldTransactorSession) EvefrontierSetName(smartObjectId *big.Int, name string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetName(&_World.TransactOpts, smartObjectId, name)
+}
+
+// EvefrontierSetTransferFromEphemeralAccess is a paid mutator transaction binding the contract method 0x2487dc35.
+//
+// Solidity: function evefrontier__setTransferFromEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactor) EvefrontierSetTransferFromEphemeralAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setTransferFromEphemeralAccess", smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferFromEphemeralAccess is a paid mutator transaction binding the contract method 0x2487dc35.
+//
+// Solidity: function evefrontier__setTransferFromEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldSession) EvefrontierSetTransferFromEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetTransferFromEphemeralAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferFromEphemeralAccess is a paid mutator transaction binding the contract method 0x2487dc35.
+//
+// Solidity: function evefrontier__setTransferFromEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactorSession) EvefrontierSetTransferFromEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetTransferFromEphemeralAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0xa5f8de86.
+//
+// Solidity: function evefrontier__setTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactor) EvefrontierSetTransferToEphemeralAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setTransferToEphemeralAccess", smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0xa5f8de86.
+//
+// Solidity: function evefrontier__setTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldSession) EvefrontierSetTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetTransferToEphemeralAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0xa5f8de86.
+//
+// Solidity: function evefrontier__setTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactorSession) EvefrontierSetTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetTransferToEphemeralAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferToInventoryAccess is a paid mutator transaction binding the contract method 0xf96d7230.
+//
+// Solidity: function evefrontier__setTransferToInventoryAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactor) EvefrontierSetTransferToInventoryAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__setTransferToInventoryAccess", smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferToInventoryAccess is a paid mutator transaction binding the contract method 0xf96d7230.
+//
+// Solidity: function evefrontier__setTransferToInventoryAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldSession) EvefrontierSetTransferToInventoryAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetTransferToInventoryAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierSetTransferToInventoryAccess is a paid mutator transaction binding the contract method 0xf96d7230.
+//
+// Solidity: function evefrontier__setTransferToInventoryAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_World *WorldTransactorSession) EvefrontierSetTransferToInventoryAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierSetTransferToInventoryAccess(&_World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// EvefrontierTransferFromEphemeral is a paid mutator transaction binding the contract method 0xde72908c.
+//
+// Solidity: function evefrontier__transferFromEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierTransferFromEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__transferFromEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierTransferFromEphemeral is a paid mutator transaction binding the contract method 0xde72908c.
+//
+// Solidity: function evefrontier__transferFromEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierTransferFromEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierTransferFromEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierTransferFromEphemeral is a paid mutator transaction binding the contract method 0xde72908c.
+//
+// Solidity: function evefrontier__transferFromEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierTransferFromEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierTransferFromEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierTransferToEphemeral is a paid mutator transaction binding the contract method 0xa8430a5d.
+//
+// Solidity: function evefrontier__transferToEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierTransferToEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__transferToEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierTransferToEphemeral is a paid mutator transaction binding the contract method 0xa8430a5d.
+//
+// Solidity: function evefrontier__transferToEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierTransferToEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierTransferToEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierTransferToEphemeral is a paid mutator transaction binding the contract method 0xa8430a5d.
+//
+// Solidity: function evefrontier__transferToEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierTransferToEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierTransferToEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierTransferToInventory is a paid mutator transaction binding the contract method 0xad524293.
+//
+// Solidity: function evefrontier__transferToInventory(uint256 smartObjectId, uint256 toObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierTransferToInventory(opts *bind.TransactOpts, smartObjectId *big.Int, toObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__transferToInventory", smartObjectId, toObjectId, items)
+}
+
+// EvefrontierTransferToInventory is a paid mutator transaction binding the contract method 0xad524293.
+//
+// Solidity: function evefrontier__transferToInventory(uint256 smartObjectId, uint256 toObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierTransferToInventory(smartObjectId *big.Int, toObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierTransferToInventory(&_World.TransactOpts, smartObjectId, toObjectId, items)
+}
+
+// EvefrontierTransferToInventory is a paid mutator transaction binding the contract method 0xad524293.
+//
+// Solidity: function evefrontier__transferToInventory(uint256 smartObjectId, uint256 toObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierTransferToInventory(smartObjectId *big.Int, toObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierTransferToInventory(&_World.TransactOpts, smartObjectId, toObjectId, items)
+}
+
+// EvefrontierUnanchor is a paid mutator transaction binding the contract method 0x9abf3ec9.
+//
+// Solidity: function evefrontier__unanchor(uint256 smartObjectId) returns()
+func (_World *WorldTransactor) EvefrontierUnanchor(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__unanchor", smartObjectId)
+}
+
+// EvefrontierUnanchor is a paid mutator transaction binding the contract method 0x9abf3ec9.
+//
+// Solidity: function evefrontier__unanchor(uint256 smartObjectId) returns()
+func (_World *WorldSession) EvefrontierUnanchor(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUnanchor(&_World.TransactOpts, smartObjectId)
+}
+
+// EvefrontierUnanchor is a paid mutator transaction binding the contract method 0x9abf3ec9.
+//
+// Solidity: function evefrontier__unanchor(uint256 smartObjectId) returns()
+func (_World *WorldTransactorSession) EvefrontierUnanchor(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUnanchor(&_World.TransactOpts, smartObjectId)
+}
+
+// EvefrontierUnlinkGates is a paid mutator transaction binding the contract method 0x1a6f6bb1.
+//
+// Solidity: function evefrontier__unlinkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_World *WorldTransactor) EvefrontierUnlinkGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__unlinkGates", sourceGateId, destinationGateId)
+}
+
+// EvefrontierUnlinkGates is a paid mutator transaction binding the contract method 0x1a6f6bb1.
+//
+// Solidity: function evefrontier__unlinkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_World *WorldSession) EvefrontierUnlinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUnlinkGates(&_World.TransactOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierUnlinkGates is a paid mutator transaction binding the contract method 0x1a6f6bb1.
+//
+// Solidity: function evefrontier__unlinkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_World *WorldTransactorSession) EvefrontierUnlinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUnlinkGates(&_World.TransactOpts, sourceGateId, destinationGateId)
+}
+
+// EvefrontierUpdateAssemblyType is a paid mutator transaction binding the contract method 0x5921cdd6.
+//
+// Solidity: function evefrontier__updateAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_World *WorldTransactor) EvefrontierUpdateAssemblyType(opts *bind.TransactOpts, smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__updateAssemblyType", smartObjectId, assemblyType)
+}
+
+// EvefrontierUpdateAssemblyType is a paid mutator transaction binding the contract method 0x5921cdd6.
+//
+// Solidity: function evefrontier__updateAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_World *WorldSession) EvefrontierUpdateAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUpdateAssemblyType(&_World.TransactOpts, smartObjectId, assemblyType)
+}
+
+// EvefrontierUpdateAssemblyType is a paid mutator transaction binding the contract method 0x5921cdd6.
+//
+// Solidity: function evefrontier__updateAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_World *WorldTransactorSession) EvefrontierUpdateAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUpdateAssemblyType(&_World.TransactOpts, smartObjectId, assemblyType)
+}
+
+// EvefrontierUpdateFuel is a paid mutator transaction binding the contract method 0x75679e2e.
+//
+// Solidity: function evefrontier__updateFuel(uint256 smartObjectId) returns()
+func (_World *WorldTransactor) EvefrontierUpdateFuel(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__updateFuel", smartObjectId)
+}
+
+// EvefrontierUpdateFuel is a paid mutator transaction binding the contract method 0x75679e2e.
+//
+// Solidity: function evefrontier__updateFuel(uint256 smartObjectId) returns()
+func (_World *WorldSession) EvefrontierUpdateFuel(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUpdateFuel(&_World.TransactOpts, smartObjectId)
+}
+
+// EvefrontierUpdateFuel is a paid mutator transaction binding the contract method 0x75679e2e.
+//
+// Solidity: function evefrontier__updateFuel(uint256 smartObjectId) returns()
+func (_World *WorldTransactorSession) EvefrontierUpdateFuel(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUpdateFuel(&_World.TransactOpts, smartObjectId)
+}
+
+// EvefrontierUpdateTribeId is a paid mutator transaction binding the contract method 0x7402be76.
+//
+// Solidity: function evefrontier__updateTribeId(uint256 smartObjectId, uint256 tribeId) returns()
+func (_World *WorldTransactor) EvefrontierUpdateTribeId(opts *bind.TransactOpts, smartObjectId *big.Int, tribeId *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__updateTribeId", smartObjectId, tribeId)
+}
+
+// EvefrontierUpdateTribeId is a paid mutator transaction binding the contract method 0x7402be76.
+//
+// Solidity: function evefrontier__updateTribeId(uint256 smartObjectId, uint256 tribeId) returns()
+func (_World *WorldSession) EvefrontierUpdateTribeId(smartObjectId *big.Int, tribeId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUpdateTribeId(&_World.TransactOpts, smartObjectId, tribeId)
+}
+
+// EvefrontierUpdateTribeId is a paid mutator transaction binding the contract method 0x7402be76.
+//
+// Solidity: function evefrontier__updateTribeId(uint256 smartObjectId, uint256 tribeId) returns()
+func (_World *WorldTransactorSession) EvefrontierUpdateTribeId(smartObjectId *big.Int, tribeId *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierUpdateTribeId(&_World.TransactOpts, smartObjectId, tribeId)
+}
+
+// EvefrontierWithdrawEphemeral is a paid mutator transaction binding the contract method 0xe792638f.
+//
+// Solidity: function evefrontier__withdrawEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierWithdrawEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__withdrawEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierWithdrawEphemeral is a paid mutator transaction binding the contract method 0xe792638f.
+//
+// Solidity: function evefrontier__withdrawEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierWithdrawEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierWithdrawEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierWithdrawEphemeral is a paid mutator transaction binding the contract method 0xe792638f.
+//
+// Solidity: function evefrontier__withdrawEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierWithdrawEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierWithdrawEphemeral(&_World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// EvefrontierWithdrawFuel is a paid mutator transaction binding the contract method 0xd7edb90a.
+//
+// Solidity: function evefrontier__withdrawFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_World *WorldTransactor) EvefrontierWithdrawFuel(opts *bind.TransactOpts, smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__withdrawFuel", smartObjectId, fuelAmount)
+}
+
+// EvefrontierWithdrawFuel is a paid mutator transaction binding the contract method 0xd7edb90a.
+//
+// Solidity: function evefrontier__withdrawFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_World *WorldSession) EvefrontierWithdrawFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierWithdrawFuel(&_World.TransactOpts, smartObjectId, fuelAmount)
+}
+
+// EvefrontierWithdrawFuel is a paid mutator transaction binding the contract method 0xd7edb90a.
+//
+// Solidity: function evefrontier__withdrawFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_World *WorldTransactorSession) EvefrontierWithdrawFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierWithdrawFuel(&_World.TransactOpts, smartObjectId, fuelAmount)
+}
+
+// EvefrontierWithdrawInventory is a paid mutator transaction binding the contract method 0xd8a2f475.
+//
+// Solidity: function evefrontier__withdrawInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactor) EvefrontierWithdrawInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.contract.Transact(opts, "evefrontier__withdrawInventory", smartObjectId, items)
+}
+
+// EvefrontierWithdrawInventory is a paid mutator transaction binding the contract method 0xd8a2f475.
+//
+// Solidity: function evefrontier__withdrawInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldSession) EvefrontierWithdrawInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierWithdrawInventory(&_World.TransactOpts, smartObjectId, items)
+}
+
+// EvefrontierWithdrawInventory is a paid mutator transaction binding the contract method 0xd8a2f475.
+//
+// Solidity: function evefrontier__withdrawInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_World *WorldTransactorSession) EvefrontierWithdrawInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _World.Contract.EvefrontierWithdrawInventory(&_World.TransactOpts, smartObjectId, items)
 }
 
 // GrantAccess is a paid mutator transaction binding the contract method 0x40554c3a.
