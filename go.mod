@@ -1,3 +1,3 @@
-module github.com/projectawakening/contracts-go/v0
+module github.com/projectawakening/contracts-go/v2
 
 go 1.22.3

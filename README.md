@@ -27,8 +27,8 @@ func main() {
 
 1. Wait for a new [world-chain-contracts](https://github.com/projectawakening/world-chain-contracts/releases) deployment
 2. Make sure the new ABIs are available on abi-export.projectawakening.io
-3. Create a new [GitHub Release](https://github.com/projectawakening/contracts-go/releases/new) here
-4. Use the same Git tag as [world-chain-contracts](https://github.com/projectawakening/world-chain-contracts/releases) (e.g `v0.0.8`)
+3. Update the world contract `VERSION` in `.github/workflows/release.yml` and get that merged
+4. Create a new [GitHub Release](https://github.com/projectawakening/contracts-go/releases/new) here
 5. Publish Release
 6. CI will generate and push the new Go bindings to `main`
 

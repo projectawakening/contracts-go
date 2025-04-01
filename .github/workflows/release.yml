@@ -22,7 +22,7 @@ jobs:
 
       - run: go generate
         env:
-          VERSION: ${{ github.ref_name }}
+          VERSION: v0.1.0
 
       - name: Update main and update tag
         run: |
