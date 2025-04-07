@@ -29,39 +29,60 @@ var (
 	_ = abi.ConvertType
 )
 
-// Coord is an auto generated low-level Go binding around an user-defined struct.
-type Coord struct {
-	X *big.Int
-	Y *big.Int
-	Z *big.Int
+// AggressionParams is an auto generated low-level Go binding around an user-defined struct.
+type AggressionParams struct {
+	SmartObjectId *big.Int
+	PriorityQueue []TargetPriority
+	Turret        Turret
+	Aggressor     SmartTurretTarget
+	Victim        SmartTurretTarget
 }
 
-// EntityRecordData is an auto generated low-level Go binding around an user-defined struct.
-type EntityRecordData struct {
-	TypeId *big.Int
-	ItemId *big.Int
-	Volume *big.Int
+// CreateAndAnchorParams is an auto generated low-level Go binding around an user-defined struct.
+type CreateAndAnchorParams struct {
+	SmartObjectId                    *big.Int
+	AssemblyType                     string
+	EntityRecordParams               EntityRecordParams
+	Owner                            common.Address
+	FuelUnitVolume                   *big.Int
+	FuelConsumptionIntervalInSeconds *big.Int
+	FuelMaxCapacity                  *big.Int
+	LocationData                     LocationData
 }
 
-// EntityRecordOffchainTableData is an auto generated low-level Go binding around an user-defined struct.
-type EntityRecordOffchainTableData struct {
+// CreateInventoryItemParams is an auto generated low-level Go binding around an user-defined struct.
+type CreateInventoryItemParams struct {
+	SmartObjectId *big.Int
+	TenantId      [32]byte
+	ItemId        *big.Int
+	TypeId        *big.Int
+	Volume        *big.Int
+	Quantity      *big.Int
+}
+
+// EntityMetadataParams is an auto generated low-level Go binding around an user-defined struct.
+type EntityMetadataParams struct {
 	Name        string
 	DappURL     string
 	Description string
 }
 
-// InventoryItem is an auto generated low-level Go binding around an user-defined struct.
-type InventoryItem struct {
-	InventoryItemId *big.Int
-	Owner           common.Address
-	ItemId          *big.Int
-	TypeId          *big.Int
-	Volume          *big.Int
-	Quantity        *big.Int
+// EntityRecordParams is an auto generated low-level Go binding around an user-defined struct.
+type EntityRecordParams struct {
+	TenantId [32]byte
+	TypeId   *big.Int
+	ItemId   *big.Int
+	Volume   *big.Int
 }
 
-// KillMailTableData is an auto generated low-level Go binding around an user-defined struct.
-type KillMailTableData struct {
+// InventoryItemParams is an auto generated low-level Go binding around an user-defined struct.
+type InventoryItemParams struct {
+	SmartObjectId *big.Int
+	Quantity      *big.Int
+}
+
+// KillMailData is an auto generated low-level Go binding around an user-defined struct.
+type KillMailData struct {
 	KillerCharacterId *big.Int
 	VictimCharacterId *big.Int
 	LossType          uint8
@@ -69,18 +90,12 @@ type KillMailTableData struct {
 	KillTimestamp     *big.Int
 }
 
-// LocationTableData is an auto generated low-level Go binding around an user-defined struct.
-type LocationTableData struct {
+// LocationData is an auto generated low-level Go binding around an user-defined struct.
+type LocationData struct {
 	SolarSystemId *big.Int
 	X             *big.Int
 	Y             *big.Int
 	Z             *big.Int
-}
-
-// SmartObjectData is an auto generated low-level Go binding around an user-defined struct.
-type SmartObjectData struct {
-	Owner    common.Address
-	TokenURI string
 }
 
 // SmartTurretTarget is an auto generated low-level Go binding around an user-defined struct.
@@ -91,13 +106,6 @@ type SmartTurretTarget struct {
 	HpRatio     *big.Int
 	ShieldRatio *big.Int
 	ArmorRatio  *big.Int
-}
-
-// StaticDataGlobalTableData is an auto generated low-level Go binding around an user-defined struct.
-type StaticDataGlobalTableData struct {
-	Name    string
-	Symbol  string
-	BaseURI string
 }
 
 // SystemCallData is an auto generated low-level Go binding around an user-defined struct.
@@ -119,13 +127,6 @@ type TargetPriority struct {
 	Weight *big.Int
 }
 
-// TransferItem is an auto generated low-level Go binding around an user-defined struct.
-type TransferItem struct {
-	InventoryItemId *big.Int
-	Owner           common.Address
-	Quantity        *big.Int
-}
-
 // Turret is an auto generated low-level Go binding around an user-defined struct.
 type Turret struct {
 	WeaponTypeId *big.Int
@@ -133,15 +134,9 @@ type Turret struct {
 	ChargesLeft  *big.Int
 }
 
-// WorldPosition is an auto generated low-level Go binding around an user-defined struct.
-type WorldPosition struct {
-	SolarSystemId *big.Int
-	Position      Coord
-}
-
 // ERC2771WorldMetaData contains all meta data concerning the ERC2771World contract.
 var ERC2771WorldMetaData = &bind.MetaData{
-	ABI: "[{\"type\":\"function\",\"name\":\"batchCall\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallData[]\",\"components\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"batchCallFrom\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallFromData[]\",\"components\":[{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"call\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"callFrom\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"creator\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"aggression\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"turretOwnerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"aggressor\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"victim\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"anchor\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationTableData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"bringOffline\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"bringOnline\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"canJump\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartGate\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartTurret\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchorSmartGate\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordData\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"worldPosition\",\"type\":\"tuple\",\"internalType\":\"structWorldPosition\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"position\",\"type\":\"tuple\",\"internalType\":\"structCoord\",\"components\":[{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxDistance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchorSmartStorageUnit\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordData\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"worldPosition\",\"type\":\"tuple\",\"internalType\":\"structWorldPosition\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"position\",\"type\":\"tuple\",\"internalType\":\"structCoord\",\"components\":[{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"storageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralStorageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchorSmartTurret\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordData\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"worldPosition\",\"type\":\"tuple\",\"internalType\":\"structWorldPosition\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"position\",\"type\":\"tuple\",\"internalType\":\"structCoord\",\"components\":[{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndDepositItemsToEphemeralInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndDepositItemsToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createCharacter\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"corpId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecord\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordData\",\"components\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"entityRecordOffchain\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordOffchainTableData\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"tokenCid\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createEntityRecord\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createEntityRecordOffchain\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"currentFuelAmount\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"currentFuelAmountInWei\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"depositFuel\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"unitAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"depositToEphemeralInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"depositToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"destroyDeployable\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"ephemeralToInventoryTransfer\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structTransferItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"globalPause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"globalResume\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"inProximity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"turretOwnerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turretTarget\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"inventoryToEphemeralTransfer\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structTransferItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isGateLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isWithinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"linkSmartGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerDeployable\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"smartObjectData\",\"type\":\"tuple\",\"internalType\":\"structSmartObjectData\",\"components\":[{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tokenURI\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"name\":\"fuelUnitVolumeInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacityInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerDeployableToken\",\"inputs\":[{\"name\":\"tokenAddress\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerERC721Token\",\"inputs\":[{\"name\":\"tokenAddress\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"reportKill\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killMailTableData\",\"type\":\"tuple\",\"internalType\":\"structKillMailTableData\",\"components\":[{\"name\":\"killerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"victimCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lossType\",\"type\":\"uint8\",\"internalType\":\"enumKillMailLossType\"},{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"saveLocation\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"location\",\"type\":\"tuple\",\"internalType\":\"structLocationTableData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAccessEnforcement\",\"inputs\":[{\"name\":\"target\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAccessListByRole\",\"inputs\":[{\"name\":\"accessRoleId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"accessList\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAccessListPerSystemByRole\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"accessRoleId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"accessList\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAllInventoryTransferAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setApprovedAccessList\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessList\",\"type\":\"address[]\",\"internalType\":\"address[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setBaseURI\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"baseURI\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCharClassId\",\"inputs\":[{\"name\":\"classId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCid\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"cid\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDappURL\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDeployableMetadata\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDescription\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setEntityMetadata\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setEphemeralInventoryCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralStorageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setEphemeralToInventoryTransferAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFuelConsumptionPerMinute\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFuelMaxCapacity\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"capacityInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setInventoryCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"storageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setInventoryToEphemeralTransferAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"isEnforced\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setMetadata\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"data\",\"type\":\"tuple\",\"internalType\":\"structStaticDataGlobalTableData\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"symbol\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"baseURI\",\"type\":\"string\",\"internalType\":\"string\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setName\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setName\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSSUClassId\",\"inputs\":[{\"name\":\"classId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSmartAssemblyType\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"smartAssemblyType\",\"type\":\"uint8\",\"internalType\":\"enumSmartAssemblyType\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setSymbol\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"symbol\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unanchor\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unlinkSmartGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateCorpId\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"corpId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateFuel\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawFromEphemeralInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralInventoryOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawFromInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItem[]\",\"components\":[{\"name\":\"inventoryItemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawFuel\",\"inputs\":[{\"name\":\"entityId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"unitAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldSlice\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLayout\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getKeySchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getValueSchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"grantAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initModule\",\"type\":\"address\",\"internalType\":\"contractIModule\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installRootModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"popFromDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"byteLengthToPop\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"pushToDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"dataToPush\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespace\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerRootFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"worldFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystem\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"contractSystem\"},{\"name\":\"publicAccess\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerTable\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"},{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"keyNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"},{\"name\":\"fieldNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"revokeAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"storeVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"version\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"transferBalanceToAddress\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferBalanceToNamespace\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"worldVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"HelloStore\",\"inputs\":[{\"name\":\"storeVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"HelloWorld\",\"inputs\":[{\"name\":\"worldVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_DeleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SetRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"indexed\":false,\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"indexed\":false,\"internalType\":\"uint40\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"error\",\"name\":\"EncodedLengths_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_Empty\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"FieldLayout_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"staticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"computedStaticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthDoesNotFitInAWord\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsNotZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyDynamicFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Module_AlreadyInstalled\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_MissingDependency\",\"inputs\":[{\"name\":\"dependency\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Module_NonRootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_RootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Schema_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Schema_StaticTypeAfterDynamicType\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Slice_OutOfBounds\",\"inputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateAlreadyLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateNotLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotConfigured\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotWithtinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_SameSourceAndDestination\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_UndefinedClassId\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"SmartStorageUnitERC721AlreadyInitialized\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"SmartTurret_NotConfigured\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartTurret_UndefinedClassId\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Store_IndexOutOfBounds\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessedIndex\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidBounds\",\"inputs\":[{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidFieldNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidKeyNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidSplice\",\"inputs\":[{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"fieldLength\",\"type\":\"uint40\",\"internalType\":\"uint40\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaDynamicLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaStaticLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_TableAlreadyExists\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_TableNotFound\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_AccessDenied\",\"inputs\":[{\"name\":\"resource\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_AlreadyInitialized\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"World_CallbackNotAllowed\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_DelegationNotFound\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorAlreadyExists\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorNotFound\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InsufficientBalance\",\"inputs\":[{\"name\":\"balance\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"World_InterfaceNotSupported\",\"inputs\":[{\"name\":\"contractAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"interfaceId\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InvalidNamespace\",\"inputs\":[{\"name\":\"namespace\",\"type\":\"bytes14\",\"internalType\":\"bytes14\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceId\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceAlreadyExists\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceNotFound\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_SystemAlreadyExists\",\"inputs\":[{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_UnlimitedDelegationNotAllowed\",\"inputs\":[]}]",
+	ABI: "[{\"type\":\"function\",\"name\":\"batchCall\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallData[]\",\"components\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"batchCallFrom\",\"inputs\":[{\"name\":\"systemCalls\",\"type\":\"tuple[]\",\"internalType\":\"structSystemCallFromData[]\",\"components\":[{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}]}],\"outputs\":[{\"name\":\"returnDatas\",\"type\":\"bytes[]\",\"internalType\":\"bytes[]\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"call\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"callFrom\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"callData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"payable\"},{\"type\":\"function\",\"name\":\"creator\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"deleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"adminSupportOrDirectOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"adminSupportOrDirectOwnerGates\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"aggression\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structAggressionParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"aggressor\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"victim\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"anchor\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"areGatesOnline\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"assignItemToInventory\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"assignOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"to\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"bringOffline\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"bringOnline\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"canCrossTransferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"canJump\",\"inputs\":[{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"canTransferFromEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"canTransferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"canTransferToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"configureDeployableAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureEntityRecordAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureEphemeralInteractAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureEphemeralInventoryAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureFuelAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureFuelParameters\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureGate\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureInventoryAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureInventoryInteractAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureKillMailAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureLocationAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureOwnershipAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartAssemblyAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartCharacterAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartGateAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartStorageUnitAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureSmartTurretAccess\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"configureTurret\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchor\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchorGate\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"maxDistance\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchorStorageUnit\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]},{\"name\":\"storageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralStorageCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndAnchorTurret\",\"inputs\":[{\"name\":\"params\",\"type\":\"tuple\",\"internalType\":\"structCreateAndAnchorParams\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndDepositEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structCreateInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAndDepositInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structCreateInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createAssembly\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createCharacter\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"tribeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"entityRecordMetadata\",\"type\":\"tuple\",\"internalType\":\"structEntityMetadataParams\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createDeployable\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"owner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createMetadata\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordMetadata\",\"type\":\"tuple\",\"internalType\":\"structEntityMetadataParams\",\"components\":[{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"createRecord\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"entityRecordParams\",\"type\":\"tuple\",\"internalType\":\"structEntityRecordParams\",\"components\":[{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"crossTransferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fromEphemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"toEphemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"currentFuelAmountInWei\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"depositEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"depositFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"depositInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"destroyDeployable\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getEphemeralOwner\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getEphemeralSmartObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"pure\"},{\"type\":\"function\",\"name\":\"getInventoryOwner\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSmartCharacterClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSmartGateClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSmartStorageUnitClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getSmartTurretClassId\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"globalPause\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"globalResume\",\"inputs\":[],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"inProximity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"priorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turret\",\"type\":\"tuple\",\"internalType\":\"structTurret\",\"components\":[{\"name\":\"weaponTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ammoTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"chargesLeft\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"turretTarget\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[{\"name\":\"updatedPriorityQueue\",\"type\":\"tuple[]\",\"internalType\":\"structTargetPriority[]\",\"components\":[{\"name\":\"target\",\"type\":\"tuple\",\"internalType\":\"structSmartTurretTarget\",\"components\":[{\"name\":\"shipId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shipTypeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"hpRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"shieldRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"armorRatio\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"name\":\"weight\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"isAdmin\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isAnyGateLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isClassScoped\",\"inputs\":[{\"name\":\"classId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isEphemeralOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isGateLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isOwnerOfBothGates\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"isWithinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"linkGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"onlyAdminOrCallAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyAdminOrClassScopedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyAdminOrOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyAdminOrScopeEnforcedCall\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyAdminSupportedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyAdminSupportedOwnerOrCall\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyCallAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyCallAccessOrDirectEphemeralOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyCallAccessWithScopeEnforced\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyClassScopedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyClassScopedOrCharAdminOrOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyDirectAdmin\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyDirectAdminOrCallAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyDirectEphemeralOwnerOrCall\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyDirectOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyEphemeralTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyOwnerOrEphemeralCrossTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyOwnerOrEphemeralTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyOwnerOrInventoryTransferRole\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlyOwnerWithAdminSupportAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"onlySmartAssemblyClassScopedAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"owner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"\",\"type\":\"address\",\"internalType\":\"address\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"registerSmartCharacterClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSmartGateClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSmartStorageUnitClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSmartTurretClass\",\"inputs\":[{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"volume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeCharacter\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeItemFromInventory\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"removeOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"from\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"reportKill\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killMailData\",\"type\":\"tuple\",\"internalType\":\"structKillMailData\",\"components\":[{\"name\":\"killerCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"victimCharacterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"lossType\",\"type\":\"uint8\",\"internalType\":\"enumKillMailLossType\"},{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"killTimestamp\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"saveLocation\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"locationData\",\"type\":\"tuple\",\"internalType\":\"structLocationData\",\"components\":[{\"name\":\"solarSystemId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"x\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"y\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"z\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setAssemblyType\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"capacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setCrossTransferToEphemeralAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDappURL\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"dappURL\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDescription\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"description\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setEphemeralCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFuelAmount\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmountInWei\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFuelConsumptionIntervalInSeconds\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFuelMaxCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setFuelUnitVolume\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setName\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"name\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setTransferFromEphemeralAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setTransferToEphemeralAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setTransferToInventoryAccess\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"isAllowed\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferFromEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferToEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferToInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"toObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unanchor\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unlinkGates\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateAssemblyType\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"assemblyType\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"updateTribeId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tribeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawEphemeral\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"withdrawInventory\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"items\",\"type\":\"tuple[]\",\"internalType\":\"structInventoryItemParams[]\",\"components\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"getDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getDynamicFieldSlice\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLayout\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getFieldLength\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[{\"name\":\"\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getKeySchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"}],\"outputs\":[{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"getValueSchema\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"grantAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"initialize\",\"inputs\":[{\"name\":\"initModule\",\"type\":\"address\",\"internalType\":\"contractIModule\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"installRootModule\",\"inputs\":[{\"name\":\"module\",\"type\":\"address\",\"internalType\":\"contractIModule\"},{\"name\":\"encodedArgs\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"popFromDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"byteLengthToPop\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"pushToDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"dataToPush\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespace\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"delegationControlId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"initCallData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerRootFunctionSelector\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"worldFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"systemFunctionSignature\",\"type\":\"string\",\"internalType\":\"string\"}],\"outputs\":[{\"name\":\"worldFunctionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystem\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"contractSystem\"},{\"name\":\"publicAccess\",\"type\":\"bool\",\"internalType\":\"bool\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"},{\"name\":\"enabledHooksBitmap\",\"type\":\"uint8\",\"internalType\":\"uint8\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"registerTable\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"},{\"name\":\"keySchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"valueSchema\",\"type\":\"bytes32\",\"internalType\":\"Schema\"},{\"name\":\"keyNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"},{\"name\":\"fieldNames\",\"type\":\"string[]\",\"internalType\":\"string[]\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"renounceOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"revokeAccess\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"grantee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setDynamicField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"setStaticField\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"fieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"fieldLayout\",\"type\":\"bytes32\",\"internalType\":\"FieldLayout\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"internalType\":\"uint8\"},{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"spliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"storeVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"version\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"function\",\"name\":\"transferBalanceToAddress\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferBalanceToNamespace\",\"inputs\":[{\"name\":\"fromNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"toNamespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"transferOwnership\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"newOwner\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterDelegation\",\"inputs\":[{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterNamespaceDelegation\",\"inputs\":[{\"name\":\"namespaceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterStoreHook\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractIStoreHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"unregisterSystemHook\",\"inputs\":[{\"name\":\"systemId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"hookAddress\",\"type\":\"address\",\"internalType\":\"contractISystemHook\"}],\"outputs\":[],\"stateMutability\":\"nonpayable\"},{\"type\":\"function\",\"name\":\"worldVersion\",\"inputs\":[],\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}],\"stateMutability\":\"view\"},{\"type\":\"event\",\"name\":\"HelloStore\",\"inputs\":[{\"name\":\"storeVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"HelloWorld\",\"inputs\":[{\"name\":\"worldVersion\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"bytes32\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_DeleteRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SetRecord\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"staticData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"dynamicData\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceDynamicData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"dynamicFieldIndex\",\"type\":\"uint8\",\"indexed\":false,\"internalType\":\"uint8\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"indexed\":false,\"internalType\":\"uint40\"},{\"name\":\"encodedLengths\",\"type\":\"bytes32\",\"indexed\":false,\"internalType\":\"EncodedLengths\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"event\",\"name\":\"Store_SpliceStaticData\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"indexed\":true,\"internalType\":\"ResourceId\"},{\"name\":\"keyTuple\",\"type\":\"bytes32[]\",\"indexed\":false,\"internalType\":\"bytes32[]\"},{\"name\":\"start\",\"type\":\"uint48\",\"indexed\":false,\"internalType\":\"uint48\"},{\"name\":\"data\",\"type\":\"bytes\",\"indexed\":false,\"internalType\":\"bytes\"}],\"anonymous\":false},{\"type\":\"error\",\"name\":\"Access_CannotTransferFromEphemeral\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminOrClassScoped\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminOrOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupported\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupportedOrDirectOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupportedOrDirectOwnerGates\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotAdminSupportedOwnerOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotClassScoped\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotClassScopedAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectAdmin\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectAdminOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectEphemeralOwnerOrCanCrossTransferToEphemeral\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectOwnerOrCanTransferToEphemeral\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotDirectOwnerOrCanTransferToInventory\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotEphemeralOwnerOrCallAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotEphemeralOwnerOrCallAccessWithEphemeralOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotOwner\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Access_NotOwnerWithAdminSupportAccess\",\"inputs\":[{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_IncorrectState\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"currentState\",\"type\":\"uint8\",\"internalType\":\"enumState\"}]},{\"type\":\"error\",\"name\":\"Deployable_InvalidFuelConsumptionInterval\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_InvalidObjectOwner\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"smartObjectOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_NoFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Deployable_StateTransitionPaused\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Deployable_TooMuchFuelDeposited\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"amountDeposited\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EncodedLengths_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InsufficientCapacity\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"maxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"usedCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidEphemeralOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidItemDepositQuantity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidItemObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidSmartObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_InvalidTenantId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"EphemeralInventory_NonExistentEntityRecord\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_Empty\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"FieldLayout_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"staticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"computedStaticDataLength\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthDoesNotFitInAWord\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsNotZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_StaticLengthIsZero\",\"inputs\":[{\"name\":\"index\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyDynamicFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"FieldLayout_TooManyFields\",\"inputs\":[{\"name\":\"numFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxFields\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_ExceedsMaxCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"totalProjectedCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"maxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InsufficientFuel\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"availableFuel\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelAmount\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelAmount\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelConsumptionInterval\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelConsumptionIntervalInSeconds\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelMaxCapacity\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelMaxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Fuel_InvalidFuelUnitVolume\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"fuelUnitVolume\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"min\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"max\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_Ephemeral_InsufficientQuantity\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"ephemeralOwner\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"providedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"availableQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InsufficientQuantity\",\"inputs\":[{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"providedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"availableQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InvalidInventory\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"inventoryObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InvalidOperation\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_InvalidQuantity\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"providedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"expectedQuantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_NonexistentItemRecord\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_NonexistentObject\",\"inputs\":[{\"name\":\"objectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"InventoryOwnership_ZeroQuantity\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InsufficientCapacity\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"maxCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"usedCapacity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidCapacity\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidItemDepositQuantity\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"quantity\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidItemObjectId\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Inventory_InvalidTenantId\",\"inputs\":[{\"name\":\"itemObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"Inventory_NonExistentEntityRecord\",\"inputs\":[{\"name\":\"message\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"KillMail_AlreadyExists\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"KillMail_InvalidCharacterId\",\"inputs\":[{\"name\":\"killMailId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"characterId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Module_AlreadyInstalled\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_MissingDependency\",\"inputs\":[{\"name\":\"dependency\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Module_NonRootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Module_RootInstallNotSupported\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Ownership_AlreadyOwned\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"currentOwner\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Ownership_InvalidAccount\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Ownership_InvalidOwner\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"invalidOwner\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"Ownership_InvalidSingleton\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Ownership_NonexistentObject\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Schema_InvalidLength\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Schema_StaticTypeAfterDynamicType\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Slice_OutOfBounds\",\"inputs\":[{\"name\":\"data\",\"type\":\"bytes\",\"internalType\":\"bytes\"},{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_DoesNotExist\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_InvalidObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_InvalidTenantId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_InvalidTypeId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartAssembly_TypeCannotBeEmpty\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacterDoesNotExist\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_AlreadyCreated\",\"inputs\":[{\"name\":\"account\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_InvalidObjectId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_InvalidTenantId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"tenantId\",\"type\":\"bytes32\",\"internalType\":\"bytes32\"}]},{\"type\":\"error\",\"name\":\"SmartCharacter_InvalidTypeId\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"typeId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateAlreadyLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateNotLinked\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GateNotOnline\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_GatesNotOnline\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotConfigured\",\"inputs\":[{\"name\":\"smartObjectId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_NotWithtinRange\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_SameSourceAndDestination\",\"inputs\":[{\"name\":\"sourceGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"destinationGateId\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"SmartGate_UndefinedClassId\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"Store_IndexOutOfBounds\",\"inputs\":[{\"name\":\"length\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"accessedIndex\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidBounds\",\"inputs\":[{\"name\":\"start\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"end\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidFieldNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidKeyNamesLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidSplice\",\"inputs\":[{\"name\":\"startWithinField\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"deleteCount\",\"type\":\"uint40\",\"internalType\":\"uint40\"},{\"name\":\"fieldLength\",\"type\":\"uint40\",\"internalType\":\"uint40\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidStaticDataLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaDynamicLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_InvalidValueSchemaStaticLength\",\"inputs\":[{\"name\":\"expected\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"received\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"Store_TableAlreadyExists\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"Store_TableNotFound\",\"inputs\":[{\"name\":\"tableId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"tableIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_AccessDenied\",\"inputs\":[{\"name\":\"resource\",\"type\":\"string\",\"internalType\":\"string\"},{\"name\":\"caller\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_AlreadyInitialized\",\"inputs\":[]},{\"type\":\"error\",\"name\":\"World_CallbackNotAllowed\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_DelegationNotFound\",\"inputs\":[{\"name\":\"delegator\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"delegatee\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorAlreadyExists\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_FunctionSelectorNotFound\",\"inputs\":[{\"name\":\"functionSelector\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InsufficientBalance\",\"inputs\":[{\"name\":\"balance\",\"type\":\"uint256\",\"internalType\":\"uint256\"},{\"name\":\"amount\",\"type\":\"uint256\",\"internalType\":\"uint256\"}]},{\"type\":\"error\",\"name\":\"World_InterfaceNotSupported\",\"inputs\":[{\"name\":\"contractAddress\",\"type\":\"address\",\"internalType\":\"address\"},{\"name\":\"interfaceId\",\"type\":\"bytes4\",\"internalType\":\"bytes4\"}]},{\"type\":\"error\",\"name\":\"World_InvalidNamespace\",\"inputs\":[{\"name\":\"namespace\",\"type\":\"bytes14\",\"internalType\":\"bytes14\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceId\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_InvalidResourceType\",\"inputs\":[{\"name\":\"expected\",\"type\":\"bytes2\",\"internalType\":\"bytes2\"},{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceAlreadyExists\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_ResourceNotFound\",\"inputs\":[{\"name\":\"resourceId\",\"type\":\"bytes32\",\"internalType\":\"ResourceId\"},{\"name\":\"resourceIdString\",\"type\":\"string\",\"internalType\":\"string\"}]},{\"type\":\"error\",\"name\":\"World_SystemAlreadyExists\",\"inputs\":[{\"name\":\"system\",\"type\":\"address\",\"internalType\":\"address\"}]},{\"type\":\"error\",\"name\":\"World_UnlimitedDelegationNotAllowed\",\"inputs\":[]}]",
 }
 
 // ERC2771WorldABI is the input ABI used to generate the binding from.
@@ -290,6 +285,219 @@ func (_ERC2771World *ERC2771WorldTransactorRaw) Transact(opts *bind.TransactOpts
 	return _ERC2771World.Contract.contract.Transact(opts, method, params...)
 }
 
+// AdminSupportOrDirectOwner is a free data retrieval call binding the contract method 0xc6e0b1a1.
+//
+// Solidity: function adminSupportOrDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) AdminSupportOrDirectOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "adminSupportOrDirectOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// AdminSupportOrDirectOwner is a free data retrieval call binding the contract method 0xc6e0b1a1.
+//
+// Solidity: function adminSupportOrDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) AdminSupportOrDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.AdminSupportOrDirectOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// AdminSupportOrDirectOwner is a free data retrieval call binding the contract method 0xc6e0b1a1.
+//
+// Solidity: function adminSupportOrDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) AdminSupportOrDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.AdminSupportOrDirectOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// AdminSupportOrDirectOwnerGates is a free data retrieval call binding the contract method 0xa6f28a83.
+//
+// Solidity: function adminSupportOrDirectOwnerGates(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) AdminSupportOrDirectOwnerGates(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "adminSupportOrDirectOwnerGates", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// AdminSupportOrDirectOwnerGates is a free data retrieval call binding the contract method 0xa6f28a83.
+//
+// Solidity: function adminSupportOrDirectOwnerGates(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) AdminSupportOrDirectOwnerGates(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.AdminSupportOrDirectOwnerGates(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// AdminSupportOrDirectOwnerGates is a free data retrieval call binding the contract method 0xa6f28a83.
+//
+// Solidity: function adminSupportOrDirectOwnerGates(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) AdminSupportOrDirectOwnerGates(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.AdminSupportOrDirectOwnerGates(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// AreGatesOnline is a free data retrieval call binding the contract method 0x9b11b875.
+//
+// Solidity: function areGatesOnline(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) AreGatesOnline(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "areGatesOnline", sourceGateId, destinationGateId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// AreGatesOnline is a free data retrieval call binding the contract method 0x9b11b875.
+//
+// Solidity: function areGatesOnline(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) AreGatesOnline(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _ERC2771World.Contract.AreGatesOnline(&_ERC2771World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// AreGatesOnline is a free data retrieval call binding the contract method 0x9b11b875.
+//
+// Solidity: function areGatesOnline(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) AreGatesOnline(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _ERC2771World.Contract.AreGatesOnline(&_ERC2771World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// CanCrossTransferToEphemeral is a free data retrieval call binding the contract method 0x95d62522.
+//
+// Solidity: function canCrossTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) CanCrossTransferToEphemeral(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "canCrossTransferToEphemeral", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// CanCrossTransferToEphemeral is a free data retrieval call binding the contract method 0x95d62522.
+//
+// Solidity: function canCrossTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) CanCrossTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanCrossTransferToEphemeral(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanCrossTransferToEphemeral is a free data retrieval call binding the contract method 0x95d62522.
+//
+// Solidity: function canCrossTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) CanCrossTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanCrossTransferToEphemeral(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanTransferFromEphemeral is a free data retrieval call binding the contract method 0x609fb5b0.
+//
+// Solidity: function canTransferFromEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) CanTransferFromEphemeral(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "canTransferFromEphemeral", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// CanTransferFromEphemeral is a free data retrieval call binding the contract method 0x609fb5b0.
+//
+// Solidity: function canTransferFromEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) CanTransferFromEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanTransferFromEphemeral(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanTransferFromEphemeral is a free data retrieval call binding the contract method 0x609fb5b0.
+//
+// Solidity: function canTransferFromEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) CanTransferFromEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanTransferFromEphemeral(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanTransferToEphemeral is a free data retrieval call binding the contract method 0x88756560.
+//
+// Solidity: function canTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) CanTransferToEphemeral(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "canTransferToEphemeral", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// CanTransferToEphemeral is a free data retrieval call binding the contract method 0x88756560.
+//
+// Solidity: function canTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) CanTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanTransferToEphemeral(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanTransferToEphemeral is a free data retrieval call binding the contract method 0x88756560.
+//
+// Solidity: function canTransferToEphemeral(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) CanTransferToEphemeral(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanTransferToEphemeral(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanTransferToInventory is a free data retrieval call binding the contract method 0x0fcd8ed6.
+//
+// Solidity: function canTransferToInventory(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) CanTransferToInventory(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "canTransferToInventory", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// CanTransferToInventory is a free data retrieval call binding the contract method 0x0fcd8ed6.
+//
+// Solidity: function canTransferToInventory(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) CanTransferToInventory(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanTransferToInventory(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// CanTransferToInventory is a free data retrieval call binding the contract method 0x0fcd8ed6.
+//
+// Solidity: function canTransferToInventory(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) CanTransferToInventory(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.CanTransferToInventory(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
 // Creator is a free data retrieval call binding the contract method 0x02d05d3f.
 //
 // Solidity: function creator() view returns(address)
@@ -321,43 +529,12 @@ func (_ERC2771World *ERC2771WorldCallerSession) Creator() (common.Address, error
 	return _ERC2771World.Contract.Creator(&_ERC2771World.CallOpts)
 }
 
-// CurrentFuelAmount is a free data retrieval call binding the contract method 0x22d3581d.
-//
-// Solidity: function currentFuelAmount(uint256 entityId) view returns(uint256 amount)
-func (_ERC2771World *ERC2771WorldCaller) CurrentFuelAmount(opts *bind.CallOpts, entityId *big.Int) (*big.Int, error) {
-	var out []interface{}
-	err := _ERC2771World.contract.Call(opts, &out, "currentFuelAmount", entityId)
-
-	if err != nil {
-		return *new(*big.Int), err
-	}
-
-	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
-
-	return out0, err
-
-}
-
-// CurrentFuelAmount is a free data retrieval call binding the contract method 0x22d3581d.
-//
-// Solidity: function currentFuelAmount(uint256 entityId) view returns(uint256 amount)
-func (_ERC2771World *ERC2771WorldSession) CurrentFuelAmount(entityId *big.Int) (*big.Int, error) {
-	return _ERC2771World.Contract.CurrentFuelAmount(&_ERC2771World.CallOpts, entityId)
-}
-
-// CurrentFuelAmount is a free data retrieval call binding the contract method 0x22d3581d.
-//
-// Solidity: function currentFuelAmount(uint256 entityId) view returns(uint256 amount)
-func (_ERC2771World *ERC2771WorldCallerSession) CurrentFuelAmount(entityId *big.Int) (*big.Int, error) {
-	return _ERC2771World.Contract.CurrentFuelAmount(&_ERC2771World.CallOpts, entityId)
-}
-
 // CurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x40bbcc11.
 //
-// Solidity: function currentFuelAmountInWei(uint256 entityId) view returns(uint256 amount)
-func (_ERC2771World *ERC2771WorldCaller) CurrentFuelAmountInWei(opts *bind.CallOpts, entityId *big.Int) (*big.Int, error) {
+// Solidity: function currentFuelAmountInWei(uint256 smartObjectId) view returns(uint256 amount)
+func (_ERC2771World *ERC2771WorldCaller) CurrentFuelAmountInWei(opts *bind.CallOpts, smartObjectId *big.Int) (*big.Int, error) {
 	var out []interface{}
-	err := _ERC2771World.contract.Call(opts, &out, "currentFuelAmountInWei", entityId)
+	err := _ERC2771World.contract.Call(opts, &out, "currentFuelAmountInWei", smartObjectId)
 
 	if err != nil {
 		return *new(*big.Int), err
@@ -371,16 +548,16 @@ func (_ERC2771World *ERC2771WorldCaller) CurrentFuelAmountInWei(opts *bind.CallO
 
 // CurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x40bbcc11.
 //
-// Solidity: function currentFuelAmountInWei(uint256 entityId) view returns(uint256 amount)
-func (_ERC2771World *ERC2771WorldSession) CurrentFuelAmountInWei(entityId *big.Int) (*big.Int, error) {
-	return _ERC2771World.Contract.CurrentFuelAmountInWei(&_ERC2771World.CallOpts, entityId)
+// Solidity: function currentFuelAmountInWei(uint256 smartObjectId) view returns(uint256 amount)
+func (_ERC2771World *ERC2771WorldSession) CurrentFuelAmountInWei(smartObjectId *big.Int) (*big.Int, error) {
+	return _ERC2771World.Contract.CurrentFuelAmountInWei(&_ERC2771World.CallOpts, smartObjectId)
 }
 
 // CurrentFuelAmountInWei is a free data retrieval call binding the contract method 0x40bbcc11.
 //
-// Solidity: function currentFuelAmountInWei(uint256 entityId) view returns(uint256 amount)
-func (_ERC2771World *ERC2771WorldCallerSession) CurrentFuelAmountInWei(entityId *big.Int) (*big.Int, error) {
-	return _ERC2771World.Contract.CurrentFuelAmountInWei(&_ERC2771World.CallOpts, entityId)
+// Solidity: function currentFuelAmountInWei(uint256 smartObjectId) view returns(uint256 amount)
+func (_ERC2771World *ERC2771WorldCallerSession) CurrentFuelAmountInWei(smartObjectId *big.Int) (*big.Int, error) {
+	return _ERC2771World.Contract.CurrentFuelAmountInWei(&_ERC2771World.CallOpts, smartObjectId)
 }
 
 // GetDynamicField is a free data retrieval call binding the contract method 0x1e788977.
@@ -474,6 +651,68 @@ func (_ERC2771World *ERC2771WorldSession) GetDynamicFieldSlice(tableId [32]byte,
 // Solidity: function getDynamicFieldSlice(bytes32 tableId, bytes32[] keyTuple, uint8 dynamicFieldIndex, uint256 start, uint256 end) view returns(bytes data)
 func (_ERC2771World *ERC2771WorldCallerSession) GetDynamicFieldSlice(tableId [32]byte, keyTuple [][32]byte, dynamicFieldIndex uint8, start *big.Int, end *big.Int) ([]byte, error) {
 	return _ERC2771World.Contract.GetDynamicFieldSlice(&_ERC2771World.CallOpts, tableId, keyTuple, dynamicFieldIndex, start, end)
+}
+
+// GetEphemeralOwner is a free data retrieval call binding the contract method 0x2a53720d.
+//
+// Solidity: function getEphemeralOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldCaller) GetEphemeralOwner(opts *bind.CallOpts, inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getEphemeralOwner", inventoryObjectId, itemObjectId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// GetEphemeralOwner is a free data retrieval call binding the contract method 0x2a53720d.
+//
+// Solidity: function getEphemeralOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldSession) GetEphemeralOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _ERC2771World.Contract.GetEphemeralOwner(&_ERC2771World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// GetEphemeralOwner is a free data retrieval call binding the contract method 0x2a53720d.
+//
+// Solidity: function getEphemeralOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldCallerSession) GetEphemeralOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _ERC2771World.Contract.GetEphemeralOwner(&_ERC2771World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// GetEphemeralSmartObjectId is a free data retrieval call binding the contract method 0x83619510.
+//
+// Solidity: function getEphemeralSmartObjectId(uint256 smartObjectId, address ephemeralOwner) pure returns(uint256)
+func (_ERC2771World *ERC2771WorldCaller) GetEphemeralSmartObjectId(opts *bind.CallOpts, smartObjectId *big.Int, ephemeralOwner common.Address) (*big.Int, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getEphemeralSmartObjectId", smartObjectId, ephemeralOwner)
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetEphemeralSmartObjectId is a free data retrieval call binding the contract method 0x83619510.
+//
+// Solidity: function getEphemeralSmartObjectId(uint256 smartObjectId, address ephemeralOwner) pure returns(uint256)
+func (_ERC2771World *ERC2771WorldSession) GetEphemeralSmartObjectId(smartObjectId *big.Int, ephemeralOwner common.Address) (*big.Int, error) {
+	return _ERC2771World.Contract.GetEphemeralSmartObjectId(&_ERC2771World.CallOpts, smartObjectId, ephemeralOwner)
+}
+
+// GetEphemeralSmartObjectId is a free data retrieval call binding the contract method 0x83619510.
+//
+// Solidity: function getEphemeralSmartObjectId(uint256 smartObjectId, address ephemeralOwner) pure returns(uint256)
+func (_ERC2771World *ERC2771WorldCallerSession) GetEphemeralSmartObjectId(smartObjectId *big.Int, ephemeralOwner common.Address) (*big.Int, error) {
+	return _ERC2771World.Contract.GetEphemeralSmartObjectId(&_ERC2771World.CallOpts, smartObjectId, ephemeralOwner)
 }
 
 // GetField is a free data retrieval call binding the contract method 0x05242d2f.
@@ -631,6 +870,37 @@ func (_ERC2771World *ERC2771WorldCallerSession) GetFieldLength0(tableId [32]byte
 	return _ERC2771World.Contract.GetFieldLength0(&_ERC2771World.CallOpts, tableId, keyTuple, fieldIndex)
 }
 
+// GetInventoryOwner is a free data retrieval call binding the contract method 0x1904f95b.
+//
+// Solidity: function getInventoryOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldCaller) GetInventoryOwner(opts *bind.CallOpts, inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getInventoryOwner", inventoryObjectId, itemObjectId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// GetInventoryOwner is a free data retrieval call binding the contract method 0x1904f95b.
+//
+// Solidity: function getInventoryOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldSession) GetInventoryOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _ERC2771World.Contract.GetInventoryOwner(&_ERC2771World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
+// GetInventoryOwner is a free data retrieval call binding the contract method 0x1904f95b.
+//
+// Solidity: function getInventoryOwner(uint256 inventoryObjectId, uint256 itemObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldCallerSession) GetInventoryOwner(inventoryObjectId *big.Int, itemObjectId *big.Int) (common.Address, error) {
+	return _ERC2771World.Contract.GetInventoryOwner(&_ERC2771World.CallOpts, inventoryObjectId, itemObjectId)
+}
+
 // GetKeySchema is a free data retrieval call binding the contract method 0xd4285dc2.
 //
 // Solidity: function getKeySchema(bytes32 tableId) view returns(bytes32 keySchema)
@@ -762,6 +1032,130 @@ func (_ERC2771World *ERC2771WorldCallerSession) GetRecord0(tableId [32]byte, key
 	return _ERC2771World.Contract.GetRecord0(&_ERC2771World.CallOpts, tableId, keyTuple)
 }
 
+// GetSmartCharacterClassId is a free data retrieval call binding the contract method 0x95b9e2d3.
+//
+// Solidity: function getSmartCharacterClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCaller) GetSmartCharacterClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getSmartCharacterClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetSmartCharacterClassId is a free data retrieval call binding the contract method 0x95b9e2d3.
+//
+// Solidity: function getSmartCharacterClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldSession) GetSmartCharacterClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartCharacterClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartCharacterClassId is a free data retrieval call binding the contract method 0x95b9e2d3.
+//
+// Solidity: function getSmartCharacterClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCallerSession) GetSmartCharacterClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartCharacterClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartGateClassId is a free data retrieval call binding the contract method 0xc7afc974.
+//
+// Solidity: function getSmartGateClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCaller) GetSmartGateClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getSmartGateClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetSmartGateClassId is a free data retrieval call binding the contract method 0xc7afc974.
+//
+// Solidity: function getSmartGateClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldSession) GetSmartGateClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartGateClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartGateClassId is a free data retrieval call binding the contract method 0xc7afc974.
+//
+// Solidity: function getSmartGateClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCallerSession) GetSmartGateClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartGateClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartStorageUnitClassId is a free data retrieval call binding the contract method 0xf3a7f1bb.
+//
+// Solidity: function getSmartStorageUnitClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCaller) GetSmartStorageUnitClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getSmartStorageUnitClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetSmartStorageUnitClassId is a free data retrieval call binding the contract method 0xf3a7f1bb.
+//
+// Solidity: function getSmartStorageUnitClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldSession) GetSmartStorageUnitClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartStorageUnitClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartStorageUnitClassId is a free data retrieval call binding the contract method 0xf3a7f1bb.
+//
+// Solidity: function getSmartStorageUnitClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCallerSession) GetSmartStorageUnitClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartStorageUnitClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartTurretClassId is a free data retrieval call binding the contract method 0x4967ae58.
+//
+// Solidity: function getSmartTurretClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCaller) GetSmartTurretClassId(opts *bind.CallOpts) (*big.Int, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "getSmartTurretClassId")
+
+	if err != nil {
+		return *new(*big.Int), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(*big.Int)).(**big.Int)
+
+	return out0, err
+
+}
+
+// GetSmartTurretClassId is a free data retrieval call binding the contract method 0x4967ae58.
+//
+// Solidity: function getSmartTurretClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldSession) GetSmartTurretClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartTurretClassId(&_ERC2771World.CallOpts)
+}
+
+// GetSmartTurretClassId is a free data retrieval call binding the contract method 0x4967ae58.
+//
+// Solidity: function getSmartTurretClassId() view returns(uint256)
+func (_ERC2771World *ERC2771WorldCallerSession) GetSmartTurretClassId() (*big.Int, error) {
+	return _ERC2771World.Contract.GetSmartTurretClassId(&_ERC2771World.CallOpts)
+}
+
 // GetStaticField is a free data retrieval call binding the contract method 0x8c364d59.
 //
 // Solidity: function getStaticField(bytes32 tableId, bytes32[] keyTuple, uint8 fieldIndex, bytes32 fieldLayout) view returns(bytes32)
@@ -824,6 +1218,130 @@ func (_ERC2771World *ERC2771WorldCallerSession) GetValueSchema(tableId [32]byte)
 	return _ERC2771World.Contract.GetValueSchema(&_ERC2771World.CallOpts, tableId)
 }
 
+// IsAdmin is a free data retrieval call binding the contract method 0x24d7806c.
+//
+// Solidity: function isAdmin(address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) IsAdmin(opts *bind.CallOpts, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "isAdmin", caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsAdmin is a free data retrieval call binding the contract method 0x24d7806c.
+//
+// Solidity: function isAdmin(address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) IsAdmin(caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.IsAdmin(&_ERC2771World.CallOpts, caller)
+}
+
+// IsAdmin is a free data retrieval call binding the contract method 0x24d7806c.
+//
+// Solidity: function isAdmin(address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) IsAdmin(caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.IsAdmin(&_ERC2771World.CallOpts, caller)
+}
+
+// IsAnyGateLinked is a free data retrieval call binding the contract method 0x7222f910.
+//
+// Solidity: function isAnyGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) IsAnyGateLinked(opts *bind.CallOpts, sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "isAnyGateLinked", sourceGateId, destinationGateId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsAnyGateLinked is a free data retrieval call binding the contract method 0x7222f910.
+//
+// Solidity: function isAnyGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) IsAnyGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _ERC2771World.Contract.IsAnyGateLinked(&_ERC2771World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// IsAnyGateLinked is a free data retrieval call binding the contract method 0x7222f910.
+//
+// Solidity: function isAnyGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) IsAnyGateLinked(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
+	return _ERC2771World.Contract.IsAnyGateLinked(&_ERC2771World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// IsClassScoped is a free data retrieval call binding the contract method 0x590d5cdd.
+//
+// Solidity: function isClassScoped(uint256 classId, bytes32 systemId) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) IsClassScoped(opts *bind.CallOpts, classId *big.Int, systemId [32]byte) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "isClassScoped", classId, systemId)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsClassScoped is a free data retrieval call binding the contract method 0x590d5cdd.
+//
+// Solidity: function isClassScoped(uint256 classId, bytes32 systemId) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) IsClassScoped(classId *big.Int, systemId [32]byte) (bool, error) {
+	return _ERC2771World.Contract.IsClassScoped(&_ERC2771World.CallOpts, classId, systemId)
+}
+
+// IsClassScoped is a free data retrieval call binding the contract method 0x590d5cdd.
+//
+// Solidity: function isClassScoped(uint256 classId, bytes32 systemId) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) IsClassScoped(classId *big.Int, systemId [32]byte) (bool, error) {
+	return _ERC2771World.Contract.IsClassScoped(&_ERC2771World.CallOpts, classId, systemId)
+}
+
+// IsEphemeralOwner is a free data retrieval call binding the contract method 0x9f218381.
+//
+// Solidity: function isEphemeralOwner(uint256 smartObjectId, address caller, bytes data) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) IsEphemeralOwner(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address, data []byte) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "isEphemeralOwner", smartObjectId, caller, data)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsEphemeralOwner is a free data retrieval call binding the contract method 0x9f218381.
+//
+// Solidity: function isEphemeralOwner(uint256 smartObjectId, address caller, bytes data) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) IsEphemeralOwner(smartObjectId *big.Int, caller common.Address, data []byte) (bool, error) {
+	return _ERC2771World.Contract.IsEphemeralOwner(&_ERC2771World.CallOpts, smartObjectId, caller, data)
+}
+
+// IsEphemeralOwner is a free data retrieval call binding the contract method 0x9f218381.
+//
+// Solidity: function isEphemeralOwner(uint256 smartObjectId, address caller, bytes data) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) IsEphemeralOwner(smartObjectId *big.Int, caller common.Address, data []byte) (bool, error) {
+	return _ERC2771World.Contract.IsEphemeralOwner(&_ERC2771World.CallOpts, smartObjectId, caller, data)
+}
+
 // IsGateLinked is a free data retrieval call binding the contract method 0x2ab90d4d.
 //
 // Solidity: function isGateLinked(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
@@ -855,6 +1373,68 @@ func (_ERC2771World *ERC2771WorldCallerSession) IsGateLinked(sourceGateId *big.I
 	return _ERC2771World.Contract.IsGateLinked(&_ERC2771World.CallOpts, sourceGateId, destinationGateId)
 }
 
+// IsOwner is a free data retrieval call binding the contract method 0x5a5d096c.
+//
+// Solidity: function isOwner(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) IsOwner(opts *bind.CallOpts, smartObjectId *big.Int, caller common.Address) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "isOwner", smartObjectId, caller)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsOwner is a free data retrieval call binding the contract method 0x5a5d096c.
+//
+// Solidity: function isOwner(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) IsOwner(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.IsOwner(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// IsOwner is a free data retrieval call binding the contract method 0x5a5d096c.
+//
+// Solidity: function isOwner(uint256 smartObjectId, address caller) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) IsOwner(smartObjectId *big.Int, caller common.Address) (bool, error) {
+	return _ERC2771World.Contract.IsOwner(&_ERC2771World.CallOpts, smartObjectId, caller)
+}
+
+// IsOwnerOfBothGates is a free data retrieval call binding the contract method 0xa134720c.
+//
+// Solidity: function isOwnerOfBothGates(address caller, bytes data) view returns(bool)
+func (_ERC2771World *ERC2771WorldCaller) IsOwnerOfBothGates(opts *bind.CallOpts, caller common.Address, data []byte) (bool, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "isOwnerOfBothGates", caller, data)
+
+	if err != nil {
+		return *new(bool), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(bool)).(*bool)
+
+	return out0, err
+
+}
+
+// IsOwnerOfBothGates is a free data retrieval call binding the contract method 0xa134720c.
+//
+// Solidity: function isOwnerOfBothGates(address caller, bytes data) view returns(bool)
+func (_ERC2771World *ERC2771WorldSession) IsOwnerOfBothGates(caller common.Address, data []byte) (bool, error) {
+	return _ERC2771World.Contract.IsOwnerOfBothGates(&_ERC2771World.CallOpts, caller, data)
+}
+
+// IsOwnerOfBothGates is a free data retrieval call binding the contract method 0xa134720c.
+//
+// Solidity: function isOwnerOfBothGates(address caller, bytes data) view returns(bool)
+func (_ERC2771World *ERC2771WorldCallerSession) IsOwnerOfBothGates(caller common.Address, data []byte) (bool, error) {
+	return _ERC2771World.Contract.IsOwnerOfBothGates(&_ERC2771World.CallOpts, caller, data)
+}
+
 // IsWithinRange is a free data retrieval call binding the contract method 0x36dfd147.
 //
 // Solidity: function isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
@@ -884,6 +1464,675 @@ func (_ERC2771World *ERC2771WorldSession) IsWithinRange(sourceGateId *big.Int, d
 // Solidity: function isWithinRange(uint256 sourceGateId, uint256 destinationGateId) view returns(bool)
 func (_ERC2771World *ERC2771WorldCallerSession) IsWithinRange(sourceGateId *big.Int, destinationGateId *big.Int) (bool, error) {
 	return _ERC2771World.Contract.IsWithinRange(&_ERC2771World.CallOpts, sourceGateId, destinationGateId)
+}
+
+// OnlyAdminOrCallAccess is a free data retrieval call binding the contract method 0x1d5a7107.
+//
+// Solidity: function onlyAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyAdminOrCallAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyAdminOrCallAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyAdminOrCallAccess is a free data retrieval call binding the contract method 0x1d5a7107.
+//
+// Solidity: function onlyAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrCallAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrCallAccess is a free data retrieval call binding the contract method 0x1d5a7107.
+//
+// Solidity: function onlyAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrCallAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrClassScopedAccess is a free data retrieval call binding the contract method 0x31098e24.
+//
+// Solidity: function onlyAdminOrClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyAdminOrClassScopedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyAdminOrClassScopedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyAdminOrClassScopedAccess is a free data retrieval call binding the contract method 0x31098e24.
+//
+// Solidity: function onlyAdminOrClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyAdminOrClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrClassScopedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrClassScopedAccess is a free data retrieval call binding the contract method 0x31098e24.
+//
+// Solidity: function onlyAdminOrClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyAdminOrClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrClassScopedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrOwner is a free data retrieval call binding the contract method 0xd2df45d4.
+//
+// Solidity: function onlyAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyAdminOrOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyAdminOrOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyAdminOrOwner is a free data retrieval call binding the contract method 0xd2df45d4.
+//
+// Solidity: function onlyAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrOwner is a free data retrieval call binding the contract method 0xd2df45d4.
+//
+// Solidity: function onlyAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrScopeEnforcedCall is a free data retrieval call binding the contract method 0xb65e6ac2.
+//
+// Solidity: function onlyAdminOrScopeEnforcedCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyAdminOrScopeEnforcedCall(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyAdminOrScopeEnforcedCall", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyAdminOrScopeEnforcedCall is a free data retrieval call binding the contract method 0xb65e6ac2.
+//
+// Solidity: function onlyAdminOrScopeEnforcedCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyAdminOrScopeEnforcedCall(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrScopeEnforcedCall(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminOrScopeEnforcedCall is a free data retrieval call binding the contract method 0xb65e6ac2.
+//
+// Solidity: function onlyAdminOrScopeEnforcedCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyAdminOrScopeEnforcedCall(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminOrScopeEnforcedCall(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminSupportedAccess is a free data retrieval call binding the contract method 0x12fea21c.
+//
+// Solidity: function onlyAdminSupportedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyAdminSupportedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyAdminSupportedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyAdminSupportedAccess is a free data retrieval call binding the contract method 0x12fea21c.
+//
+// Solidity: function onlyAdminSupportedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyAdminSupportedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminSupportedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminSupportedAccess is a free data retrieval call binding the contract method 0x12fea21c.
+//
+// Solidity: function onlyAdminSupportedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyAdminSupportedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminSupportedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminSupportedOwnerOrCall is a free data retrieval call binding the contract method 0x03e4c983.
+//
+// Solidity: function onlyAdminSupportedOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyAdminSupportedOwnerOrCall(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyAdminSupportedOwnerOrCall", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyAdminSupportedOwnerOrCall is a free data retrieval call binding the contract method 0x03e4c983.
+//
+// Solidity: function onlyAdminSupportedOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyAdminSupportedOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminSupportedOwnerOrCall(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyAdminSupportedOwnerOrCall is a free data retrieval call binding the contract method 0x03e4c983.
+//
+// Solidity: function onlyAdminSupportedOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyAdminSupportedOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyAdminSupportedOwnerOrCall(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyCallAccess is a free data retrieval call binding the contract method 0xa58a5393.
+//
+// Solidity: function onlyCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyCallAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyCallAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyCallAccess is a free data retrieval call binding the contract method 0xa58a5393.
+//
+// Solidity: function onlyCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyCallAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyCallAccess is a free data retrieval call binding the contract method 0xa58a5393.
+//
+// Solidity: function onlyCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyCallAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyCallAccessOrDirectEphemeralOwner is a free data retrieval call binding the contract method 0xee906526.
+//
+// Solidity: function onlyCallAccessOrDirectEphemeralOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyCallAccessOrDirectEphemeralOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyCallAccessOrDirectEphemeralOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyCallAccessOrDirectEphemeralOwner is a free data retrieval call binding the contract method 0xee906526.
+//
+// Solidity: function onlyCallAccessOrDirectEphemeralOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyCallAccessOrDirectEphemeralOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyCallAccessOrDirectEphemeralOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyCallAccessOrDirectEphemeralOwner is a free data retrieval call binding the contract method 0xee906526.
+//
+// Solidity: function onlyCallAccessOrDirectEphemeralOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyCallAccessOrDirectEphemeralOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyCallAccessOrDirectEphemeralOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyCallAccessWithScopeEnforced is a free data retrieval call binding the contract method 0xdde2f623.
+//
+// Solidity: function onlyCallAccessWithScopeEnforced(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyCallAccessWithScopeEnforced(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyCallAccessWithScopeEnforced", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyCallAccessWithScopeEnforced is a free data retrieval call binding the contract method 0xdde2f623.
+//
+// Solidity: function onlyCallAccessWithScopeEnforced(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyCallAccessWithScopeEnforced(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyCallAccessWithScopeEnforced(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyCallAccessWithScopeEnforced is a free data retrieval call binding the contract method 0xdde2f623.
+//
+// Solidity: function onlyCallAccessWithScopeEnforced(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyCallAccessWithScopeEnforced(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyCallAccessWithScopeEnforced(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyClassScopedAccess is a free data retrieval call binding the contract method 0xf78da887.
+//
+// Solidity: function onlyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyClassScopedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyClassScopedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyClassScopedAccess is a free data retrieval call binding the contract method 0xf78da887.
+//
+// Solidity: function onlyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyClassScopedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyClassScopedAccess is a free data retrieval call binding the contract method 0xf78da887.
+//
+// Solidity: function onlyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyClassScopedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyClassScopedOrCharAdminOrOwner is a free data retrieval call binding the contract method 0xcc8636d8.
+//
+// Solidity: function onlyClassScopedOrCharAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyClassScopedOrCharAdminOrOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyClassScopedOrCharAdminOrOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyClassScopedOrCharAdminOrOwner is a free data retrieval call binding the contract method 0xcc8636d8.
+//
+// Solidity: function onlyClassScopedOrCharAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyClassScopedOrCharAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyClassScopedOrCharAdminOrOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyClassScopedOrCharAdminOrOwner is a free data retrieval call binding the contract method 0xcc8636d8.
+//
+// Solidity: function onlyClassScopedOrCharAdminOrOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyClassScopedOrCharAdminOrOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyClassScopedOrCharAdminOrOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectAdmin is a free data retrieval call binding the contract method 0x542b659d.
+//
+// Solidity: function onlyDirectAdmin(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyDirectAdmin(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyDirectAdmin", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyDirectAdmin is a free data retrieval call binding the contract method 0x542b659d.
+//
+// Solidity: function onlyDirectAdmin(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyDirectAdmin(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectAdmin(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectAdmin is a free data retrieval call binding the contract method 0x542b659d.
+//
+// Solidity: function onlyDirectAdmin(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyDirectAdmin(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectAdmin(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectAdminOrCallAccess is a free data retrieval call binding the contract method 0xd7fe3c1c.
+//
+// Solidity: function onlyDirectAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyDirectAdminOrCallAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyDirectAdminOrCallAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyDirectAdminOrCallAccess is a free data retrieval call binding the contract method 0xd7fe3c1c.
+//
+// Solidity: function onlyDirectAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyDirectAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectAdminOrCallAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectAdminOrCallAccess is a free data retrieval call binding the contract method 0xd7fe3c1c.
+//
+// Solidity: function onlyDirectAdminOrCallAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyDirectAdminOrCallAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectAdminOrCallAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectEphemeralOwnerOrCall is a free data retrieval call binding the contract method 0xf10f61ca.
+//
+// Solidity: function onlyDirectEphemeralOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyDirectEphemeralOwnerOrCall(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyDirectEphemeralOwnerOrCall", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyDirectEphemeralOwnerOrCall is a free data retrieval call binding the contract method 0xf10f61ca.
+//
+// Solidity: function onlyDirectEphemeralOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyDirectEphemeralOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectEphemeralOwnerOrCall(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectEphemeralOwnerOrCall is a free data retrieval call binding the contract method 0xf10f61ca.
+//
+// Solidity: function onlyDirectEphemeralOwnerOrCall(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyDirectEphemeralOwnerOrCall(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectEphemeralOwnerOrCall(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectOwner is a free data retrieval call binding the contract method 0x3ac45a0c.
+//
+// Solidity: function onlyDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyDirectOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyDirectOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyDirectOwner is a free data retrieval call binding the contract method 0x3ac45a0c.
+//
+// Solidity: function onlyDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyDirectOwner is a free data retrieval call binding the contract method 0x3ac45a0c.
+//
+// Solidity: function onlyDirectOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyDirectOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyDirectOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyEphemeralTransferRole is a free data retrieval call binding the contract method 0x4e86d060.
+//
+// Solidity: function onlyEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyEphemeralTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyEphemeralTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyEphemeralTransferRole is a free data retrieval call binding the contract method 0x4e86d060.
+//
+// Solidity: function onlyEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyEphemeralTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyEphemeralTransferRole is a free data retrieval call binding the contract method 0x4e86d060.
+//
+// Solidity: function onlyEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyEphemeralTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwner is a free data retrieval call binding the contract method 0x4ded2d51.
+//
+// Solidity: function onlyOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyOwner(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyOwner", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyOwner is a free data retrieval call binding the contract method 0x4ded2d51.
+//
+// Solidity: function onlyOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwner is a free data retrieval call binding the contract method 0x4ded2d51.
+//
+// Solidity: function onlyOwner(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyOwner(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwner(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerOrEphemeralCrossTransferRole is a free data retrieval call binding the contract method 0xd061b071.
+//
+// Solidity: function onlyOwnerOrEphemeralCrossTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyOwnerOrEphemeralCrossTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyOwnerOrEphemeralCrossTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyOwnerOrEphemeralCrossTransferRole is a free data retrieval call binding the contract method 0xd061b071.
+//
+// Solidity: function onlyOwnerOrEphemeralCrossTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyOwnerOrEphemeralCrossTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerOrEphemeralCrossTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerOrEphemeralCrossTransferRole is a free data retrieval call binding the contract method 0xd061b071.
+//
+// Solidity: function onlyOwnerOrEphemeralCrossTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyOwnerOrEphemeralCrossTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerOrEphemeralCrossTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerOrEphemeralTransferRole is a free data retrieval call binding the contract method 0x2227febd.
+//
+// Solidity: function onlyOwnerOrEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyOwnerOrEphemeralTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyOwnerOrEphemeralTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyOwnerOrEphemeralTransferRole is a free data retrieval call binding the contract method 0x2227febd.
+//
+// Solidity: function onlyOwnerOrEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyOwnerOrEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerOrEphemeralTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerOrEphemeralTransferRole is a free data retrieval call binding the contract method 0x2227febd.
+//
+// Solidity: function onlyOwnerOrEphemeralTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyOwnerOrEphemeralTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerOrEphemeralTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerOrInventoryTransferRole is a free data retrieval call binding the contract method 0x992518f9.
+//
+// Solidity: function onlyOwnerOrInventoryTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyOwnerOrInventoryTransferRole(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyOwnerOrInventoryTransferRole", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyOwnerOrInventoryTransferRole is a free data retrieval call binding the contract method 0x992518f9.
+//
+// Solidity: function onlyOwnerOrInventoryTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyOwnerOrInventoryTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerOrInventoryTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerOrInventoryTransferRole is a free data retrieval call binding the contract method 0x992518f9.
+//
+// Solidity: function onlyOwnerOrInventoryTransferRole(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyOwnerOrInventoryTransferRole(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerOrInventoryTransferRole(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerWithAdminSupportAccess is a free data retrieval call binding the contract method 0x036867ec.
+//
+// Solidity: function onlyOwnerWithAdminSupportAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlyOwnerWithAdminSupportAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlyOwnerWithAdminSupportAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlyOwnerWithAdminSupportAccess is a free data retrieval call binding the contract method 0x036867ec.
+//
+// Solidity: function onlyOwnerWithAdminSupportAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlyOwnerWithAdminSupportAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerWithAdminSupportAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlyOwnerWithAdminSupportAccess is a free data retrieval call binding the contract method 0x036867ec.
+//
+// Solidity: function onlyOwnerWithAdminSupportAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlyOwnerWithAdminSupportAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlyOwnerWithAdminSupportAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlySmartAssemblyClassScopedAccess is a free data retrieval call binding the contract method 0xbccd5c2a.
+//
+// Solidity: function onlySmartAssemblyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCaller) OnlySmartAssemblyClassScopedAccess(opts *bind.CallOpts, smartObjectId *big.Int, data []byte) error {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "onlySmartAssemblyClassScopedAccess", smartObjectId, data)
+
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+// OnlySmartAssemblyClassScopedAccess is a free data retrieval call binding the contract method 0xbccd5c2a.
+//
+// Solidity: function onlySmartAssemblyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldSession) OnlySmartAssemblyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlySmartAssemblyClassScopedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// OnlySmartAssemblyClassScopedAccess is a free data retrieval call binding the contract method 0xbccd5c2a.
+//
+// Solidity: function onlySmartAssemblyClassScopedAccess(uint256 smartObjectId, bytes data) view returns()
+func (_ERC2771World *ERC2771WorldCallerSession) OnlySmartAssemblyClassScopedAccess(smartObjectId *big.Int, data []byte) error {
+	return _ERC2771World.Contract.OnlySmartAssemblyClassScopedAccess(&_ERC2771World.CallOpts, smartObjectId, data)
+}
+
+// Owner is a free data retrieval call binding the contract method 0xa123c33e.
+//
+// Solidity: function owner(uint256 smartObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldCaller) Owner(opts *bind.CallOpts, smartObjectId *big.Int) (common.Address, error) {
+	var out []interface{}
+	err := _ERC2771World.contract.Call(opts, &out, "owner", smartObjectId)
+
+	if err != nil {
+		return *new(common.Address), err
+	}
+
+	out0 := *abi.ConvertType(out[0], new(common.Address)).(*common.Address)
+
+	return out0, err
+
+}
+
+// Owner is a free data retrieval call binding the contract method 0xa123c33e.
+//
+// Solidity: function owner(uint256 smartObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldSession) Owner(smartObjectId *big.Int) (common.Address, error) {
+	return _ERC2771World.Contract.Owner(&_ERC2771World.CallOpts, smartObjectId)
+}
+
+// Owner is a free data retrieval call binding the contract method 0xa123c33e.
+//
+// Solidity: function owner(uint256 smartObjectId) view returns(address)
+func (_ERC2771World *ERC2771WorldCallerSession) Owner(smartObjectId *big.Int) (common.Address, error) {
+	return _ERC2771World.Contract.Owner(&_ERC2771World.CallOpts, smartObjectId)
 }
 
 // StoreVersion is a free data retrieval call binding the contract method 0xc1122229.
@@ -948,46 +2197,88 @@ func (_ERC2771World *ERC2771WorldCallerSession) WorldVersion() ([32]byte, error)
 	return _ERC2771World.Contract.WorldVersion(&_ERC2771World.CallOpts)
 }
 
-// Aggression is a paid mutator transaction binding the contract method 0xb9782236.
+// Aggression is a paid mutator transaction binding the contract method 0x8ba2b5d8.
 //
-// Solidity: function aggression(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) aggressor, (uint256,uint256,uint256,uint256,uint256,uint256) victim) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_ERC2771World *ERC2771WorldTransactor) Aggression(opts *bind.TransactOpts, smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, aggressor SmartTurretTarget, victim SmartTurretTarget) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "aggression", smartObjectId, turretOwnerCharacterId, priorityQueue, turret, aggressor, victim)
+// Solidity: function aggression((uint256,((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[],(uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256)) params) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_ERC2771World *ERC2771WorldTransactor) Aggression(opts *bind.TransactOpts, params AggressionParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "aggression", params)
 }
 
-// Aggression is a paid mutator transaction binding the contract method 0xb9782236.
+// Aggression is a paid mutator transaction binding the contract method 0x8ba2b5d8.
 //
-// Solidity: function aggression(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) aggressor, (uint256,uint256,uint256,uint256,uint256,uint256) victim) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_ERC2771World *ERC2771WorldSession) Aggression(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, aggressor SmartTurretTarget, victim SmartTurretTarget) (*types.Transaction, error) {
-	return _ERC2771World.Contract.Aggression(&_ERC2771World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, aggressor, victim)
+// Solidity: function aggression((uint256,((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[],(uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256)) params) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_ERC2771World *ERC2771WorldSession) Aggression(params AggressionParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.Aggression(&_ERC2771World.TransactOpts, params)
 }
 
-// Aggression is a paid mutator transaction binding the contract method 0xb9782236.
+// Aggression is a paid mutator transaction binding the contract method 0x8ba2b5d8.
 //
-// Solidity: function aggression(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) aggressor, (uint256,uint256,uint256,uint256,uint256,uint256) victim) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_ERC2771World *ERC2771WorldTransactorSession) Aggression(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, aggressor SmartTurretTarget, victim SmartTurretTarget) (*types.Transaction, error) {
-	return _ERC2771World.Contract.Aggression(&_ERC2771World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, aggressor, victim)
+// Solidity: function aggression((uint256,((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[],(uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256),(uint256,uint256,uint256,uint256,uint256,uint256)) params) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_ERC2771World *ERC2771WorldTransactorSession) Aggression(params AggressionParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.Aggression(&_ERC2771World.TransactOpts, params)
 }
 
-// Anchor is a paid mutator transaction binding the contract method 0xc0395eab.
+// Anchor is a paid mutator transaction binding the contract method 0x4ccd479d.
 //
-// Solidity: function anchor(uint256 entityId, (uint256,uint256,uint256,uint256) locationData) returns()
-func (_ERC2771World *ERC2771WorldTransactor) Anchor(opts *bind.TransactOpts, entityId *big.Int, locationData LocationTableData) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "anchor", entityId, locationData)
+// Solidity: function anchor(uint256 smartObjectId, address owner, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_ERC2771World *ERC2771WorldTransactor) Anchor(opts *bind.TransactOpts, smartObjectId *big.Int, owner common.Address, locationData LocationData) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "anchor", smartObjectId, owner, locationData)
 }
 
-// Anchor is a paid mutator transaction binding the contract method 0xc0395eab.
+// Anchor is a paid mutator transaction binding the contract method 0x4ccd479d.
 //
-// Solidity: function anchor(uint256 entityId, (uint256,uint256,uint256,uint256) locationData) returns()
-func (_ERC2771World *ERC2771WorldSession) Anchor(entityId *big.Int, locationData LocationTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.Anchor(&_ERC2771World.TransactOpts, entityId, locationData)
+// Solidity: function anchor(uint256 smartObjectId, address owner, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_ERC2771World *ERC2771WorldSession) Anchor(smartObjectId *big.Int, owner common.Address, locationData LocationData) (*types.Transaction, error) {
+	return _ERC2771World.Contract.Anchor(&_ERC2771World.TransactOpts, smartObjectId, owner, locationData)
 }
 
-// Anchor is a paid mutator transaction binding the contract method 0xc0395eab.
+// Anchor is a paid mutator transaction binding the contract method 0x4ccd479d.
 //
-// Solidity: function anchor(uint256 entityId, (uint256,uint256,uint256,uint256) locationData) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) Anchor(entityId *big.Int, locationData LocationTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.Anchor(&_ERC2771World.TransactOpts, entityId, locationData)
+// Solidity: function anchor(uint256 smartObjectId, address owner, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) Anchor(smartObjectId *big.Int, owner common.Address, locationData LocationData) (*types.Transaction, error) {
+	return _ERC2771World.Contract.Anchor(&_ERC2771World.TransactOpts, smartObjectId, owner, locationData)
+}
+
+// AssignItemToInventory is a paid mutator transaction binding the contract method 0xe2957099.
+//
+// Solidity: function assignItemToInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) AssignItemToInventory(opts *bind.TransactOpts, inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "assignItemToInventory", inventoryObjectId, itemObjectId, quantity)
+}
+
+// AssignItemToInventory is a paid mutator transaction binding the contract method 0xe2957099.
+//
+// Solidity: function assignItemToInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_ERC2771World *ERC2771WorldSession) AssignItemToInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.AssignItemToInventory(&_ERC2771World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
+}
+
+// AssignItemToInventory is a paid mutator transaction binding the contract method 0xe2957099.
+//
+// Solidity: function assignItemToInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) AssignItemToInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.AssignItemToInventory(&_ERC2771World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
+}
+
+// AssignOwner is a paid mutator transaction binding the contract method 0xe671644b.
+//
+// Solidity: function assignOwner(uint256 smartObjectId, address to) returns()
+func (_ERC2771World *ERC2771WorldTransactor) AssignOwner(opts *bind.TransactOpts, smartObjectId *big.Int, to common.Address) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "assignOwner", smartObjectId, to)
+}
+
+// AssignOwner is a paid mutator transaction binding the contract method 0xe671644b.
+//
+// Solidity: function assignOwner(uint256 smartObjectId, address to) returns()
+func (_ERC2771World *ERC2771WorldSession) AssignOwner(smartObjectId *big.Int, to common.Address) (*types.Transaction, error) {
+	return _ERC2771World.Contract.AssignOwner(&_ERC2771World.TransactOpts, smartObjectId, to)
+}
+
+// AssignOwner is a paid mutator transaction binding the contract method 0xe671644b.
+//
+// Solidity: function assignOwner(uint256 smartObjectId, address to) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) AssignOwner(smartObjectId *big.Int, to common.Address) (*types.Transaction, error) {
+	return _ERC2771World.Contract.AssignOwner(&_ERC2771World.TransactOpts, smartObjectId, to)
 }
 
 // BatchCall is a paid mutator transaction binding the contract method 0xce5e8dd9.
@@ -1034,44 +2325,44 @@ func (_ERC2771World *ERC2771WorldTransactorSession) BatchCallFrom(systemCalls []
 
 // BringOffline is a paid mutator transaction binding the contract method 0xe1509e87.
 //
-// Solidity: function bringOffline(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) BringOffline(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "bringOffline", entityId)
+// Solidity: function bringOffline(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) BringOffline(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "bringOffline", smartObjectId)
 }
 
 // BringOffline is a paid mutator transaction binding the contract method 0xe1509e87.
 //
-// Solidity: function bringOffline(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldSession) BringOffline(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.BringOffline(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function bringOffline(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldSession) BringOffline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.BringOffline(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
 // BringOffline is a paid mutator transaction binding the contract method 0xe1509e87.
 //
-// Solidity: function bringOffline(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) BringOffline(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.BringOffline(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function bringOffline(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) BringOffline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.BringOffline(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
 // BringOnline is a paid mutator transaction binding the contract method 0xeb5f2f58.
 //
-// Solidity: function bringOnline(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) BringOnline(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "bringOnline", entityId)
+// Solidity: function bringOnline(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) BringOnline(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "bringOnline", smartObjectId)
 }
 
 // BringOnline is a paid mutator transaction binding the contract method 0xeb5f2f58.
 //
-// Solidity: function bringOnline(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldSession) BringOnline(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.BringOnline(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function bringOnline(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldSession) BringOnline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.BringOnline(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
 // BringOnline is a paid mutator transaction binding the contract method 0xeb5f2f58.
 //
-// Solidity: function bringOnline(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) BringOnline(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.BringOnline(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function bringOnline(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) BringOnline(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.BringOnline(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
 // Call is a paid mutator transaction binding the contract method 0x3ae7af08.
@@ -1137,214 +2428,634 @@ func (_ERC2771World *ERC2771WorldTransactorSession) CanJump(characterId *big.Int
 	return _ERC2771World.Contract.CanJump(&_ERC2771World.TransactOpts, characterId, sourceGateId, destinationGateId)
 }
 
-// ConfigureSmartGate is a paid mutator transaction binding the contract method 0xd2f7fd7a.
+// ConfigureDeployableAccess is a paid mutator transaction binding the contract method 0x03d05669.
 //
-// Solidity: function configureSmartGate(uint256 smartObjectId, bytes32 systemId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartGate(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "configureSmartGate", smartObjectId, systemId)
+// Solidity: function configureDeployableAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureDeployableAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureDeployableAccess")
 }
 
-// ConfigureSmartGate is a paid mutator transaction binding the contract method 0xd2f7fd7a.
+// ConfigureDeployableAccess is a paid mutator transaction binding the contract method 0x03d05669.
 //
-// Solidity: function configureSmartGate(uint256 smartObjectId, bytes32 systemId) returns()
-func (_ERC2771World *ERC2771WorldSession) ConfigureSmartGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _ERC2771World.Contract.ConfigureSmartGate(&_ERC2771World.TransactOpts, smartObjectId, systemId)
+// Solidity: function configureDeployableAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureDeployableAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureDeployableAccess(&_ERC2771World.TransactOpts)
 }
 
-// ConfigureSmartGate is a paid mutator transaction binding the contract method 0xd2f7fd7a.
+// ConfigureDeployableAccess is a paid mutator transaction binding the contract method 0x03d05669.
 //
-// Solidity: function configureSmartGate(uint256 smartObjectId, bytes32 systemId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _ERC2771World.Contract.ConfigureSmartGate(&_ERC2771World.TransactOpts, smartObjectId, systemId)
+// Solidity: function configureDeployableAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureDeployableAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureDeployableAccess(&_ERC2771World.TransactOpts)
 }
 
-// ConfigureSmartTurret is a paid mutator transaction binding the contract method 0x83340514.
+// ConfigureEntityRecordAccess is a paid mutator transaction binding the contract method 0xc36c2700.
 //
-// Solidity: function configureSmartTurret(uint256 smartObjectId, bytes32 systemId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartTurret(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "configureSmartTurret", smartObjectId, systemId)
+// Solidity: function configureEntityRecordAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureEntityRecordAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureEntityRecordAccess")
 }
 
-// ConfigureSmartTurret is a paid mutator transaction binding the contract method 0x83340514.
+// ConfigureEntityRecordAccess is a paid mutator transaction binding the contract method 0xc36c2700.
 //
-// Solidity: function configureSmartTurret(uint256 smartObjectId, bytes32 systemId) returns()
-func (_ERC2771World *ERC2771WorldSession) ConfigureSmartTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _ERC2771World.Contract.ConfigureSmartTurret(&_ERC2771World.TransactOpts, smartObjectId, systemId)
+// Solidity: function configureEntityRecordAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureEntityRecordAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureEntityRecordAccess(&_ERC2771World.TransactOpts)
 }
 
-// ConfigureSmartTurret is a paid mutator transaction binding the contract method 0x83340514.
+// ConfigureEntityRecordAccess is a paid mutator transaction binding the contract method 0xc36c2700.
 //
-// Solidity: function configureSmartTurret(uint256 smartObjectId, bytes32 systemId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
-	return _ERC2771World.Contract.ConfigureSmartTurret(&_ERC2771World.TransactOpts, smartObjectId, systemId)
+// Solidity: function configureEntityRecordAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureEntityRecordAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureEntityRecordAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndAnchorSmartGate is a paid mutator transaction binding the contract method 0xb6fbbf35.
+// ConfigureEphemeralInteractAccess is a paid mutator transaction binding the contract method 0x1a3be1ed.
 //
-// Solidity: function createAndAnchorSmartGate(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 maxDistance) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchorSmartGate(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, maxDistance *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createAndAnchorSmartGate", smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, maxDistance)
+// Solidity: function configureEphemeralInteractAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureEphemeralInteractAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureEphemeralInteractAccess")
 }
 
-// CreateAndAnchorSmartGate is a paid mutator transaction binding the contract method 0xb6fbbf35.
+// ConfigureEphemeralInteractAccess is a paid mutator transaction binding the contract method 0x1a3be1ed.
 //
-// Solidity: function createAndAnchorSmartGate(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 maxDistance) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateAndAnchorSmartGate(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, maxDistance *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndAnchorSmartGate(&_ERC2771World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, maxDistance)
+// Solidity: function configureEphemeralInteractAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureEphemeralInteractAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureEphemeralInteractAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndAnchorSmartGate is a paid mutator transaction binding the contract method 0xb6fbbf35.
+// ConfigureEphemeralInteractAccess is a paid mutator transaction binding the contract method 0x1a3be1ed.
 //
-// Solidity: function createAndAnchorSmartGate(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 maxDistance) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchorSmartGate(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, maxDistance *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndAnchorSmartGate(&_ERC2771World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, maxDistance)
+// Solidity: function configureEphemeralInteractAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureEphemeralInteractAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureEphemeralInteractAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndAnchorSmartStorageUnit is a paid mutator transaction binding the contract method 0x1bd1eb3e.
+// ConfigureEphemeralInventoryAccess is a paid mutator transaction binding the contract method 0xc8367523.
 //
-// Solidity: function createAndAnchorSmartStorageUnit(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchorSmartStorageUnit(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createAndAnchorSmartStorageUnit", smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, storageCapacity, ephemeralStorageCapacity)
+// Solidity: function configureEphemeralInventoryAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureEphemeralInventoryAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureEphemeralInventoryAccess")
 }
 
-// CreateAndAnchorSmartStorageUnit is a paid mutator transaction binding the contract method 0x1bd1eb3e.
+// ConfigureEphemeralInventoryAccess is a paid mutator transaction binding the contract method 0xc8367523.
 //
-// Solidity: function createAndAnchorSmartStorageUnit(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateAndAnchorSmartStorageUnit(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndAnchorSmartStorageUnit(&_ERC2771World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, storageCapacity, ephemeralStorageCapacity)
+// Solidity: function configureEphemeralInventoryAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureEphemeralInventoryAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureEphemeralInventoryAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndAnchorSmartStorageUnit is a paid mutator transaction binding the contract method 0x1bd1eb3e.
+// ConfigureEphemeralInventoryAccess is a paid mutator transaction binding the contract method 0xc8367523.
 //
-// Solidity: function createAndAnchorSmartStorageUnit(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchorSmartStorageUnit(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndAnchorSmartStorageUnit(&_ERC2771World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, storageCapacity, ephemeralStorageCapacity)
+// Solidity: function configureEphemeralInventoryAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureEphemeralInventoryAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureEphemeralInventoryAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndAnchorSmartTurret is a paid mutator transaction binding the contract method 0xa9ceb1a1.
+// ConfigureFuelAccess is a paid mutator transaction binding the contract method 0xde941597.
 //
-// Solidity: function createAndAnchorSmartTurret(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchorSmartTurret(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createAndAnchorSmartTurret", smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+// Solidity: function configureFuelAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureFuelAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureFuelAccess")
 }
 
-// CreateAndAnchorSmartTurret is a paid mutator transaction binding the contract method 0xa9ceb1a1.
+// ConfigureFuelAccess is a paid mutator transaction binding the contract method 0xde941597.
 //
-// Solidity: function createAndAnchorSmartTurret(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateAndAnchorSmartTurret(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndAnchorSmartTurret(&_ERC2771World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+// Solidity: function configureFuelAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureFuelAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureFuelAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndAnchorSmartTurret is a paid mutator transaction binding the contract method 0xa9ceb1a1.
+// ConfigureFuelAccess is a paid mutator transaction binding the contract method 0xde941597.
 //
-// Solidity: function createAndAnchorSmartTurret(uint256 smartObjectId, (uint256,uint256,uint256) entityRecordData, (address,string) smartObjectData, (uint256,(uint256,uint256,uint256)) worldPosition, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchorSmartTurret(smartObjectId *big.Int, entityRecordData EntityRecordData, smartObjectData SmartObjectData, worldPosition WorldPosition, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndAnchorSmartTurret(&_ERC2771World.TransactOpts, smartObjectId, entityRecordData, smartObjectData, worldPosition, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+// Solidity: function configureFuelAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureFuelAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureFuelAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateAndDepositItemsToEphemeralInventory is a paid mutator transaction binding the contract method 0xe111c1a6.
+// ConfigureFuelParameters is a paid mutator transaction binding the contract method 0x3d5309bd.
 //
-// Solidity: function createAndDepositItemsToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateAndDepositItemsToEphemeralInventory(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createAndDepositItemsToEphemeralInventory", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function configureFuelParameters(uint256 smartObjectId, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureFuelParameters(opts *bind.TransactOpts, smartObjectId *big.Int, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureFuelParameters", smartObjectId, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, fuelAmount)
 }
 
-// CreateAndDepositItemsToEphemeralInventory is a paid mutator transaction binding the contract method 0xe111c1a6.
+// ConfigureFuelParameters is a paid mutator transaction binding the contract method 0x3d5309bd.
 //
-// Solidity: function createAndDepositItemsToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateAndDepositItemsToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndDepositItemsToEphemeralInventory(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function configureFuelParameters(uint256 smartObjectId, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureFuelParameters(smartObjectId *big.Int, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureFuelParameters(&_ERC2771World.TransactOpts, smartObjectId, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, fuelAmount)
 }
 
-// CreateAndDepositItemsToEphemeralInventory is a paid mutator transaction binding the contract method 0xe111c1a6.
+// ConfigureFuelParameters is a paid mutator transaction binding the contract method 0x3d5309bd.
 //
-// Solidity: function createAndDepositItemsToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndDepositItemsToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndDepositItemsToEphemeralInventory(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function configureFuelParameters(uint256 smartObjectId, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureFuelParameters(smartObjectId *big.Int, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureFuelParameters(&_ERC2771World.TransactOpts, smartObjectId, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity, fuelAmount)
 }
 
-// CreateAndDepositItemsToInventory is a paid mutator transaction binding the contract method 0x9e19e7aa.
+// ConfigureGate is a paid mutator transaction binding the contract method 0xe6611746.
 //
-// Solidity: function createAndDepositItemsToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateAndDepositItemsToInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createAndDepositItemsToInventory", smartObjectId, items)
+// Solidity: function configureGate(uint256 smartObjectId, bytes32 systemId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureGate(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureGate", smartObjectId, systemId)
 }
 
-// CreateAndDepositItemsToInventory is a paid mutator transaction binding the contract method 0x9e19e7aa.
+// ConfigureGate is a paid mutator transaction binding the contract method 0xe6611746.
 //
-// Solidity: function createAndDepositItemsToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateAndDepositItemsToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndDepositItemsToInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+// Solidity: function configureGate(uint256 smartObjectId, bytes32 systemId) returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureGate(&_ERC2771World.TransactOpts, smartObjectId, systemId)
 }
 
-// CreateAndDepositItemsToInventory is a paid mutator transaction binding the contract method 0x9e19e7aa.
+// ConfigureGate is a paid mutator transaction binding the contract method 0xe6611746.
 //
-// Solidity: function createAndDepositItemsToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndDepositItemsToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateAndDepositItemsToInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+// Solidity: function configureGate(uint256 smartObjectId, bytes32 systemId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureGate(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureGate(&_ERC2771World.TransactOpts, smartObjectId, systemId)
 }
 
-// CreateCharacter is a paid mutator transaction binding the contract method 0x036bb5d5.
+// ConfigureInventoryAccess is a paid mutator transaction binding the contract method 0xb47cb8f3.
 //
-// Solidity: function createCharacter(uint256 characterId, address characterAddress, uint256 corpId, (uint256,uint256,uint256) entityRecord, (string,string,string) entityRecordOffchain, string tokenCid) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateCharacter(opts *bind.TransactOpts, characterId *big.Int, characterAddress common.Address, corpId *big.Int, entityRecord EntityRecordData, entityRecordOffchain EntityRecordOffchainTableData, tokenCid string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createCharacter", characterId, characterAddress, corpId, entityRecord, entityRecordOffchain, tokenCid)
+// Solidity: function configureInventoryAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureInventoryAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureInventoryAccess")
 }
 
-// CreateCharacter is a paid mutator transaction binding the contract method 0x036bb5d5.
+// ConfigureInventoryAccess is a paid mutator transaction binding the contract method 0xb47cb8f3.
 //
-// Solidity: function createCharacter(uint256 characterId, address characterAddress, uint256 corpId, (uint256,uint256,uint256) entityRecord, (string,string,string) entityRecordOffchain, string tokenCid) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateCharacter(characterId *big.Int, characterAddress common.Address, corpId *big.Int, entityRecord EntityRecordData, entityRecordOffchain EntityRecordOffchainTableData, tokenCid string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateCharacter(&_ERC2771World.TransactOpts, characterId, characterAddress, corpId, entityRecord, entityRecordOffchain, tokenCid)
+// Solidity: function configureInventoryAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureInventoryAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureInventoryAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateCharacter is a paid mutator transaction binding the contract method 0x036bb5d5.
+// ConfigureInventoryAccess is a paid mutator transaction binding the contract method 0xb47cb8f3.
 //
-// Solidity: function createCharacter(uint256 characterId, address characterAddress, uint256 corpId, (uint256,uint256,uint256) entityRecord, (string,string,string) entityRecordOffchain, string tokenCid) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateCharacter(characterId *big.Int, characterAddress common.Address, corpId *big.Int, entityRecord EntityRecordData, entityRecordOffchain EntityRecordOffchainTableData, tokenCid string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateCharacter(&_ERC2771World.TransactOpts, characterId, characterAddress, corpId, entityRecord, entityRecordOffchain, tokenCid)
+// Solidity: function configureInventoryAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureInventoryAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureInventoryAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateEntityRecord is a paid mutator transaction binding the contract method 0x2c63f58f.
+// ConfigureInventoryInteractAccess is a paid mutator transaction binding the contract method 0x3884c463.
 //
-// Solidity: function createEntityRecord(uint256 entityId, uint256 itemId, uint256 typeId, uint256 volume) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateEntityRecord(opts *bind.TransactOpts, entityId *big.Int, itemId *big.Int, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createEntityRecord", entityId, itemId, typeId, volume)
+// Solidity: function configureInventoryInteractAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureInventoryInteractAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureInventoryInteractAccess")
 }
 
-// CreateEntityRecord is a paid mutator transaction binding the contract method 0x2c63f58f.
+// ConfigureInventoryInteractAccess is a paid mutator transaction binding the contract method 0x3884c463.
 //
-// Solidity: function createEntityRecord(uint256 entityId, uint256 itemId, uint256 typeId, uint256 volume) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateEntityRecord(entityId *big.Int, itemId *big.Int, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateEntityRecord(&_ERC2771World.TransactOpts, entityId, itemId, typeId, volume)
+// Solidity: function configureInventoryInteractAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureInventoryInteractAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureInventoryInteractAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateEntityRecord is a paid mutator transaction binding the contract method 0x2c63f58f.
+// ConfigureInventoryInteractAccess is a paid mutator transaction binding the contract method 0x3884c463.
 //
-// Solidity: function createEntityRecord(uint256 entityId, uint256 itemId, uint256 typeId, uint256 volume) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateEntityRecord(entityId *big.Int, itemId *big.Int, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateEntityRecord(&_ERC2771World.TransactOpts, entityId, itemId, typeId, volume)
+// Solidity: function configureInventoryInteractAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureInventoryInteractAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureInventoryInteractAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateEntityRecordOffchain is a paid mutator transaction binding the contract method 0xbf662710.
+// ConfigureKillMailAccess is a paid mutator transaction binding the contract method 0x752918af.
 //
-// Solidity: function createEntityRecordOffchain(uint256 entityId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactor) CreateEntityRecordOffchain(opts *bind.TransactOpts, entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "createEntityRecordOffchain", entityId, name, dappURL, description)
+// Solidity: function configureKillMailAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureKillMailAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureKillMailAccess")
 }
 
-// CreateEntityRecordOffchain is a paid mutator transaction binding the contract method 0xbf662710.
+// ConfigureKillMailAccess is a paid mutator transaction binding the contract method 0x752918af.
 //
-// Solidity: function createEntityRecordOffchain(uint256 entityId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldSession) CreateEntityRecordOffchain(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateEntityRecordOffchain(&_ERC2771World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function configureKillMailAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureKillMailAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureKillMailAccess(&_ERC2771World.TransactOpts)
 }
 
-// CreateEntityRecordOffchain is a paid mutator transaction binding the contract method 0xbf662710.
+// ConfigureKillMailAccess is a paid mutator transaction binding the contract method 0x752918af.
 //
-// Solidity: function createEntityRecordOffchain(uint256 entityId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) CreateEntityRecordOffchain(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.CreateEntityRecordOffchain(&_ERC2771World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function configureKillMailAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureKillMailAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureKillMailAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureLocationAccess is a paid mutator transaction binding the contract method 0x520f13da.
+//
+// Solidity: function configureLocationAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureLocationAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureLocationAccess")
+}
+
+// ConfigureLocationAccess is a paid mutator transaction binding the contract method 0x520f13da.
+//
+// Solidity: function configureLocationAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureLocationAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureLocationAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureLocationAccess is a paid mutator transaction binding the contract method 0x520f13da.
+//
+// Solidity: function configureLocationAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureLocationAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureLocationAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureOwnershipAccess is a paid mutator transaction binding the contract method 0x4eee463a.
+//
+// Solidity: function configureOwnershipAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureOwnershipAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureOwnershipAccess")
+}
+
+// ConfigureOwnershipAccess is a paid mutator transaction binding the contract method 0x4eee463a.
+//
+// Solidity: function configureOwnershipAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureOwnershipAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureOwnershipAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureOwnershipAccess is a paid mutator transaction binding the contract method 0x4eee463a.
+//
+// Solidity: function configureOwnershipAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureOwnershipAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureOwnershipAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartAssemblyAccess is a paid mutator transaction binding the contract method 0xafa610cb.
+//
+// Solidity: function configureSmartAssemblyAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartAssemblyAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureSmartAssemblyAccess")
+}
+
+// ConfigureSmartAssemblyAccess is a paid mutator transaction binding the contract method 0xafa610cb.
+//
+// Solidity: function configureSmartAssemblyAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureSmartAssemblyAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartAssemblyAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartAssemblyAccess is a paid mutator transaction binding the contract method 0xafa610cb.
+//
+// Solidity: function configureSmartAssemblyAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartAssemblyAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartAssemblyAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartCharacterAccess is a paid mutator transaction binding the contract method 0xa2c4eac8.
+//
+// Solidity: function configureSmartCharacterAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartCharacterAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureSmartCharacterAccess")
+}
+
+// ConfigureSmartCharacterAccess is a paid mutator transaction binding the contract method 0xa2c4eac8.
+//
+// Solidity: function configureSmartCharacterAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureSmartCharacterAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartCharacterAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartCharacterAccess is a paid mutator transaction binding the contract method 0xa2c4eac8.
+//
+// Solidity: function configureSmartCharacterAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartCharacterAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartCharacterAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartGateAccess is a paid mutator transaction binding the contract method 0x6238f85c.
+//
+// Solidity: function configureSmartGateAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartGateAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureSmartGateAccess")
+}
+
+// ConfigureSmartGateAccess is a paid mutator transaction binding the contract method 0x6238f85c.
+//
+// Solidity: function configureSmartGateAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureSmartGateAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartGateAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartGateAccess is a paid mutator transaction binding the contract method 0x6238f85c.
+//
+// Solidity: function configureSmartGateAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartGateAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartGateAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartStorageUnitAccess is a paid mutator transaction binding the contract method 0x647dc438.
+//
+// Solidity: function configureSmartStorageUnitAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartStorageUnitAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureSmartStorageUnitAccess")
+}
+
+// ConfigureSmartStorageUnitAccess is a paid mutator transaction binding the contract method 0x647dc438.
+//
+// Solidity: function configureSmartStorageUnitAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureSmartStorageUnitAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartStorageUnitAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartStorageUnitAccess is a paid mutator transaction binding the contract method 0x647dc438.
+//
+// Solidity: function configureSmartStorageUnitAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartStorageUnitAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartStorageUnitAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartTurretAccess is a paid mutator transaction binding the contract method 0x232dba5b.
+//
+// Solidity: function configureSmartTurretAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureSmartTurretAccess(opts *bind.TransactOpts) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureSmartTurretAccess")
+}
+
+// ConfigureSmartTurretAccess is a paid mutator transaction binding the contract method 0x232dba5b.
+//
+// Solidity: function configureSmartTurretAccess() returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureSmartTurretAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartTurretAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureSmartTurretAccess is a paid mutator transaction binding the contract method 0x232dba5b.
+//
+// Solidity: function configureSmartTurretAccess() returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureSmartTurretAccess() (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureSmartTurretAccess(&_ERC2771World.TransactOpts)
+}
+
+// ConfigureTurret is a paid mutator transaction binding the contract method 0x4d7e3af1.
+//
+// Solidity: function configureTurret(uint256 smartObjectId, bytes32 systemId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) ConfigureTurret(opts *bind.TransactOpts, smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "configureTurret", smartObjectId, systemId)
+}
+
+// ConfigureTurret is a paid mutator transaction binding the contract method 0x4d7e3af1.
+//
+// Solidity: function configureTurret(uint256 smartObjectId, bytes32 systemId) returns()
+func (_ERC2771World *ERC2771WorldSession) ConfigureTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureTurret(&_ERC2771World.TransactOpts, smartObjectId, systemId)
+}
+
+// ConfigureTurret is a paid mutator transaction binding the contract method 0x4d7e3af1.
+//
+// Solidity: function configureTurret(uint256 smartObjectId, bytes32 systemId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ConfigureTurret(smartObjectId *big.Int, systemId [32]byte) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ConfigureTurret(&_ERC2771World.TransactOpts, smartObjectId, systemId)
+}
+
+// CreateAndAnchor is a paid mutator transaction binding the contract method 0xecbb707e.
+//
+// Solidity: function createAndAnchor((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchor(opts *bind.TransactOpts, params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAndAnchor", params)
+}
+
+// CreateAndAnchor is a paid mutator transaction binding the contract method 0xecbb707e.
+//
+// Solidity: function createAndAnchor((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAndAnchor(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchor(&_ERC2771World.TransactOpts, params)
+}
+
+// CreateAndAnchor is a paid mutator transaction binding the contract method 0xecbb707e.
+//
+// Solidity: function createAndAnchor((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchor(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchor(&_ERC2771World.TransactOpts, params)
+}
+
+// CreateAndAnchorGate is a paid mutator transaction binding the contract method 0xcc22af3b.
+//
+// Solidity: function createAndAnchorGate((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 maxDistance) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchorGate(opts *bind.TransactOpts, params CreateAndAnchorParams, maxDistance *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAndAnchorGate", params, maxDistance)
+}
+
+// CreateAndAnchorGate is a paid mutator transaction binding the contract method 0xcc22af3b.
+//
+// Solidity: function createAndAnchorGate((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 maxDistance) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAndAnchorGate(params CreateAndAnchorParams, maxDistance *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchorGate(&_ERC2771World.TransactOpts, params, maxDistance)
+}
+
+// CreateAndAnchorGate is a paid mutator transaction binding the contract method 0xcc22af3b.
+//
+// Solidity: function createAndAnchorGate((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 maxDistance) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchorGate(params CreateAndAnchorParams, maxDistance *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchorGate(&_ERC2771World.TransactOpts, params, maxDistance)
+}
+
+// CreateAndAnchorStorageUnit is a paid mutator transaction binding the contract method 0x70945b15.
+//
+// Solidity: function createAndAnchorStorageUnit((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchorStorageUnit(opts *bind.TransactOpts, params CreateAndAnchorParams, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAndAnchorStorageUnit", params, storageCapacity, ephemeralStorageCapacity)
+}
+
+// CreateAndAnchorStorageUnit is a paid mutator transaction binding the contract method 0x70945b15.
+//
+// Solidity: function createAndAnchorStorageUnit((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAndAnchorStorageUnit(params CreateAndAnchorParams, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchorStorageUnit(&_ERC2771World.TransactOpts, params, storageCapacity, ephemeralStorageCapacity)
+}
+
+// CreateAndAnchorStorageUnit is a paid mutator transaction binding the contract method 0x70945b15.
+//
+// Solidity: function createAndAnchorStorageUnit((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params, uint256 storageCapacity, uint256 ephemeralStorageCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchorStorageUnit(params CreateAndAnchorParams, storageCapacity *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchorStorageUnit(&_ERC2771World.TransactOpts, params, storageCapacity, ephemeralStorageCapacity)
+}
+
+// CreateAndAnchorTurret is a paid mutator transaction binding the contract method 0xa51337a6.
+//
+// Solidity: function createAndAnchorTurret((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAndAnchorTurret(opts *bind.TransactOpts, params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAndAnchorTurret", params)
+}
+
+// CreateAndAnchorTurret is a paid mutator transaction binding the contract method 0xa51337a6.
+//
+// Solidity: function createAndAnchorTurret((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAndAnchorTurret(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchorTurret(&_ERC2771World.TransactOpts, params)
+}
+
+// CreateAndAnchorTurret is a paid mutator transaction binding the contract method 0xa51337a6.
+//
+// Solidity: function createAndAnchorTurret((uint256,string,(bytes32,uint256,uint256,uint256),address,uint256,uint256,uint256,(uint256,uint256,uint256,uint256)) params) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndAnchorTurret(params CreateAndAnchorParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndAnchorTurret(&_ERC2771World.TransactOpts, params)
+}
+
+// CreateAndDepositEphemeral is a paid mutator transaction binding the contract method 0x0f33de24.
+//
+// Solidity: function createAndDepositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAndDepositEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAndDepositEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// CreateAndDepositEphemeral is a paid mutator transaction binding the contract method 0x0f33de24.
+//
+// Solidity: function createAndDepositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAndDepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndDepositEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// CreateAndDepositEphemeral is a paid mutator transaction binding the contract method 0x0f33de24.
+//
+// Solidity: function createAndDepositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndDepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndDepositEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// CreateAndDepositInventory is a paid mutator transaction binding the contract method 0x087ad59f.
+//
+// Solidity: function createAndDepositInventory(uint256 smartObjectId, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAndDepositInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAndDepositInventory", smartObjectId, items)
+}
+
+// CreateAndDepositInventory is a paid mutator transaction binding the contract method 0x087ad59f.
+//
+// Solidity: function createAndDepositInventory(uint256 smartObjectId, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAndDepositInventory(smartObjectId *big.Int, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndDepositInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+}
+
+// CreateAndDepositInventory is a paid mutator transaction binding the contract method 0x087ad59f.
+//
+// Solidity: function createAndDepositInventory(uint256 smartObjectId, (uint256,bytes32,uint256,uint256,uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAndDepositInventory(smartObjectId *big.Int, items []CreateInventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAndDepositInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+}
+
+// CreateAssembly is a paid mutator transaction binding the contract method 0xc9f4c7c2.
+//
+// Solidity: function createAssembly(uint256 smartObjectId, string assemblyType, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateAssembly(opts *bind.TransactOpts, smartObjectId *big.Int, assemblyType string, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createAssembly", smartObjectId, assemblyType, entityRecordParams)
+}
+
+// CreateAssembly is a paid mutator transaction binding the contract method 0xc9f4c7c2.
+//
+// Solidity: function createAssembly(uint256 smartObjectId, string assemblyType, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateAssembly(smartObjectId *big.Int, assemblyType string, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAssembly(&_ERC2771World.TransactOpts, smartObjectId, assemblyType, entityRecordParams)
+}
+
+// CreateAssembly is a paid mutator transaction binding the contract method 0xc9f4c7c2.
+//
+// Solidity: function createAssembly(uint256 smartObjectId, string assemblyType, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateAssembly(smartObjectId *big.Int, assemblyType string, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateAssembly(&_ERC2771World.TransactOpts, smartObjectId, assemblyType, entityRecordParams)
+}
+
+// CreateCharacter is a paid mutator transaction binding the contract method 0x6d0030ca.
+//
+// Solidity: function createCharacter(uint256 smartObjectId, address owner, uint256 tribeId, (bytes32,uint256,uint256,uint256) entityRecordParams, (string,string,string) entityRecordMetadata) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateCharacter(opts *bind.TransactOpts, smartObjectId *big.Int, owner common.Address, tribeId *big.Int, entityRecordParams EntityRecordParams, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createCharacter", smartObjectId, owner, tribeId, entityRecordParams, entityRecordMetadata)
+}
+
+// CreateCharacter is a paid mutator transaction binding the contract method 0x6d0030ca.
+//
+// Solidity: function createCharacter(uint256 smartObjectId, address owner, uint256 tribeId, (bytes32,uint256,uint256,uint256) entityRecordParams, (string,string,string) entityRecordMetadata) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateCharacter(smartObjectId *big.Int, owner common.Address, tribeId *big.Int, entityRecordParams EntityRecordParams, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateCharacter(&_ERC2771World.TransactOpts, smartObjectId, owner, tribeId, entityRecordParams, entityRecordMetadata)
+}
+
+// CreateCharacter is a paid mutator transaction binding the contract method 0x6d0030ca.
+//
+// Solidity: function createCharacter(uint256 smartObjectId, address owner, uint256 tribeId, (bytes32,uint256,uint256,uint256) entityRecordParams, (string,string,string) entityRecordMetadata) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateCharacter(smartObjectId *big.Int, owner common.Address, tribeId *big.Int, entityRecordParams EntityRecordParams, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateCharacter(&_ERC2771World.TransactOpts, smartObjectId, owner, tribeId, entityRecordParams, entityRecordMetadata)
+}
+
+// CreateDeployable is a paid mutator transaction binding the contract method 0xfb96f31a.
+//
+// Solidity: function createDeployable(uint256 smartObjectId, address owner, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateDeployable(opts *bind.TransactOpts, smartObjectId *big.Int, owner common.Address, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createDeployable", smartObjectId, owner, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+}
+
+// CreateDeployable is a paid mutator transaction binding the contract method 0xfb96f31a.
+//
+// Solidity: function createDeployable(uint256 smartObjectId, address owner, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateDeployable(smartObjectId *big.Int, owner common.Address, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateDeployable(&_ERC2771World.TransactOpts, smartObjectId, owner, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+}
+
+// CreateDeployable is a paid mutator transaction binding the contract method 0xfb96f31a.
+//
+// Solidity: function createDeployable(uint256 smartObjectId, address owner, uint256 fuelUnitVolume, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateDeployable(smartObjectId *big.Int, owner common.Address, fuelUnitVolume *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateDeployable(&_ERC2771World.TransactOpts, smartObjectId, owner, fuelUnitVolume, fuelConsumptionIntervalInSeconds, fuelMaxCapacity)
+}
+
+// CreateMetadata is a paid mutator transaction binding the contract method 0x21823a2a.
+//
+// Solidity: function createMetadata(uint256 smartObjectId, (string,string,string) entityRecordMetadata) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateMetadata(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createMetadata", smartObjectId, entityRecordMetadata)
+}
+
+// CreateMetadata is a paid mutator transaction binding the contract method 0x21823a2a.
+//
+// Solidity: function createMetadata(uint256 smartObjectId, (string,string,string) entityRecordMetadata) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateMetadata(smartObjectId *big.Int, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateMetadata(&_ERC2771World.TransactOpts, smartObjectId, entityRecordMetadata)
+}
+
+// CreateMetadata is a paid mutator transaction binding the contract method 0x21823a2a.
+//
+// Solidity: function createMetadata(uint256 smartObjectId, (string,string,string) entityRecordMetadata) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateMetadata(smartObjectId *big.Int, entityRecordMetadata EntityMetadataParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateMetadata(&_ERC2771World.TransactOpts, smartObjectId, entityRecordMetadata)
+}
+
+// CreateRecord is a paid mutator transaction binding the contract method 0xb4b891f7.
+//
+// Solidity: function createRecord(uint256 smartObjectId, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CreateRecord(opts *bind.TransactOpts, smartObjectId *big.Int, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "createRecord", smartObjectId, entityRecordParams)
+}
+
+// CreateRecord is a paid mutator transaction binding the contract method 0xb4b891f7.
+//
+// Solidity: function createRecord(uint256 smartObjectId, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_ERC2771World *ERC2771WorldSession) CreateRecord(smartObjectId *big.Int, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateRecord(&_ERC2771World.TransactOpts, smartObjectId, entityRecordParams)
+}
+
+// CreateRecord is a paid mutator transaction binding the contract method 0xb4b891f7.
+//
+// Solidity: function createRecord(uint256 smartObjectId, (bytes32,uint256,uint256,uint256) entityRecordParams) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CreateRecord(smartObjectId *big.Int, entityRecordParams EntityRecordParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CreateRecord(&_ERC2771World.TransactOpts, smartObjectId, entityRecordParams)
+}
+
+// CrossTransferToEphemeral is a paid mutator transaction binding the contract method 0xab2aea53.
+//
+// Solidity: function crossTransferToEphemeral(uint256 smartObjectId, address fromEphemeralOwner, address toEphemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) CrossTransferToEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, fromEphemeralOwner common.Address, toEphemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "crossTransferToEphemeral", smartObjectId, fromEphemeralOwner, toEphemeralOwner, items)
+}
+
+// CrossTransferToEphemeral is a paid mutator transaction binding the contract method 0xab2aea53.
+//
+// Solidity: function crossTransferToEphemeral(uint256 smartObjectId, address fromEphemeralOwner, address toEphemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) CrossTransferToEphemeral(smartObjectId *big.Int, fromEphemeralOwner common.Address, toEphemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CrossTransferToEphemeral(&_ERC2771World.TransactOpts, smartObjectId, fromEphemeralOwner, toEphemeralOwner, items)
+}
+
+// CrossTransferToEphemeral is a paid mutator transaction binding the contract method 0xab2aea53.
+//
+// Solidity: function crossTransferToEphemeral(uint256 smartObjectId, address fromEphemeralOwner, address toEphemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) CrossTransferToEphemeral(smartObjectId *big.Int, fromEphemeralOwner common.Address, toEphemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.CrossTransferToEphemeral(&_ERC2771World.TransactOpts, smartObjectId, fromEphemeralOwner, toEphemeralOwner, items)
 }
 
 // DeleteRecord is a paid mutator transaction binding the contract method 0x505a181d.
@@ -1368,109 +3079,88 @@ func (_ERC2771World *ERC2771WorldTransactorSession) DeleteRecord(tableId [32]byt
 	return _ERC2771World.Contract.DeleteRecord(&_ERC2771World.TransactOpts, tableId, keyTuple)
 }
 
-// DepositFuel is a paid mutator transaction binding the contract method 0xc3e9a45f.
+// DepositEphemeral is a paid mutator transaction binding the contract method 0xf3688464.
 //
-// Solidity: function depositFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_ERC2771World *ERC2771WorldTransactor) DepositFuel(opts *bind.TransactOpts, entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "depositFuel", entityId, unitAmount)
+// Solidity: function depositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) DepositEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "depositEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// DepositEphemeral is a paid mutator transaction binding the contract method 0xf3688464.
+//
+// Solidity: function depositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) DepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DepositEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// DepositEphemeral is a paid mutator transaction binding the contract method 0xf3688464.
+//
+// Solidity: function depositEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) DepositEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DepositEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
 // DepositFuel is a paid mutator transaction binding the contract method 0xc3e9a45f.
 //
-// Solidity: function depositFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_ERC2771World *ERC2771WorldSession) DepositFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DepositFuel(&_ERC2771World.TransactOpts, entityId, unitAmount)
+// Solidity: function depositFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldTransactor) DepositFuel(opts *bind.TransactOpts, smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "depositFuel", smartObjectId, fuelAmount)
 }
 
 // DepositFuel is a paid mutator transaction binding the contract method 0xc3e9a45f.
 //
-// Solidity: function depositFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) DepositFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DepositFuel(&_ERC2771World.TransactOpts, entityId, unitAmount)
+// Solidity: function depositFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldSession) DepositFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DepositFuel(&_ERC2771World.TransactOpts, smartObjectId, fuelAmount)
 }
 
-// DepositToEphemeralInventory is a paid mutator transaction binding the contract method 0xaff42af2.
+// DepositFuel is a paid mutator transaction binding the contract method 0xc3e9a45f.
 //
-// Solidity: function depositToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) DepositToEphemeralInventory(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "depositToEphemeralInventory", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function depositFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) DepositFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DepositFuel(&_ERC2771World.TransactOpts, smartObjectId, fuelAmount)
 }
 
-// DepositToEphemeralInventory is a paid mutator transaction binding the contract method 0xaff42af2.
+// DepositInventory is a paid mutator transaction binding the contract method 0x1931d4e5.
 //
-// Solidity: function depositToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) DepositToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DepositToEphemeralInventory(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function depositInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) DepositInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "depositInventory", smartObjectId, items)
 }
 
-// DepositToEphemeralInventory is a paid mutator transaction binding the contract method 0xaff42af2.
+// DepositInventory is a paid mutator transaction binding the contract method 0x1931d4e5.
 //
-// Solidity: function depositToEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) DepositToEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DepositToEphemeralInventory(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function depositInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) DepositInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DepositInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
 }
 
-// DepositToInventory is a paid mutator transaction binding the contract method 0x15e306bb.
+// DepositInventory is a paid mutator transaction binding the contract method 0x1931d4e5.
 //
-// Solidity: function depositToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) DepositToInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "depositToInventory", smartObjectId, items)
-}
-
-// DepositToInventory is a paid mutator transaction binding the contract method 0x15e306bb.
-//
-// Solidity: function depositToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) DepositToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DepositToInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
-}
-
-// DepositToInventory is a paid mutator transaction binding the contract method 0x15e306bb.
-//
-// Solidity: function depositToInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) DepositToInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DepositToInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+// Solidity: function depositInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) DepositInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DepositInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
 }
 
 // DestroyDeployable is a paid mutator transaction binding the contract method 0x80a63ec4.
 //
-// Solidity: function destroyDeployable(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) DestroyDeployable(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "destroyDeployable", entityId)
+// Solidity: function destroyDeployable(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) DestroyDeployable(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "destroyDeployable", smartObjectId)
 }
 
 // DestroyDeployable is a paid mutator transaction binding the contract method 0x80a63ec4.
 //
-// Solidity: function destroyDeployable(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldSession) DestroyDeployable(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DestroyDeployable(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function destroyDeployable(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldSession) DestroyDeployable(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DestroyDeployable(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
 // DestroyDeployable is a paid mutator transaction binding the contract method 0x80a63ec4.
 //
-// Solidity: function destroyDeployable(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) DestroyDeployable(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.DestroyDeployable(&_ERC2771World.TransactOpts, entityId)
-}
-
-// EphemeralToInventoryTransfer is a paid mutator transaction binding the contract method 0xdb7aab2b.
-//
-// Solidity: function ephemeralToInventoryTransfer(uint256 smartObjectId, (uint256,address,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) EphemeralToInventoryTransfer(opts *bind.TransactOpts, smartObjectId *big.Int, items []TransferItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "ephemeralToInventoryTransfer", smartObjectId, items)
-}
-
-// EphemeralToInventoryTransfer is a paid mutator transaction binding the contract method 0xdb7aab2b.
-//
-// Solidity: function ephemeralToInventoryTransfer(uint256 smartObjectId, (uint256,address,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) EphemeralToInventoryTransfer(smartObjectId *big.Int, items []TransferItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.EphemeralToInventoryTransfer(&_ERC2771World.TransactOpts, smartObjectId, items)
-}
-
-// EphemeralToInventoryTransfer is a paid mutator transaction binding the contract method 0xdb7aab2b.
-//
-// Solidity: function ephemeralToInventoryTransfer(uint256 smartObjectId, (uint256,address,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) EphemeralToInventoryTransfer(smartObjectId *big.Int, items []TransferItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.EphemeralToInventoryTransfer(&_ERC2771World.TransactOpts, smartObjectId, items)
+// Solidity: function destroyDeployable(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) DestroyDeployable(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.DestroyDeployable(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
 // GlobalPause is a paid mutator transaction binding the contract method 0xf12d54d8.
@@ -1536,25 +3226,25 @@ func (_ERC2771World *ERC2771WorldTransactorSession) GrantAccess(resourceId [32]b
 	return _ERC2771World.Contract.GrantAccess(&_ERC2771World.TransactOpts, resourceId, grantee)
 }
 
-// InProximity is a paid mutator transaction binding the contract method 0xea49f0a8.
+// InProximity is a paid mutator transaction binding the contract method 0x5588377c.
 //
-// Solidity: function inProximity(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_ERC2771World *ERC2771WorldTransactor) InProximity(opts *bind.TransactOpts, smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "inProximity", smartObjectId, turretOwnerCharacterId, priorityQueue, turret, turretTarget)
+// Solidity: function inProximity(uint256 smartObjectId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_ERC2771World *ERC2771WorldTransactor) InProximity(opts *bind.TransactOpts, smartObjectId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "inProximity", smartObjectId, priorityQueue, turret, turretTarget)
 }
 
-// InProximity is a paid mutator transaction binding the contract method 0xea49f0a8.
+// InProximity is a paid mutator transaction binding the contract method 0x5588377c.
 //
-// Solidity: function inProximity(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_ERC2771World *ERC2771WorldSession) InProximity(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
-	return _ERC2771World.Contract.InProximity(&_ERC2771World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, turretTarget)
+// Solidity: function inProximity(uint256 smartObjectId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_ERC2771World *ERC2771WorldSession) InProximity(smartObjectId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
+	return _ERC2771World.Contract.InProximity(&_ERC2771World.TransactOpts, smartObjectId, priorityQueue, turret, turretTarget)
 }
 
-// InProximity is a paid mutator transaction binding the contract method 0xea49f0a8.
+// InProximity is a paid mutator transaction binding the contract method 0x5588377c.
 //
-// Solidity: function inProximity(uint256 smartObjectId, uint256 turretOwnerCharacterId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
-func (_ERC2771World *ERC2771WorldTransactorSession) InProximity(smartObjectId *big.Int, turretOwnerCharacterId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
-	return _ERC2771World.Contract.InProximity(&_ERC2771World.TransactOpts, smartObjectId, turretOwnerCharacterId, priorityQueue, turret, turretTarget)
+// Solidity: function inProximity(uint256 smartObjectId, ((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] priorityQueue, (uint256,uint256,uint256) turret, (uint256,uint256,uint256,uint256,uint256,uint256) turretTarget) returns(((uint256,uint256,uint256,uint256,uint256,uint256),uint256)[] updatedPriorityQueue)
+func (_ERC2771World *ERC2771WorldTransactorSession) InProximity(smartObjectId *big.Int, priorityQueue []TargetPriority, turret Turret, turretTarget SmartTurretTarget) (*types.Transaction, error) {
+	return _ERC2771World.Contract.InProximity(&_ERC2771World.TransactOpts, smartObjectId, priorityQueue, turret, turretTarget)
 }
 
 // Initialize is a paid mutator transaction binding the contract method 0xc4d66de8.
@@ -1620,46 +3310,25 @@ func (_ERC2771World *ERC2771WorldTransactorSession) InstallRootModule(module com
 	return _ERC2771World.Contract.InstallRootModule(&_ERC2771World.TransactOpts, module, encodedArgs)
 }
 
-// InventoryToEphemeralTransfer is a paid mutator transaction binding the contract method 0x2ce51702.
+// LinkGates is a paid mutator transaction binding the contract method 0x1caa06ce.
 //
-// Solidity: function inventoryToEphemeralTransfer(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) InventoryToEphemeralTransfer(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []TransferItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "inventoryToEphemeralTransfer", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function linkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) LinkGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "linkGates", sourceGateId, destinationGateId)
 }
 
-// InventoryToEphemeralTransfer is a paid mutator transaction binding the contract method 0x2ce51702.
+// LinkGates is a paid mutator transaction binding the contract method 0x1caa06ce.
 //
-// Solidity: function inventoryToEphemeralTransfer(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) InventoryToEphemeralTransfer(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []TransferItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.InventoryToEphemeralTransfer(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function linkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_ERC2771World *ERC2771WorldSession) LinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.LinkGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
 }
 
-// InventoryToEphemeralTransfer is a paid mutator transaction binding the contract method 0x2ce51702.
+// LinkGates is a paid mutator transaction binding the contract method 0x1caa06ce.
 //
-// Solidity: function inventoryToEphemeralTransfer(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) InventoryToEphemeralTransfer(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []TransferItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.InventoryToEphemeralTransfer(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
-}
-
-// LinkSmartGates is a paid mutator transaction binding the contract method 0xd40adbfb.
-//
-// Solidity: function linkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) LinkSmartGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "linkSmartGates", sourceGateId, destinationGateId)
-}
-
-// LinkSmartGates is a paid mutator transaction binding the contract method 0xd40adbfb.
-//
-// Solidity: function linkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_ERC2771World *ERC2771WorldSession) LinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.LinkSmartGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
-}
-
-// LinkSmartGates is a paid mutator transaction binding the contract method 0xd40adbfb.
-//
-// Solidity: function linkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) LinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.LinkSmartGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function linkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) LinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.LinkGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
 }
 
 // PopFromDynamicField is a paid mutator transaction binding the contract method 0xd9c03a04.
@@ -1723,69 +3392,6 @@ func (_ERC2771World *ERC2771WorldSession) RegisterDelegation(delegatee common.Ad
 // Solidity: function registerDelegation(address delegatee, bytes32 delegationControlId, bytes initCallData) returns()
 func (_ERC2771World *ERC2771WorldTransactorSession) RegisterDelegation(delegatee common.Address, delegationControlId [32]byte, initCallData []byte) (*types.Transaction, error) {
 	return _ERC2771World.Contract.RegisterDelegation(&_ERC2771World.TransactOpts, delegatee, delegationControlId, initCallData)
-}
-
-// RegisterDeployable is a paid mutator transaction binding the contract method 0x922bd0ca.
-//
-// Solidity: function registerDeployable(uint256 entityId, (address,string) smartObjectData, uint256 fuelUnitVolumeInWei, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacityInWei) returns()
-func (_ERC2771World *ERC2771WorldTransactor) RegisterDeployable(opts *bind.TransactOpts, entityId *big.Int, smartObjectData SmartObjectData, fuelUnitVolumeInWei *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacityInWei *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "registerDeployable", entityId, smartObjectData, fuelUnitVolumeInWei, fuelConsumptionIntervalInSeconds, fuelMaxCapacityInWei)
-}
-
-// RegisterDeployable is a paid mutator transaction binding the contract method 0x922bd0ca.
-//
-// Solidity: function registerDeployable(uint256 entityId, (address,string) smartObjectData, uint256 fuelUnitVolumeInWei, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacityInWei) returns()
-func (_ERC2771World *ERC2771WorldSession) RegisterDeployable(entityId *big.Int, smartObjectData SmartObjectData, fuelUnitVolumeInWei *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacityInWei *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.RegisterDeployable(&_ERC2771World.TransactOpts, entityId, smartObjectData, fuelUnitVolumeInWei, fuelConsumptionIntervalInSeconds, fuelMaxCapacityInWei)
-}
-
-// RegisterDeployable is a paid mutator transaction binding the contract method 0x922bd0ca.
-//
-// Solidity: function registerDeployable(uint256 entityId, (address,string) smartObjectData, uint256 fuelUnitVolumeInWei, uint256 fuelConsumptionIntervalInSeconds, uint256 fuelMaxCapacityInWei) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) RegisterDeployable(entityId *big.Int, smartObjectData SmartObjectData, fuelUnitVolumeInWei *big.Int, fuelConsumptionIntervalInSeconds *big.Int, fuelMaxCapacityInWei *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.RegisterDeployable(&_ERC2771World.TransactOpts, entityId, smartObjectData, fuelUnitVolumeInWei, fuelConsumptionIntervalInSeconds, fuelMaxCapacityInWei)
-}
-
-// RegisterDeployableToken is a paid mutator transaction binding the contract method 0x7b0d0e3c.
-//
-// Solidity: function registerDeployableToken(address tokenAddress) returns()
-func (_ERC2771World *ERC2771WorldTransactor) RegisterDeployableToken(opts *bind.TransactOpts, tokenAddress common.Address) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "registerDeployableToken", tokenAddress)
-}
-
-// RegisterDeployableToken is a paid mutator transaction binding the contract method 0x7b0d0e3c.
-//
-// Solidity: function registerDeployableToken(address tokenAddress) returns()
-func (_ERC2771World *ERC2771WorldSession) RegisterDeployableToken(tokenAddress common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.RegisterDeployableToken(&_ERC2771World.TransactOpts, tokenAddress)
-}
-
-// RegisterDeployableToken is a paid mutator transaction binding the contract method 0x7b0d0e3c.
-//
-// Solidity: function registerDeployableToken(address tokenAddress) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) RegisterDeployableToken(tokenAddress common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.RegisterDeployableToken(&_ERC2771World.TransactOpts, tokenAddress)
-}
-
-// RegisterERC721Token is a paid mutator transaction binding the contract method 0x2c3309d1.
-//
-// Solidity: function registerERC721Token(address tokenAddress) returns()
-func (_ERC2771World *ERC2771WorldTransactor) RegisterERC721Token(opts *bind.TransactOpts, tokenAddress common.Address) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "registerERC721Token", tokenAddress)
-}
-
-// RegisterERC721Token is a paid mutator transaction binding the contract method 0x2c3309d1.
-//
-// Solidity: function registerERC721Token(address tokenAddress) returns()
-func (_ERC2771World *ERC2771WorldSession) RegisterERC721Token(tokenAddress common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.RegisterERC721Token(&_ERC2771World.TransactOpts, tokenAddress)
-}
-
-// RegisterERC721Token is a paid mutator transaction binding the contract method 0x2c3309d1.
-//
-// Solidity: function registerERC721Token(address tokenAddress) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) RegisterERC721Token(tokenAddress common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.RegisterERC721Token(&_ERC2771World.TransactOpts, tokenAddress)
 }
 
 // RegisterFunctionSelector is a paid mutator transaction binding the contract method 0x26d98102.
@@ -1872,6 +3478,90 @@ func (_ERC2771World *ERC2771WorldTransactorSession) RegisterRootFunctionSelector
 	return _ERC2771World.Contract.RegisterRootFunctionSelector(&_ERC2771World.TransactOpts, systemId, worldFunctionSignature, systemFunctionSignature)
 }
 
+// RegisterSmartCharacterClass is a paid mutator transaction binding the contract method 0x3664e851.
+//
+// Solidity: function registerSmartCharacterClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RegisterSmartCharacterClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "registerSmartCharacterClass", typeId, volume)
+}
+
+// RegisterSmartCharacterClass is a paid mutator transaction binding the contract method 0x3664e851.
+//
+// Solidity: function registerSmartCharacterClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldSession) RegisterSmartCharacterClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartCharacterClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartCharacterClass is a paid mutator transaction binding the contract method 0x3664e851.
+//
+// Solidity: function registerSmartCharacterClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RegisterSmartCharacterClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartCharacterClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartGateClass is a paid mutator transaction binding the contract method 0x63d71589.
+//
+// Solidity: function registerSmartGateClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RegisterSmartGateClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "registerSmartGateClass", typeId, volume)
+}
+
+// RegisterSmartGateClass is a paid mutator transaction binding the contract method 0x63d71589.
+//
+// Solidity: function registerSmartGateClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldSession) RegisterSmartGateClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartGateClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartGateClass is a paid mutator transaction binding the contract method 0x63d71589.
+//
+// Solidity: function registerSmartGateClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RegisterSmartGateClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartGateClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartStorageUnitClass is a paid mutator transaction binding the contract method 0x1f5493d1.
+//
+// Solidity: function registerSmartStorageUnitClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RegisterSmartStorageUnitClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "registerSmartStorageUnitClass", typeId, volume)
+}
+
+// RegisterSmartStorageUnitClass is a paid mutator transaction binding the contract method 0x1f5493d1.
+//
+// Solidity: function registerSmartStorageUnitClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldSession) RegisterSmartStorageUnitClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartStorageUnitClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartStorageUnitClass is a paid mutator transaction binding the contract method 0x1f5493d1.
+//
+// Solidity: function registerSmartStorageUnitClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RegisterSmartStorageUnitClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartStorageUnitClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartTurretClass is a paid mutator transaction binding the contract method 0x2cf57627.
+//
+// Solidity: function registerSmartTurretClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RegisterSmartTurretClass(opts *bind.TransactOpts, typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "registerSmartTurretClass", typeId, volume)
+}
+
+// RegisterSmartTurretClass is a paid mutator transaction binding the contract method 0x2cf57627.
+//
+// Solidity: function registerSmartTurretClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldSession) RegisterSmartTurretClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartTurretClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
+// RegisterSmartTurretClass is a paid mutator transaction binding the contract method 0x2cf57627.
+//
+// Solidity: function registerSmartTurretClass(uint256 typeId, uint256 volume) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RegisterSmartTurretClass(typeId *big.Int, volume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RegisterSmartTurretClass(&_ERC2771World.TransactOpts, typeId, volume)
+}
+
 // RegisterStoreHook is a paid mutator transaction binding the contract method 0x530f4b60.
 //
 // Solidity: function registerStoreHook(bytes32 tableId, address hookAddress, uint8 enabledHooksBitmap) returns()
@@ -1956,6 +3646,69 @@ func (_ERC2771World *ERC2771WorldTransactorSession) RegisterTable(tableId [32]by
 	return _ERC2771World.Contract.RegisterTable(&_ERC2771World.TransactOpts, tableId, fieldLayout, keySchema, valueSchema, keyNames, fieldNames)
 }
 
+// RemoveCharacter is a paid mutator transaction binding the contract method 0x834f6531.
+//
+// Solidity: function removeCharacter(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RemoveCharacter(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "removeCharacter", smartObjectId)
+}
+
+// RemoveCharacter is a paid mutator transaction binding the contract method 0x834f6531.
+//
+// Solidity: function removeCharacter(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldSession) RemoveCharacter(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RemoveCharacter(&_ERC2771World.TransactOpts, smartObjectId)
+}
+
+// RemoveCharacter is a paid mutator transaction binding the contract method 0x834f6531.
+//
+// Solidity: function removeCharacter(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RemoveCharacter(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RemoveCharacter(&_ERC2771World.TransactOpts, smartObjectId)
+}
+
+// RemoveItemFromInventory is a paid mutator transaction binding the contract method 0x8a38b387.
+//
+// Solidity: function removeItemFromInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RemoveItemFromInventory(opts *bind.TransactOpts, inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "removeItemFromInventory", inventoryObjectId, itemObjectId, quantity)
+}
+
+// RemoveItemFromInventory is a paid mutator transaction binding the contract method 0x8a38b387.
+//
+// Solidity: function removeItemFromInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_ERC2771World *ERC2771WorldSession) RemoveItemFromInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RemoveItemFromInventory(&_ERC2771World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
+}
+
+// RemoveItemFromInventory is a paid mutator transaction binding the contract method 0x8a38b387.
+//
+// Solidity: function removeItemFromInventory(uint256 inventoryObjectId, uint256 itemObjectId, uint256 quantity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RemoveItemFromInventory(inventoryObjectId *big.Int, itemObjectId *big.Int, quantity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RemoveItemFromInventory(&_ERC2771World.TransactOpts, inventoryObjectId, itemObjectId, quantity)
+}
+
+// RemoveOwner is a paid mutator transaction binding the contract method 0x0058bbfd.
+//
+// Solidity: function removeOwner(uint256 smartObjectId, address from) returns()
+func (_ERC2771World *ERC2771WorldTransactor) RemoveOwner(opts *bind.TransactOpts, smartObjectId *big.Int, from common.Address) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "removeOwner", smartObjectId, from)
+}
+
+// RemoveOwner is a paid mutator transaction binding the contract method 0x0058bbfd.
+//
+// Solidity: function removeOwner(uint256 smartObjectId, address from) returns()
+func (_ERC2771World *ERC2771WorldSession) RemoveOwner(smartObjectId *big.Int, from common.Address) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RemoveOwner(&_ERC2771World.TransactOpts, smartObjectId, from)
+}
+
+// RemoveOwner is a paid mutator transaction binding the contract method 0x0058bbfd.
+//
+// Solidity: function removeOwner(uint256 smartObjectId, address from) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) RemoveOwner(smartObjectId *big.Int, from common.Address) (*types.Transaction, error) {
+	return _ERC2771World.Contract.RemoveOwner(&_ERC2771World.TransactOpts, smartObjectId, from)
+}
+
 // RenounceOwnership is a paid mutator transaction binding the contract method 0x219adc2e.
 //
 // Solidity: function renounceOwnership(bytes32 namespaceId) returns()
@@ -1979,23 +3732,23 @@ func (_ERC2771World *ERC2771WorldTransactorSession) RenounceOwnership(namespaceI
 
 // ReportKill is a paid mutator transaction binding the contract method 0xda3293e1.
 //
-// Solidity: function reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailTableData) returns()
-func (_ERC2771World *ERC2771WorldTransactor) ReportKill(opts *bind.TransactOpts, killMailId *big.Int, killMailTableData KillMailTableData) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "reportKill", killMailId, killMailTableData)
+// Solidity: function reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailData) returns()
+func (_ERC2771World *ERC2771WorldTransactor) ReportKill(opts *bind.TransactOpts, killMailId *big.Int, killMailData KillMailData) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "reportKill", killMailId, killMailData)
 }
 
 // ReportKill is a paid mutator transaction binding the contract method 0xda3293e1.
 //
-// Solidity: function reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailTableData) returns()
-func (_ERC2771World *ERC2771WorldSession) ReportKill(killMailId *big.Int, killMailTableData KillMailTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.ReportKill(&_ERC2771World.TransactOpts, killMailId, killMailTableData)
+// Solidity: function reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailData) returns()
+func (_ERC2771World *ERC2771WorldSession) ReportKill(killMailId *big.Int, killMailData KillMailData) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ReportKill(&_ERC2771World.TransactOpts, killMailId, killMailData)
 }
 
 // ReportKill is a paid mutator transaction binding the contract method 0xda3293e1.
 //
-// Solidity: function reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailTableData) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) ReportKill(killMailId *big.Int, killMailTableData KillMailTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.ReportKill(&_ERC2771World.TransactOpts, killMailId, killMailTableData)
+// Solidity: function reportKill(uint256 killMailId, (uint256,uint256,uint8,uint256,uint256) killMailData) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) ReportKill(killMailId *big.Int, killMailData KillMailData) (*types.Transaction, error) {
+	return _ERC2771World.Contract.ReportKill(&_ERC2771World.TransactOpts, killMailId, killMailData)
 }
 
 // RevokeAccess is a paid mutator transaction binding the contract method 0x8d53b208.
@@ -2021,254 +3774,128 @@ func (_ERC2771World *ERC2771WorldTransactorSession) RevokeAccess(resourceId [32]
 
 // SaveLocation is a paid mutator transaction binding the contract method 0x2f525c1c.
 //
-// Solidity: function saveLocation(uint256 entityId, (uint256,uint256,uint256,uint256) location) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SaveLocation(opts *bind.TransactOpts, entityId *big.Int, location LocationTableData) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "saveLocation", entityId, location)
+// Solidity: function saveLocation(uint256 smartObjectId, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SaveLocation(opts *bind.TransactOpts, smartObjectId *big.Int, locationData LocationData) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "saveLocation", smartObjectId, locationData)
 }
 
 // SaveLocation is a paid mutator transaction binding the contract method 0x2f525c1c.
 //
-// Solidity: function saveLocation(uint256 entityId, (uint256,uint256,uint256,uint256) location) returns()
-func (_ERC2771World *ERC2771WorldSession) SaveLocation(entityId *big.Int, location LocationTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SaveLocation(&_ERC2771World.TransactOpts, entityId, location)
+// Solidity: function saveLocation(uint256 smartObjectId, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_ERC2771World *ERC2771WorldSession) SaveLocation(smartObjectId *big.Int, locationData LocationData) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SaveLocation(&_ERC2771World.TransactOpts, smartObjectId, locationData)
 }
 
 // SaveLocation is a paid mutator transaction binding the contract method 0x2f525c1c.
 //
-// Solidity: function saveLocation(uint256 entityId, (uint256,uint256,uint256,uint256) location) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SaveLocation(entityId *big.Int, location LocationTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SaveLocation(&_ERC2771World.TransactOpts, entityId, location)
+// Solidity: function saveLocation(uint256 smartObjectId, (uint256,uint256,uint256,uint256) locationData) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SaveLocation(smartObjectId *big.Int, locationData LocationData) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SaveLocation(&_ERC2771World.TransactOpts, smartObjectId, locationData)
 }
 
-// SetAccessEnforcement is a paid mutator transaction binding the contract method 0x572b9514.
+// SetAssemblyType is a paid mutator transaction binding the contract method 0xf9914db3.
 //
-// Solidity: function setAccessEnforcement(bytes32 target, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetAccessEnforcement(opts *bind.TransactOpts, target [32]byte, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setAccessEnforcement", target, isEnforced)
+// Solidity: function setAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetAssemblyType(opts *bind.TransactOpts, smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setAssemblyType", smartObjectId, assemblyType)
 }
 
-// SetAccessEnforcement is a paid mutator transaction binding the contract method 0x572b9514.
+// SetAssemblyType is a paid mutator transaction binding the contract method 0xf9914db3.
 //
-// Solidity: function setAccessEnforcement(bytes32 target, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldSession) SetAccessEnforcement(target [32]byte, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAccessEnforcement(&_ERC2771World.TransactOpts, target, isEnforced)
+// Solidity: function setAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_ERC2771World *ERC2771WorldSession) SetAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetAssemblyType(&_ERC2771World.TransactOpts, smartObjectId, assemblyType)
 }
 
-// SetAccessEnforcement is a paid mutator transaction binding the contract method 0x572b9514.
+// SetAssemblyType is a paid mutator transaction binding the contract method 0xf9914db3.
 //
-// Solidity: function setAccessEnforcement(bytes32 target, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetAccessEnforcement(target [32]byte, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAccessEnforcement(&_ERC2771World.TransactOpts, target, isEnforced)
+// Solidity: function setAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetAssemblyType(&_ERC2771World.TransactOpts, smartObjectId, assemblyType)
 }
 
-// SetAccessListByRole is a paid mutator transaction binding the contract method 0x9991d221.
+// SetCapacity is a paid mutator transaction binding the contract method 0xdee2b058.
 //
-// Solidity: function setAccessListByRole(bytes32 accessRoleId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetAccessListByRole(opts *bind.TransactOpts, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setAccessListByRole", accessRoleId, accessList)
+// Solidity: function setCapacity(uint256 smartObjectId, uint256 capacity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, capacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setCapacity", smartObjectId, capacity)
 }
 
-// SetAccessListByRole is a paid mutator transaction binding the contract method 0x9991d221.
+// SetCapacity is a paid mutator transaction binding the contract method 0xdee2b058.
 //
-// Solidity: function setAccessListByRole(bytes32 accessRoleId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldSession) SetAccessListByRole(accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAccessListByRole(&_ERC2771World.TransactOpts, accessRoleId, accessList)
+// Solidity: function setCapacity(uint256 smartObjectId, uint256 capacity) returns()
+func (_ERC2771World *ERC2771WorldSession) SetCapacity(smartObjectId *big.Int, capacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetCapacity(&_ERC2771World.TransactOpts, smartObjectId, capacity)
 }
 
-// SetAccessListByRole is a paid mutator transaction binding the contract method 0x9991d221.
+// SetCapacity is a paid mutator transaction binding the contract method 0xdee2b058.
 //
-// Solidity: function setAccessListByRole(bytes32 accessRoleId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetAccessListByRole(accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAccessListByRole(&_ERC2771World.TransactOpts, accessRoleId, accessList)
+// Solidity: function setCapacity(uint256 smartObjectId, uint256 capacity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetCapacity(smartObjectId *big.Int, capacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetCapacity(&_ERC2771World.TransactOpts, smartObjectId, capacity)
 }
 
-// SetAccessListPerSystemByRole is a paid mutator transaction binding the contract method 0x8af533b7.
+// SetCrossTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0x5f3be290.
 //
-// Solidity: function setAccessListPerSystemByRole(bytes32 systemId, bytes32 accessRoleId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetAccessListPerSystemByRole(opts *bind.TransactOpts, systemId [32]byte, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setAccessListPerSystemByRole", systemId, accessRoleId, accessList)
+// Solidity: function setCrossTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetCrossTransferToEphemeralAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setCrossTransferToEphemeralAccess", smartObjectId, accessAddress, isAllowed)
 }
 
-// SetAccessListPerSystemByRole is a paid mutator transaction binding the contract method 0x8af533b7.
+// SetCrossTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0x5f3be290.
 //
-// Solidity: function setAccessListPerSystemByRole(bytes32 systemId, bytes32 accessRoleId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldSession) SetAccessListPerSystemByRole(systemId [32]byte, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAccessListPerSystemByRole(&_ERC2771World.TransactOpts, systemId, accessRoleId, accessList)
+// Solidity: function setCrossTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldSession) SetCrossTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetCrossTransferToEphemeralAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
 }
 
-// SetAccessListPerSystemByRole is a paid mutator transaction binding the contract method 0x8af533b7.
+// SetCrossTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0x5f3be290.
 //
-// Solidity: function setAccessListPerSystemByRole(bytes32 systemId, bytes32 accessRoleId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetAccessListPerSystemByRole(systemId [32]byte, accessRoleId [32]byte, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAccessListPerSystemByRole(&_ERC2771World.TransactOpts, systemId, accessRoleId, accessList)
-}
-
-// SetAllInventoryTransferAccess is a paid mutator transaction binding the contract method 0x2420bacf.
-//
-// Solidity: function setAllInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetAllInventoryTransferAccess(opts *bind.TransactOpts, smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setAllInventoryTransferAccess", smartObjectId, isEnforced)
-}
-
-// SetAllInventoryTransferAccess is a paid mutator transaction binding the contract method 0x2420bacf.
-//
-// Solidity: function setAllInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldSession) SetAllInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAllInventoryTransferAccess(&_ERC2771World.TransactOpts, smartObjectId, isEnforced)
-}
-
-// SetAllInventoryTransferAccess is a paid mutator transaction binding the contract method 0x2420bacf.
-//
-// Solidity: function setAllInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetAllInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetAllInventoryTransferAccess(&_ERC2771World.TransactOpts, smartObjectId, isEnforced)
-}
-
-// SetApprovedAccessList is a paid mutator transaction binding the contract method 0x5f599c9f.
-//
-// Solidity: function setApprovedAccessList(uint256 smartObjectId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetApprovedAccessList(opts *bind.TransactOpts, smartObjectId *big.Int, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setApprovedAccessList", smartObjectId, accessList)
-}
-
-// SetApprovedAccessList is a paid mutator transaction binding the contract method 0x5f599c9f.
-//
-// Solidity: function setApprovedAccessList(uint256 smartObjectId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldSession) SetApprovedAccessList(smartObjectId *big.Int, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetApprovedAccessList(&_ERC2771World.TransactOpts, smartObjectId, accessList)
-}
-
-// SetApprovedAccessList is a paid mutator transaction binding the contract method 0x5f599c9f.
-//
-// Solidity: function setApprovedAccessList(uint256 smartObjectId, address[] accessList) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetApprovedAccessList(smartObjectId *big.Int, accessList []common.Address) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetApprovedAccessList(&_ERC2771World.TransactOpts, smartObjectId, accessList)
-}
-
-// SetBaseURI is a paid mutator transaction binding the contract method 0x8bf3d594.
-//
-// Solidity: function setBaseURI(bytes32 systemId, string baseURI) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetBaseURI(opts *bind.TransactOpts, systemId [32]byte, baseURI string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setBaseURI", systemId, baseURI)
-}
-
-// SetBaseURI is a paid mutator transaction binding the contract method 0x8bf3d594.
-//
-// Solidity: function setBaseURI(bytes32 systemId, string baseURI) returns()
-func (_ERC2771World *ERC2771WorldSession) SetBaseURI(systemId [32]byte, baseURI string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetBaseURI(&_ERC2771World.TransactOpts, systemId, baseURI)
-}
-
-// SetBaseURI is a paid mutator transaction binding the contract method 0x8bf3d594.
-//
-// Solidity: function setBaseURI(bytes32 systemId, string baseURI) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetBaseURI(systemId [32]byte, baseURI string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetBaseURI(&_ERC2771World.TransactOpts, systemId, baseURI)
-}
-
-// SetCharClassId is a paid mutator transaction binding the contract method 0xf83a5887.
-//
-// Solidity: function setCharClassId(uint256 classId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetCharClassId(opts *bind.TransactOpts, classId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setCharClassId", classId)
-}
-
-// SetCharClassId is a paid mutator transaction binding the contract method 0xf83a5887.
-//
-// Solidity: function setCharClassId(uint256 classId) returns()
-func (_ERC2771World *ERC2771WorldSession) SetCharClassId(classId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetCharClassId(&_ERC2771World.TransactOpts, classId)
-}
-
-// SetCharClassId is a paid mutator transaction binding the contract method 0xf83a5887.
-//
-// Solidity: function setCharClassId(uint256 classId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetCharClassId(classId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetCharClassId(&_ERC2771World.TransactOpts, classId)
-}
-
-// SetCid is a paid mutator transaction binding the contract method 0x1cc5fe59.
-//
-// Solidity: function setCid(uint256 entityId, string cid) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetCid(opts *bind.TransactOpts, entityId *big.Int, cid string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setCid", entityId, cid)
-}
-
-// SetCid is a paid mutator transaction binding the contract method 0x1cc5fe59.
-//
-// Solidity: function setCid(uint256 entityId, string cid) returns()
-func (_ERC2771World *ERC2771WorldSession) SetCid(entityId *big.Int, cid string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetCid(&_ERC2771World.TransactOpts, entityId, cid)
-}
-
-// SetCid is a paid mutator transaction binding the contract method 0x1cc5fe59.
-//
-// Solidity: function setCid(uint256 entityId, string cid) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetCid(entityId *big.Int, cid string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetCid(&_ERC2771World.TransactOpts, entityId, cid)
+// Solidity: function setCrossTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetCrossTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetCrossTransferToEphemeralAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
 }
 
 // SetDappURL is a paid mutator transaction binding the contract method 0x63b6b498.
 //
-// Solidity: function setDappURL(uint256 entityId, string dappURL) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetDappURL(opts *bind.TransactOpts, entityId *big.Int, dappURL string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setDappURL", entityId, dappURL)
+// Solidity: function setDappURL(uint256 smartObjectId, string dappURL) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetDappURL(opts *bind.TransactOpts, smartObjectId *big.Int, dappURL string) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setDappURL", smartObjectId, dappURL)
 }
 
 // SetDappURL is a paid mutator transaction binding the contract method 0x63b6b498.
 //
-// Solidity: function setDappURL(uint256 entityId, string dappURL) returns()
-func (_ERC2771World *ERC2771WorldSession) SetDappURL(entityId *big.Int, dappURL string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetDappURL(&_ERC2771World.TransactOpts, entityId, dappURL)
+// Solidity: function setDappURL(uint256 smartObjectId, string dappURL) returns()
+func (_ERC2771World *ERC2771WorldSession) SetDappURL(smartObjectId *big.Int, dappURL string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetDappURL(&_ERC2771World.TransactOpts, smartObjectId, dappURL)
 }
 
 // SetDappURL is a paid mutator transaction binding the contract method 0x63b6b498.
 //
-// Solidity: function setDappURL(uint256 entityId, string dappURL) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetDappURL(entityId *big.Int, dappURL string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetDappURL(&_ERC2771World.TransactOpts, entityId, dappURL)
-}
-
-// SetDeployableMetadata is a paid mutator transaction binding the contract method 0x8418f4cf.
-//
-// Solidity: function setDeployableMetadata(uint256 smartObjectId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetDeployableMetadata(opts *bind.TransactOpts, smartObjectId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setDeployableMetadata", smartObjectId, name, dappURL, description)
-}
-
-// SetDeployableMetadata is a paid mutator transaction binding the contract method 0x8418f4cf.
-//
-// Solidity: function setDeployableMetadata(uint256 smartObjectId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldSession) SetDeployableMetadata(smartObjectId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetDeployableMetadata(&_ERC2771World.TransactOpts, smartObjectId, name, dappURL, description)
-}
-
-// SetDeployableMetadata is a paid mutator transaction binding the contract method 0x8418f4cf.
-//
-// Solidity: function setDeployableMetadata(uint256 smartObjectId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetDeployableMetadata(smartObjectId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetDeployableMetadata(&_ERC2771World.TransactOpts, smartObjectId, name, dappURL, description)
+// Solidity: function setDappURL(uint256 smartObjectId, string dappURL) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetDappURL(smartObjectId *big.Int, dappURL string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetDappURL(&_ERC2771World.TransactOpts, smartObjectId, dappURL)
 }
 
 // SetDescription is a paid mutator transaction binding the contract method 0x2a6446ca.
 //
-// Solidity: function setDescription(uint256 entityId, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetDescription(opts *bind.TransactOpts, entityId *big.Int, description string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setDescription", entityId, description)
+// Solidity: function setDescription(uint256 smartObjectId, string description) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetDescription(opts *bind.TransactOpts, smartObjectId *big.Int, description string) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setDescription", smartObjectId, description)
 }
 
 // SetDescription is a paid mutator transaction binding the contract method 0x2a6446ca.
 //
-// Solidity: function setDescription(uint256 entityId, string description) returns()
-func (_ERC2771World *ERC2771WorldSession) SetDescription(entityId *big.Int, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetDescription(&_ERC2771World.TransactOpts, entityId, description)
+// Solidity: function setDescription(uint256 smartObjectId, string description) returns()
+func (_ERC2771World *ERC2771WorldSession) SetDescription(smartObjectId *big.Int, description string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetDescription(&_ERC2771World.TransactOpts, smartObjectId, description)
 }
 
 // SetDescription is a paid mutator transaction binding the contract method 0x2a6446ca.
 //
-// Solidity: function setDescription(uint256 entityId, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetDescription(entityId *big.Int, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetDescription(&_ERC2771World.TransactOpts, entityId, description)
+// Solidity: function setDescription(uint256 smartObjectId, string description) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetDescription(smartObjectId *big.Int, description string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetDescription(&_ERC2771World.TransactOpts, smartObjectId, description)
 }
 
 // SetDynamicField is a paid mutator transaction binding the contract method 0xef6ea862.
@@ -2292,67 +3919,25 @@ func (_ERC2771World *ERC2771WorldTransactorSession) SetDynamicField(tableId [32]
 	return _ERC2771World.Contract.SetDynamicField(&_ERC2771World.TransactOpts, tableId, keyTuple, dynamicFieldIndex, data)
 }
 
-// SetEntityMetadata is a paid mutator transaction binding the contract method 0x5f9c496a.
+// SetEphemeralCapacity is a paid mutator transaction binding the contract method 0xbc8229dc.
 //
-// Solidity: function setEntityMetadata(uint256 entityId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetEntityMetadata(opts *bind.TransactOpts, entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setEntityMetadata", entityId, name, dappURL, description)
+// Solidity: function setEphemeralCapacity(uint256 smartObjectId, uint256 ephemeralCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetEphemeralCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setEphemeralCapacity", smartObjectId, ephemeralCapacity)
 }
 
-// SetEntityMetadata is a paid mutator transaction binding the contract method 0x5f9c496a.
+// SetEphemeralCapacity is a paid mutator transaction binding the contract method 0xbc8229dc.
 //
-// Solidity: function setEntityMetadata(uint256 entityId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldSession) SetEntityMetadata(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetEntityMetadata(&_ERC2771World.TransactOpts, entityId, name, dappURL, description)
+// Solidity: function setEphemeralCapacity(uint256 smartObjectId, uint256 ephemeralCapacity) returns()
+func (_ERC2771World *ERC2771WorldSession) SetEphemeralCapacity(smartObjectId *big.Int, ephemeralCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetEphemeralCapacity(&_ERC2771World.TransactOpts, smartObjectId, ephemeralCapacity)
 }
 
-// SetEntityMetadata is a paid mutator transaction binding the contract method 0x5f9c496a.
+// SetEphemeralCapacity is a paid mutator transaction binding the contract method 0xbc8229dc.
 //
-// Solidity: function setEntityMetadata(uint256 entityId, string name, string dappURL, string description) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetEntityMetadata(entityId *big.Int, name string, dappURL string, description string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetEntityMetadata(&_ERC2771World.TransactOpts, entityId, name, dappURL, description)
-}
-
-// SetEphemeralInventoryCapacity is a paid mutator transaction binding the contract method 0x20305602.
-//
-// Solidity: function setEphemeralInventoryCapacity(uint256 smartObjectId, uint256 ephemeralStorageCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetEphemeralInventoryCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setEphemeralInventoryCapacity", smartObjectId, ephemeralStorageCapacity)
-}
-
-// SetEphemeralInventoryCapacity is a paid mutator transaction binding the contract method 0x20305602.
-//
-// Solidity: function setEphemeralInventoryCapacity(uint256 smartObjectId, uint256 ephemeralStorageCapacity) returns()
-func (_ERC2771World *ERC2771WorldSession) SetEphemeralInventoryCapacity(smartObjectId *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetEphemeralInventoryCapacity(&_ERC2771World.TransactOpts, smartObjectId, ephemeralStorageCapacity)
-}
-
-// SetEphemeralInventoryCapacity is a paid mutator transaction binding the contract method 0x20305602.
-//
-// Solidity: function setEphemeralInventoryCapacity(uint256 smartObjectId, uint256 ephemeralStorageCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetEphemeralInventoryCapacity(smartObjectId *big.Int, ephemeralStorageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetEphemeralInventoryCapacity(&_ERC2771World.TransactOpts, smartObjectId, ephemeralStorageCapacity)
-}
-
-// SetEphemeralToInventoryTransferAccess is a paid mutator transaction binding the contract method 0xd399fbfe.
-//
-// Solidity: function setEphemeralToInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetEphemeralToInventoryTransferAccess(opts *bind.TransactOpts, smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setEphemeralToInventoryTransferAccess", smartObjectId, isEnforced)
-}
-
-// SetEphemeralToInventoryTransferAccess is a paid mutator transaction binding the contract method 0xd399fbfe.
-//
-// Solidity: function setEphemeralToInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldSession) SetEphemeralToInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetEphemeralToInventoryTransferAccess(&_ERC2771World.TransactOpts, smartObjectId, isEnforced)
-}
-
-// SetEphemeralToInventoryTransferAccess is a paid mutator transaction binding the contract method 0xd399fbfe.
-//
-// Solidity: function setEphemeralToInventoryTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetEphemeralToInventoryTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetEphemeralToInventoryTransferAccess(&_ERC2771World.TransactOpts, smartObjectId, isEnforced)
+// Solidity: function setEphemeralCapacity(uint256 smartObjectId, uint256 ephemeralCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetEphemeralCapacity(smartObjectId *big.Int, ephemeralCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetEphemeralCapacity(&_ERC2771World.TransactOpts, smartObjectId, ephemeralCapacity)
 }
 
 // SetField is a paid mutator transaction binding the contract method 0x114a7266.
@@ -2397,151 +3982,109 @@ func (_ERC2771World *ERC2771WorldTransactorSession) SetField0(tableId [32]byte, 
 	return _ERC2771World.Contract.SetField0(&_ERC2771World.TransactOpts, tableId, keyTuple, fieldIndex, data, fieldLayout)
 }
 
-// SetFuelConsumptionPerMinute is a paid mutator transaction binding the contract method 0xeb37e8f0.
+// SetFuelAmount is a paid mutator transaction binding the contract method 0xdd9879ba.
 //
-// Solidity: function setFuelConsumptionPerMinute(uint256 entityId, uint256 fuelConsumptionIntervalInSeconds) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetFuelConsumptionPerMinute(opts *bind.TransactOpts, entityId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setFuelConsumptionPerMinute", entityId, fuelConsumptionIntervalInSeconds)
+// Solidity: function setFuelAmount(uint256 smartObjectId, uint256 fuelAmountInWei) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetFuelAmount(opts *bind.TransactOpts, smartObjectId *big.Int, fuelAmountInWei *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setFuelAmount", smartObjectId, fuelAmountInWei)
 }
 
-// SetFuelConsumptionPerMinute is a paid mutator transaction binding the contract method 0xeb37e8f0.
+// SetFuelAmount is a paid mutator transaction binding the contract method 0xdd9879ba.
 //
-// Solidity: function setFuelConsumptionPerMinute(uint256 entityId, uint256 fuelConsumptionIntervalInSeconds) returns()
-func (_ERC2771World *ERC2771WorldSession) SetFuelConsumptionPerMinute(entityId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetFuelConsumptionPerMinute(&_ERC2771World.TransactOpts, entityId, fuelConsumptionIntervalInSeconds)
+// Solidity: function setFuelAmount(uint256 smartObjectId, uint256 fuelAmountInWei) returns()
+func (_ERC2771World *ERC2771WorldSession) SetFuelAmount(smartObjectId *big.Int, fuelAmountInWei *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelAmount(&_ERC2771World.TransactOpts, smartObjectId, fuelAmountInWei)
 }
 
-// SetFuelConsumptionPerMinute is a paid mutator transaction binding the contract method 0xeb37e8f0.
+// SetFuelAmount is a paid mutator transaction binding the contract method 0xdd9879ba.
 //
-// Solidity: function setFuelConsumptionPerMinute(uint256 entityId, uint256 fuelConsumptionIntervalInSeconds) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetFuelConsumptionPerMinute(entityId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetFuelConsumptionPerMinute(&_ERC2771World.TransactOpts, entityId, fuelConsumptionIntervalInSeconds)
+// Solidity: function setFuelAmount(uint256 smartObjectId, uint256 fuelAmountInWei) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetFuelAmount(smartObjectId *big.Int, fuelAmountInWei *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelAmount(&_ERC2771World.TransactOpts, smartObjectId, fuelAmountInWei)
+}
+
+// SetFuelConsumptionIntervalInSeconds is a paid mutator transaction binding the contract method 0xae426765.
+//
+// Solidity: function setFuelConsumptionIntervalInSeconds(uint256 smartObjectId, uint256 fuelConsumptionIntervalInSeconds) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetFuelConsumptionIntervalInSeconds(opts *bind.TransactOpts, smartObjectId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setFuelConsumptionIntervalInSeconds", smartObjectId, fuelConsumptionIntervalInSeconds)
+}
+
+// SetFuelConsumptionIntervalInSeconds is a paid mutator transaction binding the contract method 0xae426765.
+//
+// Solidity: function setFuelConsumptionIntervalInSeconds(uint256 smartObjectId, uint256 fuelConsumptionIntervalInSeconds) returns()
+func (_ERC2771World *ERC2771WorldSession) SetFuelConsumptionIntervalInSeconds(smartObjectId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelConsumptionIntervalInSeconds(&_ERC2771World.TransactOpts, smartObjectId, fuelConsumptionIntervalInSeconds)
+}
+
+// SetFuelConsumptionIntervalInSeconds is a paid mutator transaction binding the contract method 0xae426765.
+//
+// Solidity: function setFuelConsumptionIntervalInSeconds(uint256 smartObjectId, uint256 fuelConsumptionIntervalInSeconds) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetFuelConsumptionIntervalInSeconds(smartObjectId *big.Int, fuelConsumptionIntervalInSeconds *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelConsumptionIntervalInSeconds(&_ERC2771World.TransactOpts, smartObjectId, fuelConsumptionIntervalInSeconds)
 }
 
 // SetFuelMaxCapacity is a paid mutator transaction binding the contract method 0xb25f99bf.
 //
-// Solidity: function setFuelMaxCapacity(uint256 entityId, uint256 capacityInWei) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetFuelMaxCapacity(opts *bind.TransactOpts, entityId *big.Int, capacityInWei *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setFuelMaxCapacity", entityId, capacityInWei)
+// Solidity: function setFuelMaxCapacity(uint256 smartObjectId, uint256 fuelMaxCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetFuelMaxCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setFuelMaxCapacity", smartObjectId, fuelMaxCapacity)
 }
 
 // SetFuelMaxCapacity is a paid mutator transaction binding the contract method 0xb25f99bf.
 //
-// Solidity: function setFuelMaxCapacity(uint256 entityId, uint256 capacityInWei) returns()
-func (_ERC2771World *ERC2771WorldSession) SetFuelMaxCapacity(entityId *big.Int, capacityInWei *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetFuelMaxCapacity(&_ERC2771World.TransactOpts, entityId, capacityInWei)
+// Solidity: function setFuelMaxCapacity(uint256 smartObjectId, uint256 fuelMaxCapacity) returns()
+func (_ERC2771World *ERC2771WorldSession) SetFuelMaxCapacity(smartObjectId *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelMaxCapacity(&_ERC2771World.TransactOpts, smartObjectId, fuelMaxCapacity)
 }
 
 // SetFuelMaxCapacity is a paid mutator transaction binding the contract method 0xb25f99bf.
 //
-// Solidity: function setFuelMaxCapacity(uint256 entityId, uint256 capacityInWei) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetFuelMaxCapacity(entityId *big.Int, capacityInWei *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetFuelMaxCapacity(&_ERC2771World.TransactOpts, entityId, capacityInWei)
+// Solidity: function setFuelMaxCapacity(uint256 smartObjectId, uint256 fuelMaxCapacity) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetFuelMaxCapacity(smartObjectId *big.Int, fuelMaxCapacity *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelMaxCapacity(&_ERC2771World.TransactOpts, smartObjectId, fuelMaxCapacity)
 }
 
-// SetInventoryCapacity is a paid mutator transaction binding the contract method 0x21b01b1d.
+// SetFuelUnitVolume is a paid mutator transaction binding the contract method 0x20fa3423.
 //
-// Solidity: function setInventoryCapacity(uint256 smartObjectId, uint256 storageCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetInventoryCapacity(opts *bind.TransactOpts, smartObjectId *big.Int, storageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setInventoryCapacity", smartObjectId, storageCapacity)
+// Solidity: function setFuelUnitVolume(uint256 smartObjectId, uint256 fuelUnitVolume) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetFuelUnitVolume(opts *bind.TransactOpts, smartObjectId *big.Int, fuelUnitVolume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setFuelUnitVolume", smartObjectId, fuelUnitVolume)
 }
 
-// SetInventoryCapacity is a paid mutator transaction binding the contract method 0x21b01b1d.
+// SetFuelUnitVolume is a paid mutator transaction binding the contract method 0x20fa3423.
 //
-// Solidity: function setInventoryCapacity(uint256 smartObjectId, uint256 storageCapacity) returns()
-func (_ERC2771World *ERC2771WorldSession) SetInventoryCapacity(smartObjectId *big.Int, storageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetInventoryCapacity(&_ERC2771World.TransactOpts, smartObjectId, storageCapacity)
+// Solidity: function setFuelUnitVolume(uint256 smartObjectId, uint256 fuelUnitVolume) returns()
+func (_ERC2771World *ERC2771WorldSession) SetFuelUnitVolume(smartObjectId *big.Int, fuelUnitVolume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelUnitVolume(&_ERC2771World.TransactOpts, smartObjectId, fuelUnitVolume)
 }
 
-// SetInventoryCapacity is a paid mutator transaction binding the contract method 0x21b01b1d.
+// SetFuelUnitVolume is a paid mutator transaction binding the contract method 0x20fa3423.
 //
-// Solidity: function setInventoryCapacity(uint256 smartObjectId, uint256 storageCapacity) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetInventoryCapacity(smartObjectId *big.Int, storageCapacity *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetInventoryCapacity(&_ERC2771World.TransactOpts, smartObjectId, storageCapacity)
-}
-
-// SetInventoryToEphemeralTransferAccess is a paid mutator transaction binding the contract method 0x6fbae188.
-//
-// Solidity: function setInventoryToEphemeralTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetInventoryToEphemeralTransferAccess(opts *bind.TransactOpts, smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setInventoryToEphemeralTransferAccess", smartObjectId, isEnforced)
-}
-
-// SetInventoryToEphemeralTransferAccess is a paid mutator transaction binding the contract method 0x6fbae188.
-//
-// Solidity: function setInventoryToEphemeralTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldSession) SetInventoryToEphemeralTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetInventoryToEphemeralTransferAccess(&_ERC2771World.TransactOpts, smartObjectId, isEnforced)
-}
-
-// SetInventoryToEphemeralTransferAccess is a paid mutator transaction binding the contract method 0x6fbae188.
-//
-// Solidity: function setInventoryToEphemeralTransferAccess(uint256 smartObjectId, bool isEnforced) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetInventoryToEphemeralTransferAccess(smartObjectId *big.Int, isEnforced bool) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetInventoryToEphemeralTransferAccess(&_ERC2771World.TransactOpts, smartObjectId, isEnforced)
-}
-
-// SetMetadata is a paid mutator transaction binding the contract method 0x7eaf1400.
-//
-// Solidity: function setMetadata(bytes32 systemId, (string,string,string) data) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetMetadata(opts *bind.TransactOpts, systemId [32]byte, data StaticDataGlobalTableData) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setMetadata", systemId, data)
-}
-
-// SetMetadata is a paid mutator transaction binding the contract method 0x7eaf1400.
-//
-// Solidity: function setMetadata(bytes32 systemId, (string,string,string) data) returns()
-func (_ERC2771World *ERC2771WorldSession) SetMetadata(systemId [32]byte, data StaticDataGlobalTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetMetadata(&_ERC2771World.TransactOpts, systemId, data)
-}
-
-// SetMetadata is a paid mutator transaction binding the contract method 0x7eaf1400.
-//
-// Solidity: function setMetadata(bytes32 systemId, (string,string,string) data) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetMetadata(systemId [32]byte, data StaticDataGlobalTableData) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetMetadata(&_ERC2771World.TransactOpts, systemId, data)
+// Solidity: function setFuelUnitVolume(uint256 smartObjectId, uint256 fuelUnitVolume) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetFuelUnitVolume(smartObjectId *big.Int, fuelUnitVolume *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetFuelUnitVolume(&_ERC2771World.TransactOpts, smartObjectId, fuelUnitVolume)
 }
 
 // SetName is a paid mutator transaction binding the contract method 0xfe55932a.
 //
-// Solidity: function setName(uint256 entityId, string name) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetName(opts *bind.TransactOpts, entityId *big.Int, name string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setName", entityId, name)
+// Solidity: function setName(uint256 smartObjectId, string name) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetName(opts *bind.TransactOpts, smartObjectId *big.Int, name string) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setName", smartObjectId, name)
 }
 
 // SetName is a paid mutator transaction binding the contract method 0xfe55932a.
 //
-// Solidity: function setName(uint256 entityId, string name) returns()
-func (_ERC2771World *ERC2771WorldSession) SetName(entityId *big.Int, name string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetName(&_ERC2771World.TransactOpts, entityId, name)
+// Solidity: function setName(uint256 smartObjectId, string name) returns()
+func (_ERC2771World *ERC2771WorldSession) SetName(smartObjectId *big.Int, name string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetName(&_ERC2771World.TransactOpts, smartObjectId, name)
 }
 
 // SetName is a paid mutator transaction binding the contract method 0xfe55932a.
 //
-// Solidity: function setName(uint256 entityId, string name) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetName(entityId *big.Int, name string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetName(&_ERC2771World.TransactOpts, entityId, name)
-}
-
-// SetName0 is a paid mutator transaction binding the contract method 0x77372213.
-//
-// Solidity: function setName(bytes32 systemId, string name) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetName0(opts *bind.TransactOpts, systemId [32]byte, name string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setName0", systemId, name)
-}
-
-// SetName0 is a paid mutator transaction binding the contract method 0x77372213.
-//
-// Solidity: function setName(bytes32 systemId, string name) returns()
-func (_ERC2771World *ERC2771WorldSession) SetName0(systemId [32]byte, name string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetName0(&_ERC2771World.TransactOpts, systemId, name)
-}
-
-// SetName0 is a paid mutator transaction binding the contract method 0x77372213.
-//
-// Solidity: function setName(bytes32 systemId, string name) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetName0(systemId [32]byte, name string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetName0(&_ERC2771World.TransactOpts, systemId, name)
+// Solidity: function setName(uint256 smartObjectId, string name) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetName(smartObjectId *big.Int, name string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetName(&_ERC2771World.TransactOpts, smartObjectId, name)
 }
 
 // SetRecord is a paid mutator transaction binding the contract method 0x298314fb.
@@ -2565,48 +4108,6 @@ func (_ERC2771World *ERC2771WorldTransactorSession) SetRecord(tableId [32]byte, 
 	return _ERC2771World.Contract.SetRecord(&_ERC2771World.TransactOpts, tableId, keyTuple, staticData, encodedLengths, dynamicData)
 }
 
-// SetSSUClassId is a paid mutator transaction binding the contract method 0xe2afb03b.
-//
-// Solidity: function setSSUClassId(uint256 classId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetSSUClassId(opts *bind.TransactOpts, classId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setSSUClassId", classId)
-}
-
-// SetSSUClassId is a paid mutator transaction binding the contract method 0xe2afb03b.
-//
-// Solidity: function setSSUClassId(uint256 classId) returns()
-func (_ERC2771World *ERC2771WorldSession) SetSSUClassId(classId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetSSUClassId(&_ERC2771World.TransactOpts, classId)
-}
-
-// SetSSUClassId is a paid mutator transaction binding the contract method 0xe2afb03b.
-//
-// Solidity: function setSSUClassId(uint256 classId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetSSUClassId(classId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetSSUClassId(&_ERC2771World.TransactOpts, classId)
-}
-
-// SetSmartAssemblyType is a paid mutator transaction binding the contract method 0xff6f1664.
-//
-// Solidity: function setSmartAssemblyType(uint256 entityId, uint8 smartAssemblyType) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetSmartAssemblyType(opts *bind.TransactOpts, entityId *big.Int, smartAssemblyType uint8) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setSmartAssemblyType", entityId, smartAssemblyType)
-}
-
-// SetSmartAssemblyType is a paid mutator transaction binding the contract method 0xff6f1664.
-//
-// Solidity: function setSmartAssemblyType(uint256 entityId, uint8 smartAssemblyType) returns()
-func (_ERC2771World *ERC2771WorldSession) SetSmartAssemblyType(entityId *big.Int, smartAssemblyType uint8) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetSmartAssemblyType(&_ERC2771World.TransactOpts, entityId, smartAssemblyType)
-}
-
-// SetSmartAssemblyType is a paid mutator transaction binding the contract method 0xff6f1664.
-//
-// Solidity: function setSmartAssemblyType(uint256 entityId, uint8 smartAssemblyType) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetSmartAssemblyType(entityId *big.Int, smartAssemblyType uint8) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetSmartAssemblyType(&_ERC2771World.TransactOpts, entityId, smartAssemblyType)
-}
-
 // SetStaticField is a paid mutator transaction binding the contract method 0x390baae0.
 //
 // Solidity: function setStaticField(bytes32 tableId, bytes32[] keyTuple, uint8 fieldIndex, bytes data, bytes32 fieldLayout) returns()
@@ -2628,25 +4129,67 @@ func (_ERC2771World *ERC2771WorldTransactorSession) SetStaticField(tableId [32]b
 	return _ERC2771World.Contract.SetStaticField(&_ERC2771World.TransactOpts, tableId, keyTuple, fieldIndex, data, fieldLayout)
 }
 
-// SetSymbol is a paid mutator transaction binding the contract method 0x0b1cb716.
+// SetTransferFromEphemeralAccess is a paid mutator transaction binding the contract method 0x8d0ead31.
 //
-// Solidity: function setSymbol(bytes32 systemId, string symbol) returns()
-func (_ERC2771World *ERC2771WorldTransactor) SetSymbol(opts *bind.TransactOpts, systemId [32]byte, symbol string) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "setSymbol", systemId, symbol)
+// Solidity: function setTransferFromEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetTransferFromEphemeralAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setTransferFromEphemeralAccess", smartObjectId, accessAddress, isAllowed)
 }
 
-// SetSymbol is a paid mutator transaction binding the contract method 0x0b1cb716.
+// SetTransferFromEphemeralAccess is a paid mutator transaction binding the contract method 0x8d0ead31.
 //
-// Solidity: function setSymbol(bytes32 systemId, string symbol) returns()
-func (_ERC2771World *ERC2771WorldSession) SetSymbol(systemId [32]byte, symbol string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetSymbol(&_ERC2771World.TransactOpts, systemId, symbol)
+// Solidity: function setTransferFromEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldSession) SetTransferFromEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetTransferFromEphemeralAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
 }
 
-// SetSymbol is a paid mutator transaction binding the contract method 0x0b1cb716.
+// SetTransferFromEphemeralAccess is a paid mutator transaction binding the contract method 0x8d0ead31.
 //
-// Solidity: function setSymbol(bytes32 systemId, string symbol) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) SetSymbol(systemId [32]byte, symbol string) (*types.Transaction, error) {
-	return _ERC2771World.Contract.SetSymbol(&_ERC2771World.TransactOpts, systemId, symbol)
+// Solidity: function setTransferFromEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetTransferFromEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetTransferFromEphemeralAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// SetTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0xd6873420.
+//
+// Solidity: function setTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetTransferToEphemeralAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setTransferToEphemeralAccess", smartObjectId, accessAddress, isAllowed)
+}
+
+// SetTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0xd6873420.
+//
+// Solidity: function setTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldSession) SetTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetTransferToEphemeralAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// SetTransferToEphemeralAccess is a paid mutator transaction binding the contract method 0xd6873420.
+//
+// Solidity: function setTransferToEphemeralAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetTransferToEphemeralAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetTransferToEphemeralAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// SetTransferToInventoryAccess is a paid mutator transaction binding the contract method 0x0a231135.
+//
+// Solidity: function setTransferToInventoryAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactor) SetTransferToInventoryAccess(opts *bind.TransactOpts, smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "setTransferToInventoryAccess", smartObjectId, accessAddress, isAllowed)
+}
+
+// SetTransferToInventoryAccess is a paid mutator transaction binding the contract method 0x0a231135.
+//
+// Solidity: function setTransferToInventoryAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldSession) SetTransferToInventoryAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetTransferToInventoryAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
+}
+
+// SetTransferToInventoryAccess is a paid mutator transaction binding the contract method 0x0a231135.
+//
+// Solidity: function setTransferToInventoryAccess(uint256 smartObjectId, address accessAddress, bool isAllowed) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) SetTransferToInventoryAccess(smartObjectId *big.Int, accessAddress common.Address, isAllowed bool) (*types.Transaction, error) {
+	return _ERC2771World.Contract.SetTransferToInventoryAccess(&_ERC2771World.TransactOpts, smartObjectId, accessAddress, isAllowed)
 }
 
 // SpliceDynamicData is a paid mutator transaction binding the contract method 0xc0a2895a.
@@ -2733,6 +4276,27 @@ func (_ERC2771World *ERC2771WorldTransactorSession) TransferBalanceToNamespace(f
 	return _ERC2771World.Contract.TransferBalanceToNamespace(&_ERC2771World.TransactOpts, fromNamespaceId, toNamespaceId, amount)
 }
 
+// TransferFromEphemeral is a paid mutator transaction binding the contract method 0x6f29e3b1.
+//
+// Solidity: function transferFromEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) TransferFromEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "transferFromEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// TransferFromEphemeral is a paid mutator transaction binding the contract method 0x6f29e3b1.
+//
+// Solidity: function transferFromEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) TransferFromEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.TransferFromEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// TransferFromEphemeral is a paid mutator transaction binding the contract method 0x6f29e3b1.
+//
+// Solidity: function transferFromEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) TransferFromEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.TransferFromEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
 // TransferOwnership is a paid mutator transaction binding the contract method 0xef5d6bbb.
 //
 // Solidity: function transferOwnership(bytes32 namespaceId, address newOwner) returns()
@@ -2754,46 +4318,88 @@ func (_ERC2771World *ERC2771WorldTransactorSession) TransferOwnership(namespaceI
 	return _ERC2771World.Contract.TransferOwnership(&_ERC2771World.TransactOpts, namespaceId, newOwner)
 }
 
-// Unanchor is a paid mutator transaction binding the contract method 0x2d910c34.
+// TransferToEphemeral is a paid mutator transaction binding the contract method 0x63821267.
 //
-// Solidity: function unanchor(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) Unanchor(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "unanchor", entityId)
+// Solidity: function transferToEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) TransferToEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "transferToEphemeral", smartObjectId, ephemeralOwner, items)
+}
+
+// TransferToEphemeral is a paid mutator transaction binding the contract method 0x63821267.
+//
+// Solidity: function transferToEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) TransferToEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.TransferToEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// TransferToEphemeral is a paid mutator transaction binding the contract method 0x63821267.
+//
+// Solidity: function transferToEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) TransferToEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.TransferToEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
+}
+
+// TransferToInventory is a paid mutator transaction binding the contract method 0x4ce8f5ce.
+//
+// Solidity: function transferToInventory(uint256 smartObjectId, uint256 toObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) TransferToInventory(opts *bind.TransactOpts, smartObjectId *big.Int, toObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "transferToInventory", smartObjectId, toObjectId, items)
+}
+
+// TransferToInventory is a paid mutator transaction binding the contract method 0x4ce8f5ce.
+//
+// Solidity: function transferToInventory(uint256 smartObjectId, uint256 toObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) TransferToInventory(smartObjectId *big.Int, toObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.TransferToInventory(&_ERC2771World.TransactOpts, smartObjectId, toObjectId, items)
+}
+
+// TransferToInventory is a paid mutator transaction binding the contract method 0x4ce8f5ce.
+//
+// Solidity: function transferToInventory(uint256 smartObjectId, uint256 toObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) TransferToInventory(smartObjectId *big.Int, toObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.TransferToInventory(&_ERC2771World.TransactOpts, smartObjectId, toObjectId, items)
 }
 
 // Unanchor is a paid mutator transaction binding the contract method 0x2d910c34.
 //
-// Solidity: function unanchor(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldSession) Unanchor(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.Unanchor(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function unanchor(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) Unanchor(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "unanchor", smartObjectId)
 }
 
 // Unanchor is a paid mutator transaction binding the contract method 0x2d910c34.
 //
-// Solidity: function unanchor(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) Unanchor(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.Unanchor(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function unanchor(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldSession) Unanchor(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.Unanchor(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
-// UnlinkSmartGates is a paid mutator transaction binding the contract method 0xa51dc713.
+// Unanchor is a paid mutator transaction binding the contract method 0x2d910c34.
 //
-// Solidity: function unlinkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) UnlinkSmartGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "unlinkSmartGates", sourceGateId, destinationGateId)
+// Solidity: function unanchor(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) Unanchor(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.Unanchor(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
-// UnlinkSmartGates is a paid mutator transaction binding the contract method 0xa51dc713.
+// UnlinkGates is a paid mutator transaction binding the contract method 0x6a57ebde.
 //
-// Solidity: function unlinkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_ERC2771World *ERC2771WorldSession) UnlinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.UnlinkSmartGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function unlinkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) UnlinkGates(opts *bind.TransactOpts, sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "unlinkGates", sourceGateId, destinationGateId)
 }
 
-// UnlinkSmartGates is a paid mutator transaction binding the contract method 0xa51dc713.
+// UnlinkGates is a paid mutator transaction binding the contract method 0x6a57ebde.
 //
-// Solidity: function unlinkSmartGates(uint256 sourceGateId, uint256 destinationGateId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) UnlinkSmartGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.UnlinkSmartGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
+// Solidity: function unlinkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_ERC2771World *ERC2771WorldSession) UnlinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UnlinkGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
+}
+
+// UnlinkGates is a paid mutator transaction binding the contract method 0x6a57ebde.
+//
+// Solidity: function unlinkGates(uint256 sourceGateId, uint256 destinationGateId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) UnlinkGates(sourceGateId *big.Int, destinationGateId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UnlinkGates(&_ERC2771World.TransactOpts, sourceGateId, destinationGateId)
 }
 
 // UnregisterDelegation is a paid mutator transaction binding the contract method 0xcdc938c5.
@@ -2880,109 +4486,130 @@ func (_ERC2771World *ERC2771WorldTransactorSession) UnregisterSystemHook(systemI
 	return _ERC2771World.Contract.UnregisterSystemHook(&_ERC2771World.TransactOpts, systemId, hookAddress)
 }
 
-// UpdateCorpId is a paid mutator transaction binding the contract method 0x325675d4.
+// UpdateAssemblyType is a paid mutator transaction binding the contract method 0xbcb029b2.
 //
-// Solidity: function updateCorpId(uint256 characterId, uint256 corpId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) UpdateCorpId(opts *bind.TransactOpts, characterId *big.Int, corpId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "updateCorpId", characterId, corpId)
+// Solidity: function updateAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_ERC2771World *ERC2771WorldTransactor) UpdateAssemblyType(opts *bind.TransactOpts, smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "updateAssemblyType", smartObjectId, assemblyType)
 }
 
-// UpdateCorpId is a paid mutator transaction binding the contract method 0x325675d4.
+// UpdateAssemblyType is a paid mutator transaction binding the contract method 0xbcb029b2.
 //
-// Solidity: function updateCorpId(uint256 characterId, uint256 corpId) returns()
-func (_ERC2771World *ERC2771WorldSession) UpdateCorpId(characterId *big.Int, corpId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.UpdateCorpId(&_ERC2771World.TransactOpts, characterId, corpId)
+// Solidity: function updateAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_ERC2771World *ERC2771WorldSession) UpdateAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UpdateAssemblyType(&_ERC2771World.TransactOpts, smartObjectId, assemblyType)
 }
 
-// UpdateCorpId is a paid mutator transaction binding the contract method 0x325675d4.
+// UpdateAssemblyType is a paid mutator transaction binding the contract method 0xbcb029b2.
 //
-// Solidity: function updateCorpId(uint256 characterId, uint256 corpId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) UpdateCorpId(characterId *big.Int, corpId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.UpdateCorpId(&_ERC2771World.TransactOpts, characterId, corpId)
-}
-
-// UpdateFuel is a paid mutator transaction binding the contract method 0x265f0d9a.
-//
-// Solidity: function updateFuel(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactor) UpdateFuel(opts *bind.TransactOpts, entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "updateFuel", entityId)
+// Solidity: function updateAssemblyType(uint256 smartObjectId, string assemblyType) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) UpdateAssemblyType(smartObjectId *big.Int, assemblyType string) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UpdateAssemblyType(&_ERC2771World.TransactOpts, smartObjectId, assemblyType)
 }
 
 // UpdateFuel is a paid mutator transaction binding the contract method 0x265f0d9a.
 //
-// Solidity: function updateFuel(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldSession) UpdateFuel(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.UpdateFuel(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function updateFuel(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) UpdateFuel(opts *bind.TransactOpts, smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "updateFuel", smartObjectId)
 }
 
 // UpdateFuel is a paid mutator transaction binding the contract method 0x265f0d9a.
 //
-// Solidity: function updateFuel(uint256 entityId) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) UpdateFuel(entityId *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.UpdateFuel(&_ERC2771World.TransactOpts, entityId)
+// Solidity: function updateFuel(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldSession) UpdateFuel(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UpdateFuel(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
-// WithdrawFromEphemeralInventory is a paid mutator transaction binding the contract method 0x2e098e36.
+// UpdateFuel is a paid mutator transaction binding the contract method 0x265f0d9a.
 //
-// Solidity: function withdrawFromEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) WithdrawFromEphemeralInventory(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "withdrawFromEphemeralInventory", smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function updateFuel(uint256 smartObjectId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) UpdateFuel(smartObjectId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UpdateFuel(&_ERC2771World.TransactOpts, smartObjectId)
 }
 
-// WithdrawFromEphemeralInventory is a paid mutator transaction binding the contract method 0x2e098e36.
+// UpdateTribeId is a paid mutator transaction binding the contract method 0x16d51f3e.
 //
-// Solidity: function withdrawFromEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) WithdrawFromEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.WithdrawFromEphemeralInventory(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function updateTribeId(uint256 smartObjectId, uint256 tribeId) returns()
+func (_ERC2771World *ERC2771WorldTransactor) UpdateTribeId(opts *bind.TransactOpts, smartObjectId *big.Int, tribeId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "updateTribeId", smartObjectId, tribeId)
 }
 
-// WithdrawFromEphemeralInventory is a paid mutator transaction binding the contract method 0x2e098e36.
+// UpdateTribeId is a paid mutator transaction binding the contract method 0x16d51f3e.
 //
-// Solidity: function withdrawFromEphemeralInventory(uint256 smartObjectId, address ephemeralInventoryOwner, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) WithdrawFromEphemeralInventory(smartObjectId *big.Int, ephemeralInventoryOwner common.Address, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.WithdrawFromEphemeralInventory(&_ERC2771World.TransactOpts, smartObjectId, ephemeralInventoryOwner, items)
+// Solidity: function updateTribeId(uint256 smartObjectId, uint256 tribeId) returns()
+func (_ERC2771World *ERC2771WorldSession) UpdateTribeId(smartObjectId *big.Int, tribeId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UpdateTribeId(&_ERC2771World.TransactOpts, smartObjectId, tribeId)
 }
 
-// WithdrawFromInventory is a paid mutator transaction binding the contract method 0x8f7513ff.
+// UpdateTribeId is a paid mutator transaction binding the contract method 0x16d51f3e.
 //
-// Solidity: function withdrawFromInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactor) WithdrawFromInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "withdrawFromInventory", smartObjectId, items)
+// Solidity: function updateTribeId(uint256 smartObjectId, uint256 tribeId) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) UpdateTribeId(smartObjectId *big.Int, tribeId *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.UpdateTribeId(&_ERC2771World.TransactOpts, smartObjectId, tribeId)
 }
 
-// WithdrawFromInventory is a paid mutator transaction binding the contract method 0x8f7513ff.
+// WithdrawEphemeral is a paid mutator transaction binding the contract method 0x690bcc03.
 //
-// Solidity: function withdrawFromInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldSession) WithdrawFromInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.WithdrawFromInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+// Solidity: function withdrawEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) WithdrawEphemeral(opts *bind.TransactOpts, smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "withdrawEphemeral", smartObjectId, ephemeralOwner, items)
 }
 
-// WithdrawFromInventory is a paid mutator transaction binding the contract method 0x8f7513ff.
+// WithdrawEphemeral is a paid mutator transaction binding the contract method 0x690bcc03.
 //
-// Solidity: function withdrawFromInventory(uint256 smartObjectId, (uint256,address,uint256,uint256,uint256,uint256)[] items) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) WithdrawFromInventory(smartObjectId *big.Int, items []InventoryItem) (*types.Transaction, error) {
-	return _ERC2771World.Contract.WithdrawFromInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+// Solidity: function withdrawEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) WithdrawEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.WithdrawEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
-// WithdrawFuel is a paid mutator transaction binding the contract method 0xe19a0384.
+// WithdrawEphemeral is a paid mutator transaction binding the contract method 0x690bcc03.
 //
-// Solidity: function withdrawFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_ERC2771World *ERC2771WorldTransactor) WithdrawFuel(opts *bind.TransactOpts, entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.contract.Transact(opts, "withdrawFuel", entityId, unitAmount)
-}
-
-// WithdrawFuel is a paid mutator transaction binding the contract method 0xe19a0384.
-//
-// Solidity: function withdrawFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_ERC2771World *ERC2771WorldSession) WithdrawFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.WithdrawFuel(&_ERC2771World.TransactOpts, entityId, unitAmount)
+// Solidity: function withdrawEphemeral(uint256 smartObjectId, address ephemeralOwner, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) WithdrawEphemeral(smartObjectId *big.Int, ephemeralOwner common.Address, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.WithdrawEphemeral(&_ERC2771World.TransactOpts, smartObjectId, ephemeralOwner, items)
 }
 
 // WithdrawFuel is a paid mutator transaction binding the contract method 0xe19a0384.
 //
-// Solidity: function withdrawFuel(uint256 entityId, uint256 unitAmount) returns()
-func (_ERC2771World *ERC2771WorldTransactorSession) WithdrawFuel(entityId *big.Int, unitAmount *big.Int) (*types.Transaction, error) {
-	return _ERC2771World.Contract.WithdrawFuel(&_ERC2771World.TransactOpts, entityId, unitAmount)
+// Solidity: function withdrawFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldTransactor) WithdrawFuel(opts *bind.TransactOpts, smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "withdrawFuel", smartObjectId, fuelAmount)
+}
+
+// WithdrawFuel is a paid mutator transaction binding the contract method 0xe19a0384.
+//
+// Solidity: function withdrawFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldSession) WithdrawFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.WithdrawFuel(&_ERC2771World.TransactOpts, smartObjectId, fuelAmount)
+}
+
+// WithdrawFuel is a paid mutator transaction binding the contract method 0xe19a0384.
+//
+// Solidity: function withdrawFuel(uint256 smartObjectId, uint256 fuelAmount) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) WithdrawFuel(smartObjectId *big.Int, fuelAmount *big.Int) (*types.Transaction, error) {
+	return _ERC2771World.Contract.WithdrawFuel(&_ERC2771World.TransactOpts, smartObjectId, fuelAmount)
+}
+
+// WithdrawInventory is a paid mutator transaction binding the contract method 0xec92b5a5.
+//
+// Solidity: function withdrawInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactor) WithdrawInventory(opts *bind.TransactOpts, smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.contract.Transact(opts, "withdrawInventory", smartObjectId, items)
+}
+
+// WithdrawInventory is a paid mutator transaction binding the contract method 0xec92b5a5.
+//
+// Solidity: function withdrawInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldSession) WithdrawInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.WithdrawInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
+}
+
+// WithdrawInventory is a paid mutator transaction binding the contract method 0xec92b5a5.
+//
+// Solidity: function withdrawInventory(uint256 smartObjectId, (uint256,uint256)[] items) returns()
+func (_ERC2771World *ERC2771WorldTransactorSession) WithdrawInventory(smartObjectId *big.Int, items []InventoryItemParams) (*types.Transaction, error) {
+	return _ERC2771World.Contract.WithdrawInventory(&_ERC2771World.TransactOpts, smartObjectId, items)
 }
 
 // ERC2771WorldHelloStoreIterator is returned from FilterHelloStore and is used to iterate over the raw logs and unpacked data for HelloStore events raised by the ERC2771World contract.
