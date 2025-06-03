@@ -22,7 +22,7 @@ jobs:
 
       - run: go generate
         env:
-          VERSION: v0.1.11
+          VERSION: v0.1.12
 
       - name: Update main and update tag
         run: |
